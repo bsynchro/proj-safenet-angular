@@ -1,0 +1,23 @@
+@import "./variables.scss";
+@import "./fonts.scss";
+
+html {
+    font-family: 'Segoe UI';
+}
+
+
+
+// mobile
+@media all and (max-width:576px) {
+    html {
+        font-size: 15px;
+        background-color: $background-color !important;
+    }
+}
+
+// desktop
+@media all and (min-width:577px) {
+    .mobile-only {
+        display: none;
+    }
+}

@@ -1,0 +1,28 @@
+<div class="travel-type">
+    <div class="container-fluid">
+        <div class="row title mb-3 mb-md-5">
+            <div class="col-12 text-center">
+                {{ translations.wizard.sections.travelType.title | translate }}
+            </div>
+        </div>
+        <div class="row choices">
+            <ng-container *ngFor="let choice of choices">
+                <div class="col-6 answer text-center">
+                    <div class="box" [ngClass]="isSelected(choice.code) ? 'selected' : ''"
+                        (click)="selectAnswer(choice.code)">
+                        <div class="row my-2">
+                            <div class="col-12">
+                                <img src="../../../../../assets/images/icons/{{choice.key}}.svg" />
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-12">
+                                {{ 'wizard.sections.travelType.options.' + choice.key | translate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+@import '../../../styles/variables.scss';
+
+.app-home-component {
+    .layout-content {
+        background-color: $background-color !important;
+        position: relative;           
+        .content {
+            min-height: calc(100vh - #{$header-height} - #{$progress-bar-height} - 1px);
+            z-index: 10;
+            position: relative;
+            // bottom: 0;
+            // top: 0;
+            // left: 0;
+            // right: 0;
+        }
+    }
+    .footer {
+        position: sticky;
+        bottom: 0;
+        img {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            background-color: $background-color;
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .app-home-component {
+        .footer {
+            img {
+                    width: 100%;
+                    object-fit: none;
+                    height: 16vh;
+            }
+        }
+    }
+}

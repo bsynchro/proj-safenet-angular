@@ -1,0 +1,9 @@
+<div class="wizard-container">
+    <lib-wizard #wizard [editMode]="editMode" [initialStep]="initialStep" (next)="nextEventHandler($event)">
+        <app-travel-destination #step step [formGroup]="formGroup"></app-travel-destination>
+        <app-travel-duration #step step [formGroup]="formGroup"></app-travel-duration>
+        <app-date-of-birth #step step [formGroup]="formGroup" (onDatePickerReady)="triggerWizardValidation($event)">
+        </app-date-of-birth>
+        <app-travel-type #step step [formGroup]="formGroup"></app-travel-type>
+    </lib-wizard>
+</div>

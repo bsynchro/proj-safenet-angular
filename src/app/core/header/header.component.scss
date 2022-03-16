@@ -1,0 +1,63 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
+.web-navbar {
+    min-height: $header-height;
+    .header {
+        min-height: $header-height;
+
+        .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            min-height: $header-height;
+            align-items: center;
+        
+            .right-header {
+                display: flex;
+                flex-flow: row;
+                .phone {
+                    display: flex;
+                    align-items: center;
+                }
+                .sign-in {
+                    margin-left: 2rem;
+                    display: flex;
+                    align-items: center;
+                    .sign-in-btn {
+                        @include btn();
+                        border-radius: 2rem;
+                    }
+                }
+            }
+        }
+        hr {
+            margin: 0 !important;
+            background-color: $grey;
+            height: $progress-bar-height;
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .web-navbar {
+        .header {
+            .left-header {
+                .logo-img {
+                    width: 75%;
+                }
+            }
+            .right-header {
+                .phone {
+                    .phone-ic {
+                        img {
+                            width: 75%;
+                        }
+                    }
+                }
+                .sign-in {
+                    display: none;
+                }
+            }
+        }
+    }
+}

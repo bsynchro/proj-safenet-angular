@@ -1,0 +1,23 @@
+@import "../../../../../styles/variables.scss";
+
+.date-of-birth {
+    .title {
+        color: $primary-color;
+        font-size: 20px;
+    }
+    .date-picker-container {
+        margin: auto;
+        width: 70%;
+        height: 50vh;
+        font-size: 17px;
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .date-of-birth {
+        .date-picker-container {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,161 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.offers-list-component {
+    .header {
+        .header-text {
+            color: $primary-color;
+            font-size: 20px;
+        }
+    }
+    .user-selection {
+        font-size: 14px;
+        .link {
+            cursor: pointer;
+            text-decoration: underline;
+            &::before {
+                content: "\f104";
+                cursor: pointer;
+                font-family: "FontAwesome";
+            }
+        }
+    }
+    .offers-repeater {
+        margin-right: 5rem;
+        html.rtl & {
+            margin-right: unset;
+            margin-left: 5rem;
+        }
+        .header {
+            font-size: 20px;
+            .sort {
+                .sort-btn {
+                    margin-left: 0.5rem;
+                    html.rtl & {
+                    margin-left: unset;
+                    margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+        .offer-item {
+            @include shadow();
+            border-radius: 5px;
+            background-color: $white;
+            .row {
+                margin-bottom: 1rem;
+            }
+            .offer-item-header {
+                .title {
+                    font-weight: bold;
+                }
+                .premium {
+                    font-weight: bold;
+                }
+            }
+            .benefits {
+                font-size: 14px;
+                width: 50%;
+                margin: auto;
+                .benefit-properties {
+                    margin-bottom: 0.5rem;
+                    .checkbox {
+                        margin-right: 0.5rem;
+                        html.rtl & {
+                        margin-right: unset;
+                        margin-left: 0.5rem;
+                        }
+                    }
+                }
+            }
+            .buttons {
+                .button {
+                    @include btn()
+                }
+                .link {
+                    @include linkBtn();
+                    font-size: 12px;
+                    text-decoration: underline;
+                }
+            }
+            .checkboxes {
+                .checkbox {
+                    p-checkbox {
+                        .ui-chkbox-box {
+                            border: 1px solid;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .offers-list-component {
+        .offers-repeater {
+            margin-left: 2rem;
+            margin-right: 2rem;
+            .header {
+                font-size: 18px;
+                .sort {
+                    .sort-label {
+                        display: none;
+                    }
+                }
+            }
+            .offer-item {
+                .offer-item-header {
+                    .checkboxes {
+                        display: none;
+                    }
+                    .premium {
+                        display: none;
+                    }
+                }
+                .benefits {
+                    width: auto;
+                }
+                .buttons {
+                    .link {
+                        padding-left: 0;
+                        padding-right: 0;
+                        margin-left: 1rem;
+                        html.rtl & {
+                            margin-left: unset;
+                            margin-right: 1rem;
+                        }
+                    }
+                    .purchase {
+                        .button {
+                            display: none;
+                        }
+                    }
+                }
+                .mobile-only {
+                    .checkboxes {
+                        margin-left: 1rem;
+                        html.rtl & {
+                            margin-left: unset;
+                            margin-right: 1rem;
+                        }
+                    }
+                    .premium {
+                        font-weight: bold;
+                    }
+                    .mobile-btn {
+                        margin-left: 0.5rem;
+                        html.rtl & {
+                            margin-left: unset;
+                            margin-right: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+        .user-selection {
+            display: none;
+        }
+    }
+}

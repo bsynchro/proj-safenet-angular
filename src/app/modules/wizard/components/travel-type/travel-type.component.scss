@@ -1,0 +1,52 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.travel-type {
+    .title {
+        color: $primary-color;
+        font-size: 20px;
+    }
+    .choices {
+        margin: auto;
+        width: 70%;
+        justify-content: center;
+        .answer {
+            padding: 1.5rem 2rem 1.5rem 2rem;
+            z-index: 10;
+            max-width: 25%;
+            .box {
+                @include answerBtn();
+                padding: 1rem 2rem;
+                width: 70%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+            }
+            .selected {
+                background-color: $light-accent-color;
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .travel-type {
+        .choices {
+            width: 100%;
+            justify-content: space-around;
+            .answer {
+                justify-content: center;
+                display: flex;
+                padding: 1.5rem 1rem 1.5rem 1rem;
+                .box {
+                    width: 100%;
+                    padding: 1rem 4rem;
+                }
+            }
+        }
+    }
+}
