@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventPayload, Step, WizardComponent } from '@bsynchro/services';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
 import { AppWizardConstants } from '../../constants/wizard.constants';
@@ -63,8 +63,9 @@ export class WizardContainerComponent implements OnInit {
   //#endregion
 
   //#region ctor
-  constructor(private _fb: FormBuilder, private _router: Router) {
+  constructor(private _fb: FormBuilder, private _router: Router, private _activatedRoute: ActivatedRoute,) {
     this._formGroup = this._fb.group({});
+    this.setEditMode();
   }
   //#endregion
 
@@ -99,6 +100,13 @@ export class WizardContainerComponent implements OnInit {
 
   private navigateToGetOffers() {
     this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS]);
+  }
+
+  private setEditMode() {
+    const activatedRouteSnapshot = this._activatedRoute.snapshot;
+    if (activatedRouteSnapshot && activatedRouteSnapshot.params && activatedRouteSnapshot.params[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE]) {
+      this._editMode = activatedRouteSnapshot.params[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE];
+    }
   }
   //#endregion
 }

@@ -102,7 +102,9 @@ export class OffersListComponent implements OnInit {
 
   //#region public methods
   public refineSelection() {
-    this._router.navigate([AppConstants.ROUTES.MAIN]);
+    const routData = {};
+    routData[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE] = true;
+    this._router.navigate([AppConstants.ROUTES.MAIN, routData]);
   }
 
   public sortOffers(proertyName: string, sortDirection: string = null) {

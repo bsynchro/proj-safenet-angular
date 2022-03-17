@@ -71,6 +71,10 @@ export class AppConstants {
         public static readonly REFRESH = 'refresh';
         public static readonly CHECKOUT = 'checkout';
     }
+
+    public static ROUTE_DATA_KEYS = class {
+        public static readonly EDIT_MODE = 'editMode';
+    }
     //#endregion
 
     //#region authentication
