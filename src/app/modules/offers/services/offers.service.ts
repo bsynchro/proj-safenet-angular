@@ -64,6 +64,10 @@ export class OffersService {
                 case AppWizardConstants.USER_INFO_PROPERTIES.DOB:
                     payload.age = this.getAge(userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]]);
                     break;
+                case AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION:
+                    payload.from = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].from;
+                    payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].to;
+                    break;
                 default:
                     payload[AppWizardConstants.USER_INFO_PROPERTIES[key]] = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]];
                     break;

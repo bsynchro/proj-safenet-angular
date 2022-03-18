@@ -39,7 +39,9 @@
                 "title": "إلى أين أنت مسافر؟"
             },
             "travelDuration": {
-                "title": "ما هي مدة سفرك؟"
+                "from": "من",
+                "title": "ما هي مدة سفرك؟",
+                "to": "الى"
             },
             "travelType": {
                 "options": {

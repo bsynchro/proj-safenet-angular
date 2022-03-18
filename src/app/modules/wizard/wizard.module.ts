@@ -10,8 +10,7 @@ import { WizardDatalistResolver } from 'src/app/core/resolvers/data-list.resolve
 import { DateOfBirthComponent } from './components/date-of-birth/date-of-birth.component';
 import { TravelTypeComponent } from './components/travel-type/travel-type.component';
 import { WizardGlobalVariablesResolver } from 'src/app/core/resolvers/global-variable.resolver';
-
-
+import { CalendarModule } from 'primeng/components/calendar/calendar';
 
 @NgModule({
   declarations: [
@@ -25,6 +24,7 @@ import { WizardGlobalVariablesResolver } from 'src/app/core/resolvers/global-var
     WizardRouterModule,
     CommonModule,
     WizardModule,
+    CalendarModule,
     SharedModule
   ],
   providers: [

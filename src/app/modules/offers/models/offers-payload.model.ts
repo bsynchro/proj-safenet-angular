@@ -3,11 +3,12 @@ import { Offer } from "./offer.model";
 
 export class GetOffersPayload {
     public coverageArea: string;
-    public tripDuration: string;
     public sportsActivity: string;
     public age: number;
     public withDeductible: string;
     public type: string;
+    public from: Date;
+    public to: Date;
 }
 
 export class RepriceOffersPayload extends GetOffersPayload {
@@ -17,10 +18,11 @@ export class RepriceOffersPayload extends GetOffersPayload {
         repriceOffersPayload.age = getOffersPayload.age;
         repriceOffersPayload.coverageArea = getOffersPayload.coverageArea;
         repriceOffersPayload.sportsActivity = getOffersPayload.sportsActivity;
-        repriceOffersPayload.tripDuration = getOffersPayload.tripDuration;
         repriceOffersPayload.type = getOffersPayload.type;
         repriceOffersPayload.withDeductible = getOffersPayload.withDeductible;
         repriceOffersPayload.offerCode = offerCode;
+        repriceOffersPayload.from = getOffersPayload.from;
+        repriceOffersPayload.to = getOffersPayload.to;
         return repriceOffersPayload;
     }
 }

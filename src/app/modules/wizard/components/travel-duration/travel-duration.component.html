@@ -5,15 +5,21 @@
                 {{ translations.wizard.sections.travelDuration.title | translate }}
             </div>
         </div>
-        <div class="row choices" *ngIf="dataList">
-            <ng-container *ngFor="let row of dataList">
-                <div class="col-6 col-md-4 answer text-center">
-                    <div class="box" [ngClass]="isSelected(row.code) ? 'selected' : ''"
-                        (click)="selectAnswer(row.code)">
-                        {{ row.title }}
-                    </div>
-                </div>
-            </ng-container>
+        <div class="row choices" *ngIf="dateFormGroup" [formGroup]="dateFormGroup">
+            <div class="col-12 col-md-6 px-5 pb-5 date-picker from">
+                <p-calendar monthNavigator="true" yearNavigator="true" showIcon="true" showButtonBar="false"
+                    yearRange="1930:2100" [placeholder]='translations.wizard.sections.travelDuration.from | translate'
+                    [dateFormat]='calendarDateFormat' [showButtonBar]="true" [minDate]="todayDate"
+                    formControlName="from" (onSelect)="onValueChange()">
+                </p-calendar>
+            </div>
+            <div class="col-12 col-md-6 px-5 pb-5 date-picker to">
+                <p-calendar monthNavigator="true" yearNavigator="true" showIcon="true" showButtonBar="false"
+                    yearRange="1930:2100" [placeholder]='translations.wizard.sections.travelDuration.to | translate'
+                    [dateFormat]='calendarDateFormat' [showButtonBar]="true" [minDate]="minToDate" formControlName="to"
+                    (onSelect)="onValueChange()">
+                </p-calendar>
+            </div>
         </div>
     </div>
 </div>

@@ -90,6 +90,10 @@ export abstract class WizardSection extends Step {
             this.formGroup.get(this.userInfoPropertyName).value == code;
     }
 
+    public setFormControls() {
+        this.formGroup.addControl(this.userInfoPropertyName, this.fb.control(null, [this.validator]));
+    }
+
     private initializeFormGroup() {
         if (!this.userInfoPropertyName) {
             throw new Error(`userInfoPropertyName not set for section ${this.name}`);
@@ -98,7 +102,7 @@ export abstract class WizardSection extends Step {
             this.formGroup = this.fb.group({})
         }
         if (!this.formGroup.get(this.userInfoPropertyName)) {
-            this.formGroup.addControl(this.userInfoPropertyName, this.fb.control(null, [this.validator]));
+            this.setFormControls();
         }
         const savedFormGroup = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO);
         if (savedFormGroup) {
