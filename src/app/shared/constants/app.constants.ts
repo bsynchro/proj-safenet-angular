@@ -5,10 +5,8 @@ export class AppConstants {
     //#region DataList
     public static DATA_LIST_NAMES = class {
         public static readonly PREFERRED_LANGUAGE = 'PreferredLanguage';
-        // public static readonly GEOGRAPHICAL_COVERAGE = 'TGeographicalCoverage';
-        // public static readonly DURATION = 'TDuration';
-        public static readonly GEOGRAPHICAL_COVERAGE = 'GeographicalCoverage';
-        public static readonly DURATION = 'Duration';
+        public static readonly GEOGRAPHICAL_COVERAGE = 'TGeographicalCoverage';
+        public static readonly DURATION = 'TDuration';
         public static readonly IC_GENERAL_INFO = 'ICGeneralInfo';
     };
 
