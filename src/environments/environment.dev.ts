@@ -7,7 +7,7 @@ export const environment = {
     production: true,
     defaultLcid: 1033,
     location: 'LB',
-    Portal: 'http://portal.safenet.dev.bsynchro.com/',
+    Portal: 'http://portal.safenet.dev.bsynchro.com',
     IdentityServer: 'http://safenet.identity-staging-mt.dev.bsynchro.com',
     DataLists: 'http://safenet.cora-api-staging-mt.dev.bsynchro.com/data-list',
     CRM: 'http://crm.safenet.dev.bsynchro.com',
