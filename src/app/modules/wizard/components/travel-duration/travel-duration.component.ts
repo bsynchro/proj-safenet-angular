@@ -34,7 +34,10 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
 
   public get minToDate(): Date {
     return this._dateFormGroup && this._dateFormGroup.get('from') && this._dateFormGroup.get('from').value ?
-      this._dateFormGroup.get('from').value :
+      this._dateFormGroup.get('from').value instanceof Date ?
+        this._dateFormGroup.get('from').value :
+        new Date(this._dateFormGroup.get('from').value)
+      :
       this._todayDate;
   }
 
@@ -84,18 +87,19 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   }
 
   public initialize(input: any): void {
+    debugger;
     super.initialize(input);
     const dateFormGroup = this.formGroup.get(this.userInfoPropertyName) as FormGroup;
     if (dateFormGroup) {
-      this._dateFormGroup = dateFormGroup;
-      const from = this._dateFormGroup.get('from');
+      const from = dateFormGroup.get('from');
       if (from && from.value) {
         from.setValue(new Date(from.value));
       }
-      const to = this._dateFormGroup.get('to');
+      const to = dateFormGroup.get('to');
       if (to && to.value) {
         to.setValue(new Date(to.value));
       }
+      this._dateFormGroup = dateFormGroup;
     }
   }
 
@@ -108,13 +112,26 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
     return control.value ? null : { error: 'Answer Required' };
   }
 
-  public setFormControls() {
+  public initializeFormControls() {
+    debugger;
     const dateFormGroup = this.fb.group({
       from: [null, [this.validator]],
       to: [null, [this.validator]]
     });
     this.formGroup.addControl(this.userInfoPropertyName, dateFormGroup);
     this._dateFormGroup = this.formGroup.get(this.userInfoPropertyName) as FormGroup;
+  }
+
+  public updateFormControls(savedFormGroup: any) {
+    debugger;
+    const dateFormValue = savedFormGroup[this.userInfoPropertyName];
+    if (dateFormValue.from) {
+      dateFormValue.from = new Date(dateFormValue.from);
+    }
+    if (dateFormValue.to) {
+      dateFormValue.to = new Date(dateFormValue.to);
+    }
+    super.updateFormControls(savedFormGroup);
   }
   //#endregion
 

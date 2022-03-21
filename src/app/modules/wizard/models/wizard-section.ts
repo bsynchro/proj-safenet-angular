@@ -90,8 +90,13 @@ export abstract class WizardSection extends Step {
             this.formGroup.get(this.userInfoPropertyName).value == code;
     }
 
-    public setFormControls() {
+    public initializeFormControls() {
         this.formGroup.addControl(this.userInfoPropertyName, this.fb.control(null, [this.validator]));
+    }
+
+    public updateFormControls(savedFormGroup: any) {
+        this.formGroup.patchValue(savedFormGroup);
+        this.formGroup.updateValueAndValidity();
     }
 
     private initializeFormGroup() {
@@ -102,12 +107,11 @@ export abstract class WizardSection extends Step {
             this.formGroup = this.fb.group({})
         }
         if (!this.formGroup.get(this.userInfoPropertyName)) {
-            this.setFormControls();
+            this.initializeFormControls();
         }
         const savedFormGroup = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO);
         if (savedFormGroup) {
-            this.formGroup.patchValue(savedFormGroup);
-            this.formGroup.updateValueAndValidity();
+            this.updateFormControls(savedFormGroup);
         }
     }
     //#endregion
