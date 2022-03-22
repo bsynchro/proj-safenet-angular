@@ -137,7 +137,7 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   //#endregion
 
   //#region public methods
-  public onValueChange(event: any) {
+  public onValueChange() {
     this.selectAnswer(this._dateFormGroup.getRawValue());
   }
   //#endregion
