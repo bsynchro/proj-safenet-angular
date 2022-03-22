@@ -280,16 +280,14 @@ export class OffersListComponent implements OnInit {
     flattenedBenefitProperties.forEach((property) => {
       if (this.isOfferListItemHeader(property) && property.isOptional) {
         const rate = offer.detailedPrice.policyLevel.find(v => v.name == property.code);
-        if (rate && rate.total) {
-          const propertyName = this.getOfferListItemHeaderPropertyName(property.tags);
-          const checkbox = {
-            title: property.titleTranslation,
-            value: property.displayValueTranslation,//rate.total.toString(),
-            propertyName: propertyName,
-            checked: this.isItemHeaderPropertyChecked(propertyName, offersPayload)
-          }
-          checkboxes.push(checkbox);
+        const propertyName = this.getOfferListItemHeaderPropertyName(property.tags);
+        const checkbox = {
+          title: property.titleTranslation,
+          value: property.displayValueTranslation,//rate.total.toString(),
+          propertyName: propertyName,
+          checked: this.isItemHeaderPropertyChecked(propertyName, offersPayload)
         }
+        checkboxes.push(checkbox);
       }
     });
     return checkboxes;
