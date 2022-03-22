@@ -132,4 +132,11 @@ export class AppConstants {
         AppConstants.GLOBAL_VARIABLE_NAMES.OFFERS_ROWS_PER_PAGE
     ];
     //#endregion
+
+    //#region Calendar
+    public static CALENDAR = class {
+        public static readonly DATE_FORMAT = 'dd/mm/yy';// PRIME-NG CALENDAR COMPONENT COMPATIBLE EQUIVALENT TO dd/mm/yyyy
+        public static readonly PLACEHOLDER = 'dd/mm/yyyy';
+    }
+    //#endregion
 }

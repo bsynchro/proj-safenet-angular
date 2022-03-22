@@ -38,7 +38,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AutoOpenPublisherDirective,
     AutoOpenDefaultDirective,
     AutoOpenSubscribeToDirective,
-    KeyboardAutoOpenMobileFixDirective
+    KeyboardAutoOpenMobileFixDirective,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

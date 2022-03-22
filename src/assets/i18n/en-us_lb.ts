@@ -39,7 +39,9 @@ export default {
                 "title": "Where Are You Traveling?"
             },
             "travelDuration": {
-                "title": "What Is The Duration Of Your Travel?"
+                "from": "From",
+                "title": "What Is The Duration Of Your Travel?",
+                "to": "To"
             },
             "travelType": {
                 "options": {

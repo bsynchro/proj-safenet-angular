@@ -55,7 +55,7 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
     if (dob) {
       this.dobPickerComponent.dobFormGroup.patchValue(dob);
       this.formGroup.get(this.userInfoPropertyName).updateValueAndValidity();
-      // Emit event to trigger wizard validation so wizard would autotrigger next if form is valid after it has been patcheed
+      // Emit event to trigger wizard validation so wizard would autotrigger next if form is valid after it has been patched
       this.onDatePickerReady.emit(this.order);
     }
   }
