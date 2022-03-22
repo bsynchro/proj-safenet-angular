@@ -101,6 +101,7 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
       }
       this._dateFormGroup = dateFormGroup;
     }
+    this._dateFormGroup.updateValueAndValidity();
   }
 
   public getValue() {
