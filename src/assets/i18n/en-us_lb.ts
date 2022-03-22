@@ -20,7 +20,7 @@ export default {
             "sortByPremium": "Sort By: Premium",
             "userSelection": {
                 "ageAndType": "{{type}} with {{age}} years old",
-                "duration": "Duration {{duration}}",
+                "duration": "Duration {{duration}} days",
                 "refineSelection": "Refine your selection",
                 "title": "Your selection:",
                 "travelDestination": "Traveling to {{destination}}"

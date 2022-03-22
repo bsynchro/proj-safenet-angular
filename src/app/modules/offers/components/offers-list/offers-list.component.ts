@@ -30,7 +30,7 @@ export class OffersListComponent implements OnInit {
   private _userInfo: any;
   private _age: string = '';
   private _coverageArea: string = '';
-  private _tripDuration: string = '';
+  private _tripDuration: number = 0;
   private _travelTypeKey: string = '';
   private _sortDirection: string = 'asc';
   private _languageSubscription: Subscription = new Subscription();
@@ -53,7 +53,7 @@ export class OffersListComponent implements OnInit {
     return this._coverageArea;
   }
 
-  public get tripDuration(): string {
+  public get tripDuration(): number {
     return this._tripDuration;
   }
 
@@ -92,6 +92,7 @@ export class OffersListComponent implements OnInit {
   ngOnInit() {
     this.setUserInfo();
     this.loadDataLists();
+    this.setTripDuration();
     this.setTravelType();
     this.loadGlobalVariables();
     this.setAge();
@@ -153,10 +154,6 @@ export class OffersListComponent implements OnInit {
         const geographicalCovereageDataList = datalists.find((d) => d[0].dataListName === AppConstants.DATA_LIST_NAMES.GEOGRAPHICAL_COVERAGE);
         const userGeographicalCoverage = geographicalCovereageDataList.find(d => d.code == this._userInfo[AppWizardConstants.USER_INFO_PROPERTIES.COVERAGE_AREA]);
         this._coverageArea = userGeographicalCoverage ? userGeographicalCoverage.title : '';
-        // duration
-        const durationDataList = datalists.find((d) => d[0].dataListName === AppConstants.DATA_LIST_NAMES.DURATION);
-        const userTrpDuration = durationDataList.find(d => d.code == this._userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION]);
-        this._tripDuration = userTrpDuration ? userTrpDuration.title : '';
       }
     });
   }
@@ -178,6 +175,13 @@ export class OffersListComponent implements OnInit {
     const dob = this._userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB];
     const age = UtilsService.getAge(new Date(dob.year, dob.month, dob.day));
     this._age = age ? age.toString() : '';
+  }
+
+  private setTripDuration() {
+    const duration = this._userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION];
+    const from: Date = duration.from instanceof Date ? duration.from : new Date(duration.from);
+    const to: Date = duration.to instanceof Date ? duration.to : new Date(duration.to);
+    this._tripDuration = UtilsService.getDateDiffernnceInDays(from, to);
   }
 
   private setTravelType() {

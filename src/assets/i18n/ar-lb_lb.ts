@@ -20,7 +20,7 @@ export default {
             "sortByPremium": "ترتيب حسب: السعر",
             "userSelection": {
                 "ageAndType": "{{type}} مع {{age}} سنة",
-                "duration": "لمدة {{duration}}",
+                "duration": "لمدة {{duration}} يوم",
                 "refineSelection": "تغير اختيارك",
                 "title": "اختيارك:",
                 "travelDestination": "مسافر الى {{destination}}"
