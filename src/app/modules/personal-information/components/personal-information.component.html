@@ -1,0 +1,58 @@
+<div class="personalInformation-list-component">
+    <div class="container-fluid">
+        <div class="row header mb-3 mb-md-5">
+            <div class="col-12 header-text px-4 px-md-5">
+                {{ translations.personalInformation.headerText | translate }}
+            </div>
+            <div class="col-10 subHeader-text px-4 px-md-5">
+                {{ translations.personalInformation.subHeaderText | translate }}
+            </div>
+            <div class="col-10 firstLastNameSubLabel-text px-4 px-md-5">
+                {{ translations.personalInformation.firstLastNameSubLabel | translate }}
+            </div>
+        </div>
+
+        <ng-container *ngIf="beneficiariesForm" [formGroup]="beneficiariesForm">
+            <ng-container *ngIf="beneficiariesFormArray" formArrayName="beneficiaries">
+                <div *ngFor="let form of beneficiariesFormArray.controls"  [formGroup]="form">        
+                    <div class="row mb-3 mb-md-5 px-4 px-md-5">                        
+                        <div class="col-2 ">
+                            <input type="text" formControlName="firstName" placeholder="First Name (as exist in Passport)*" pInputText />
+                        </div>        
+                        <div class="col-2">
+                            <input type="text" formControlName="lastName" placeholder="Last Name (as exist in Passport)*" pInputText />
+                        </div>   
+                        <div *ngIf="form.get('type').value == PRINCIPAL" class="col-2">
+                            <input type="text" formControlName="countryOfResidence" placeholder="Country of Residence*" pInputText />
+                        </div>   
+                        <div *ngIf="form.get('type').value != PRINCIPAL" class="col-2">
+                            <app-dropdown-date-picker #dateOfBirth class="col-2" formControlName="dateOfBirth" >
+                            </app-dropdown-date-picker>                           
+                        </div>   
+                        <div class="col-2">
+                            <input type="text" formControlName="passportNumbner" placeholder="Passport Number" pInputText />
+                        </div>   
+                        <div class="col-1">
+                            <input type="text" formControlName="gender" pInputText />
+                        </div>   
+                    
+                    </div>
+                    <div *ngIf="form.get('type').value == PRINCIPAL" class="row mb-3 mb-md-5 px-4 px-md-5"> 
+                        <div class="col-2">
+                            <input type="text" formControlName="mobile" placeholder="Mobile Number*" pInputText />
+                        </div>   
+                        <div class="col-2">
+                            <p-dropdown #yearDropdown class="dropDown value" id="destination-country" [options]="countryOptions" name="year"
+                                formControlName="year" required="true"
+                                placeholder="Destinatination Country" autoDisplayFirst="true"
+                                filter="true" >
+                            </p-dropdown>
+                            
+                            <!-- <input type="text" formControlName="destinationCountry" placeholder="Destination Country*" pInputText /> -->
+                        </div>   
+                    </div>                    
+                </div>  
+            </ng-container>      
+        </ng-container>
+    </div>
+</div>

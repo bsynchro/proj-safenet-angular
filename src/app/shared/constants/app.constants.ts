@@ -8,6 +8,7 @@ export class AppConstants {
         public static readonly GEOGRAPHICAL_COVERAGE = 'TGeographicalCoverage';
         public static readonly DURATION = 'TDuration';
         public static readonly IC_GENERAL_INFO = 'ICGeneralInfo';
+        public static readonly COUNTRY = 'TCountry';
     };
 
     public static SYSTEM_DATA_LIST_NAMES = class {
@@ -28,6 +29,9 @@ export class AppConstants {
         AppConstants.DATA_LIST_NAMES.GEOGRAPHICAL_COVERAGE,
         AppConstants.DATA_LIST_NAMES.DURATION,
         AppConstants.DATA_LIST_NAMES.IC_GENERAL_INFO
+    ]
+    public static PERSONALINFORMATION_DATA_LISTS = [
+        AppConstants.DATA_LIST_NAMES.COUNTRY
     ]
     //#endregion
 
@@ -68,6 +72,7 @@ export class AppConstants {
         public static readonly CALLBACK = 'callback';
         public static readonly REFRESH = 'refresh';
         public static readonly CHECKOUT = 'checkout';
+        public static readonly PERSONALINFORMATION = 'personalInformation';
     }
 
     public static ROUTE_DATA_KEYS = class {
@@ -131,5 +136,9 @@ export class AppConstants {
     public static OFFERS_GLOBAL_VARIABLES = [
         AppConstants.GLOBAL_VARIABLE_NAMES.OFFERS_ROWS_PER_PAGE
     ];
+    //#endregion
+    
+    //#region PersonalInformation
+    public static readonly PRINCIPAL = 'principle';
     //#endregion
 }

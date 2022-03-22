@@ -28,6 +28,11 @@ export default {
             "viewAllBenefits": "View all benefits"
         }
     },
+    "personalInformation": {
+        "headerText":"Thank you for purchasing your travel policy from Basma. Your order has been placed successfully!",
+        "subHeaderText":"To continue with your policy issuance, please proceed with providing few additional information related to the insured. ",
+        "firstLastNameSubLabel":"** First Name(s) and Last Name(s) should be as exist in passport"
+    },
     "wizard": {
         "back": "Back",
         "next": "Next",
