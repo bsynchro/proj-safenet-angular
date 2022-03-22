@@ -18,7 +18,7 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit() {
     this._authService.completeAuthentication().then(res => {
-      const route = [AppConstants.ROUTES.MAIN];
+      const route = [AppConstants.ROUTES.MAIN];      
       // Redirect to checkout if in the process of purchasing, else redirect home
       if (this.isPurchasing()) {
         route.push(AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT);
