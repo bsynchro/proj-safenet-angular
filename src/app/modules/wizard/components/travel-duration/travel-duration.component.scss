@@ -34,12 +34,14 @@
                     min-width: 20rem;
                     @include shadow();
                     width: -webkit-fill-available;
+                    width: -moz-available;
                     border: none;
                     padding: 0.5rem;
                     border-radius: 5px;
                     background-color: $white;
                     .ui-inputtext {
                         width: -webkit-fill-available;
+                        width: -moz-available;
                         border: none;
                     }
                     .ui-calendar-button {
