@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col offers-repeater" *ngIf="offerViews?.offers">
+            <div class="col-md-8 offers-repeater" *ngIf="offerViews?.offers">
                 <div class="row header mb-3">
                     <div class="col-10 col-md-6 px-0 offers-number">
                         {{ translations.offers.list.offersNumberLabel | translate: {'number' : offerViews.offers.length}
@@ -54,16 +54,16 @@
                     </div>
                 </div>
                 <ng-container *ngFor="let offer of offerViews.offers; let i = index">
-                    <div class="row offer-item my-4 py-4" *ngIf="i < offersRowsPerPage">
+                    <div class="row offer-item my-4 py-2" *ngIf="i < offersRowsPerPage">
                         <div class="col-12">
                             <div class="row offer-item-header">
-                                <div class="col-6 col-md-3 logo">
+                                <div class="col-6 col-md-3 logo align-self-center">
                                     <img [src]="offer.logoUrl" />
                                 </div>
-                                <div class="col-6 col-md-3 title">
+                                <div class="col-6 col-md-3 title align-self-center">
                                     {{ getLocalizedValue(offer.title) }}
                                 </div>
-                                <div class="col-12 col-md-3 checkboxes">
+                                <div class="col-12 col-md-3 checkboxes align-self-center">
                                     <ng-container *ngFor="let chk of offer.checkboxes">
                                         <span class="checkbox">
                                             <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
@@ -75,11 +75,11 @@
                                         </span>
                                     </ng-container>
                                 </div>
-                                <div class="col-12 col-md-3 premium">
+                                <div class="col-12 col-md-3 premium align-self-center text-center">
                                     {{ offer.currency }} {{ offer.premium }}
                                 </div>
                             </div>
-                            <div class="row benefits px-2 px-md-3 mb-2" *ngIf="offer.highlightedProperties">
+                            <div class="row benefits px-1 mb-2" *ngIf="offer.highlightedProperties">
                                 <div class="col-6 benefit-properties px-1"
                                     *ngFor="let propery of offer.highlightedProperties">
                                     <div class="row p-0 m-0">
@@ -110,7 +110,7 @@
                                 <div class="col-6 col-md-3 offset-md-3 view-all-benefits">
                                     <span class="link">{{ translations.offers.list.viewAllBenefits | translate }}</span>
                                 </div>
-                                <div class="col-6 col-md-3 offset-md-3 purchase">
+                                <div class="col-6 col-md-3 offset-md-3 purchase text-center">
                                     <span class="button" (click)="purchase(offer.code)">{{
                                         translations.offers.list.purchase | translate }}</span>
                                     <span class="mobile-only">

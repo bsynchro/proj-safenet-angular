@@ -21,7 +21,7 @@
         }
     }
     .offers-repeater {
-        margin-right: 5rem;
+        // margin-right: 5rem;
         html.rtl & {
             margin-right: unset;
             margin-left: 5rem;
@@ -30,10 +30,11 @@
             font-size: 20px;
             .sort {
                 .sort-btn {
+                    cursor: pointer;
                     margin-left: 0.5rem;
                     html.rtl & {
-                    margin-left: unset;
-                    margin-right: 0.5rem;
+                        margin-left: unset;
+                        margin-right: 0.5rem;
                     }
                 }
             }

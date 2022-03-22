@@ -12,8 +12,19 @@
         .answer {
             padding: 1.5rem 2rem 1.5rem 2rem;
             z-index: 10;
+            &:nth-child(odd) {
+                .box {
+                    margin-left: auto;
+                }
+            }
+            &:nth-child(even) {
+                .box {
+                    margin-right: auto;
+                }
+            }
             .box {
                 @include answerBtn();
+                margin: unset;
                 padding: 2rem;
                 width: 70%;
                 height: 5rem;
