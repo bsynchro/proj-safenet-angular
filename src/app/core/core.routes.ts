@@ -17,6 +17,10 @@ const coreRoutes: Routes = [
             {
                 path: AppConstants.ROUTES.OFFERS,
                 loadChildren: () => import('../modules/offers/offers.module').then((mod) => mod.OffersModule)
+            },
+            {
+                path: AppConstants.ROUTES.PERSONALINFORMATION,
+                loadChildren: () => import('../modules/personal-information/personal-information.module').then((mod) => mod.PersonalInformationModule)
             }
         ]
     },

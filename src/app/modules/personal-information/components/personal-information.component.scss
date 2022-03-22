@@ -1,0 +1,30 @@
+@import "../../../../styles/variables.scss";
+@import "../../../../styles/mixins.scss";
+
+.personalInformation-list-component {
+    .header {
+        .header-text {
+            color: $primary-color;
+            font-size: 20px;
+        }
+        .subHeader-text {           
+            font-size: 16px;
+        }
+        .firstLastNameSubLabel-text {
+            color: $accent-color;
+            font-size : 12px;
+        }
+    }
+    .user-selection {
+        font-size: 14px;
+        .link {
+            cursor: pointer;
+            text-decoration: underline;
+            &::before {
+                content: "\f104";
+                cursor: pointer;
+                font-family: "FontAwesome";
+            }
+        }
+    }    
+}
