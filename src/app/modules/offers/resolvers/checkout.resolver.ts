@@ -12,6 +12,12 @@ import { OffersService } from "../services/offers.service";
 export class CheckoutResolver implements Resolve<PurchaseOfferResult>{
     constructor(public _offersService: OffersService, private _identityService: IdentityService, private _router: Router) { }
     resolve(route: ActivatedRouteSnapshot): Observable<PurchaseOfferResult> | Promise<PurchaseOfferResult> | PurchaseOfferResult {
+        // Try to return saved purchase result (if refreshing)
+        const purchaseOfferResult = LocalStorageService.getFromLocalStorage<PurchaseOfferResult>(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT, null, false);
+        if (purchaseOfferResult) {
+            return purchaseOfferResult;
+        }
+        // Prepare to purchase offer
         const payload = LocalStorageService.getFromLocalStorage<PurchaseOfferPayload>(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD);
         // Questions not answered or expired
         if (!payload) {
@@ -20,6 +26,6 @@ export class CheckoutResolver implements Resolve<PurchaseOfferResult>{
             return null;
         }
         const userInfo = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO, null, false);
-        return this._offersService.purchaseOffer(payload.offer, payload.dimensions, userInfo);
+        return this._offersService.purchaseOffer(payload.offerCode, payload.dimensions, userInfo);
     }
 }

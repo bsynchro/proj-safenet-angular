@@ -14,6 +14,7 @@ import { Benefit, BenefitProperty, Offer } from '../../models/offer.model';
 import { PurchaseOfferPayload } from '../../models/offers-payload.model';
 import { BenefitView, HighlightedProperty, OffersView, OfferView, PropertyView } from '../../models/offers-view.model';
 import { OffersService } from '../../services/offers.service';
+import cloneDeep from 'lodash/cloneDeep';
 
 @Component({
   selector: 'app-offers-list',
@@ -134,11 +135,15 @@ export class OffersListComponent implements OnInit {
 
   public purchase(offerCode: string) {
     const offer = this._offers.find(o => o.code == offerCode);
-    const dimensions = this._offersDimensions;
+    const offerView = this._offerViews.offers.find(o => o.code == offerCode);
+    const dimensions: Array<DimensionInput> = cloneDeep(this._offersDimensions);
+    const smiDimension = dimensions.find(d => d.name == OffersConstants.DIMENSION.NAMES.SMI);
+    smiDimension.policyLevel = offerView.payload;
     const purchaseOfferPayload = new PurchaseOfferPayload();
-    purchaseOfferPayload.offer = offer;
+    purchaseOfferPayload.offerCode = offer.code;
     purchaseOfferPayload.dimensions = dimensions;
     LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD, purchaseOfferPayload);
+    LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT);
     this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT])
   }
   //#endregion
@@ -217,6 +222,7 @@ export class OffersListComponent implements OnInit {
 
   private mapOfferToOfferView(offer: Offer, offersPayload: any) {
     const offerView = new OfferView();
+    offerView.payload = offersPayload;
     offerView.code = offer.code;
     offerView.currency = offer.currency;
     offerView.title = offer.titleTranslation;
@@ -279,7 +285,6 @@ export class OffersListComponent implements OnInit {
     }
     flattenedBenefitProperties.forEach((property) => {
       if (this.isOfferListItemHeader(property) && property.isOptional) {
-        const rate = offer.detailedPrice.policyLevel.find(v => v.name == property.code);
         const propertyName = this.getOfferListItemHeaderPropertyName(property.tags);
         const checkbox = {
           title: property.titleTranslation,

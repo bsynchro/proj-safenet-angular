@@ -13,7 +13,8 @@ export class OfferView {
     premium: number;
     currency: string;
     benefits: Array<BenefitView>;
-    highlightedProperties: Array<HighlightedProperty>
+    highlightedProperties: Array<HighlightedProperty>;
+    payload: { [key: string]: any };
 }
 
 export class HighlightedProperty {
@@ -32,4 +33,13 @@ export class PropertyView {
     tags: string;
     value: string;
     isOptional: boolean;
+}
+
+export class UpsellingCover {
+    code: string;
+    title: Array<LocalizedValue>;
+    description: Array<LocalizedValue>;
+    checked: boolean;
+    propertyName: string;
+    value: number;
 }

@@ -13,6 +13,30 @@ export default {
         "signIn": "Sign In"
     },
     "offers": {
+        "checkout": {
+            "buttons": {
+                "checkout": "Checkout"
+            },
+            "headerText": "Get the best travel insurance offer that fits your needs",
+            "priceSummary": {
+                "couponSection": {
+                    "buttonLabel": "Apply code",
+                    "inputLabel": "Enter coupon code",
+                    "title": "Do you have a coupon?"
+                },
+                "grandTotal": "Grand Total",
+                "title": "Price Summary"
+            },
+            "upselling": {
+                "title": "Would you like to add?"
+            },
+            "userSelection": {
+                "ageAndType": "{{type}} with {{age}} years old",
+                "duration": "From {{from}} to {{to}}",
+                "title": "Your selection:",
+                "travelDestination": "Traveling to {{destination}}"
+            }
+        },
         "list": {
             "headerText": "Get the best travel insurance offer that fits your needs",
             "offersNumberLabel": "We've got you {{number}} offers!",
@@ -29,9 +53,9 @@ export default {
         }
     },
     "personalInformation": {
-        "headerText":"Thank you for purchasing your travel policy from Basma. Your order has been placed successfully!",
-        "subHeaderText":"To continue with your policy issuance, please proceed with providing few additional information related to the insured. ",
-        "firstLastNameSubLabel":"** First Name(s) and Last Name(s) should be as exist in passport"
+        "headerText": "Thank you for purchasing your travel policy from Basma. Your order has been placed successfully!",
+        "subHeaderText": "To continue with your policy issuance, please proceed with providing few additional information related to the insured. ",
+        "firstLastNameSubLabel": "** First Name(s) and Last Name(s) should be as exist in passport"
     },
     "wizard": {
         "back": "Back",

@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, ViewEncapsulation  } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,FormArray, ValidatorFn,Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormArray, ValidatorFn, Validators } from '@angular/forms';
 import { LocalizedValue, UITranslateService } from '@bsynchro/services';
-import { appendFile } from 'fs';
 import { Translations } from 'src/app/shared/services/translation.service';
 import { AppConstants } from "../../../shared/constants/app.constants";
 
@@ -11,7 +10,7 @@ import { AppConstants } from "../../../shared/constants/app.constants";
   styleUrls: ['./personal-Information.component.scss']
 })
 export class PersonalInformationComponent implements OnInit {
-//#region fields
+  //#region fields
   private _beneficiariesForm: FormGroup;
   private _beneficiariesFormArray: FormArray;
   private _countryOptions: Array<any>;
@@ -21,7 +20,7 @@ export class PersonalInformationComponent implements OnInit {
     return AppConstants.PRINCIPAL
   }
 
-  public countryOptions():Array<any> {
+  public countryOptions(): Array<any> {
     return this._countryOptions;
   }
 
@@ -43,7 +42,7 @@ export class PersonalInformationComponent implements OnInit {
     private _translateService: UITranslateService,
     public translations: Translations,
     private _fb: FormBuilder
-  ) {   }
+  ) { }
 
   ngOnInit() {
     this._beneficiariesFormArray = this._fb.array([

@@ -26,6 +26,7 @@ export class OffersConstants {
         }
         public static BENEFIT_PROPERTY = class {
             public static readonly OFFER_LIST_ITEM_HEADER = 'OfferListItemHeader';
+            public static readonly UPSELLING = 'UpSelling';
         }
     }
 

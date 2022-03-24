@@ -87,7 +87,6 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   }
 
   public initialize(input: any): void {
-    debugger;
     super.initialize(input);
     const dateFormGroup = this.formGroup.get(this.userInfoPropertyName) as FormGroup;
     if (dateFormGroup) {
@@ -114,7 +113,6 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   }
 
   public initializeFormControls() {
-    debugger;
     const dateFormGroup = this.fb.group({
       from: [null, [this.validator]],
       to: [null, [this.validator]]
@@ -124,7 +122,6 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   }
 
   public updateFormControls(savedFormGroup: any) {
-    debugger;
     const dateFormValue = savedFormGroup[this.userInfoPropertyName];
     if (dateFormValue.from) {
       dateFormValue.from = new Date(dateFormValue.from);

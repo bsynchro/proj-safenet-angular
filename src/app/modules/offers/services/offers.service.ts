@@ -38,13 +38,14 @@ export class OffersService {
 
     }
 
-    public purchaseOffer(offer: Offer, dimensions: Array<DimensionInput>, userInfo: any): Observable<PurchaseOfferResult> {
+    public purchaseOffer(offerCode: string, dimensions: Array<DimensionInput>, userInfo: any): Observable<PurchaseOfferResult> {
         return new Observable<PurchaseOfferResult>((observer) => {
-            const payload = this.getPurchaseOfferPayload(offer, dimensions, userInfo);
+            const payload = this.getPurchaseOfferPayload(offerCode, dimensions, userInfo);
             const api = new ApiService(this._httpClient, environment.CRM);
             api.post(AppConstants.CONTROLLER_NAMES.OFFERS, AppConstants.ACTION_NAMES.PURCHASE_OFFER, payload).subscribe((res: any) => {
                 const result = res as PurchaseOfferResult;
                 LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD);
+                LocalStorageService.setInLocalStorage<PurchaseOfferResult>(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT, result)
                 observer.next(result);
                 observer.complete();
             });
@@ -76,14 +77,15 @@ export class OffersService {
         return payload;
     }
 
-    private getPurchaseOfferPayload(offer: Offer, dimensions: DimensionInput[], userInfo: any): PurchaseOfferPayload {
+    private getPurchaseOfferPayload(offerCode: string, dimensions: DimensionInput[], userInfo: any): PurchaseOfferPayload {
         const dobObj = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB] as { year: number, month: number, day: number };
         const dob = new Date(dobObj.year, dobObj.month, dobObj.day);
         const payload = new PurchaseOfferPayload();
-        payload.offer = offer;
+        payload.offerCode = offerCode;
         payload.dimensions = dimensions;
         payload.dateOfBirth = dob;
-        payload.cumulativeDays = 0; // TODO: Compute from from and to dates
+        payload.from = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].from;
+        payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].to;
         return payload;
     }
 

@@ -13,6 +13,24 @@
         "signIn": "تسجيل الدخول"
     },
     "offers": {
+        "checkout": {
+            "buttons": {
+                "checkout": "الدفع"
+            },
+            "headerText": "احصل على أفضل عرض تأمين سفر يناسب احتياجاتك",
+            "priceSummary": {
+                "title": "ملخص السعر"
+            },
+            "upselling": {
+                "title": "هل تريد ان تضيف؟"
+            },
+            "userSelection": {
+                "ageAndType": "{{type}} مع {{age}} سنة",
+                "duration": "من {{from}} الى {{to}}",
+                "title": "اختيارك:",
+                "travelDestination": "مسافر الى {{destination}}"
+            }
+        },
         "list": {
             "headerText": "احصل على أفضل عرض تأمين سفر يناسب احتياجاتك",
             "offersNumberLabel": "لدينا {{number}} عروض لك",

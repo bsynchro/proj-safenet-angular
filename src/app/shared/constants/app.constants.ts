@@ -30,6 +30,12 @@ export class AppConstants {
         AppConstants.DATA_LIST_NAMES.DURATION,
         AppConstants.DATA_LIST_NAMES.IC_GENERAL_INFO
     ]
+
+    public static CHECKOUT_DATA_LISTS = [
+        AppConstants.DATA_LIST_NAMES.GEOGRAPHICAL_COVERAGE,
+        AppConstants.DATA_LIST_NAMES.IC_GENERAL_INFO
+    ]
+
     public static PERSONALINFORMATION_DATA_LISTS = [
         AppConstants.DATA_LIST_NAMES.COUNTRY
     ]
@@ -62,6 +68,7 @@ export class AppConstants {
         public static readonly GUEST_ID = 'guest';
         public static readonly DEFAULT_TTL = 60;
         public static readonly PURCHASE_OFFER_PAYLOAD = "PurchaseOfferPayload";
+        public static readonly PURCHASE_OFFER_RESULT = "PurchaseOfferResult";
     }
     //#endregion
 
@@ -143,7 +150,7 @@ export class AppConstants {
         public static readonly DATE_FORMAT = 'dd/mm/yy';// PRIME-NG CALENDAR COMPONENT COMPATIBLE EQUIVALENT TO dd/mm/yyyy
         public static readonly PLACEHOLDER = 'dd/mm/yyyy';
     }
-    
+
     //#region PersonalInformation
     public static readonly PRINCIPAL = 'principle';
     //#endregion

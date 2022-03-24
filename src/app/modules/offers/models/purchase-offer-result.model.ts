@@ -1,4 +1,4 @@
-import { Contact, Quote } from "src/app/shared/constants/crm.model";
+import { Contact, Quote } from "src/app/shared/models/crm.model";
 
 export class PurchaseOfferResult {
     quote: Quote;

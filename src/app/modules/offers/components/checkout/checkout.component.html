@@ -1,0 +1,163 @@
+<div class="checkout-component">
+    <div class="container-fluid">
+        <div class="row header mb-3 mb-md-4 mx-2 mx-md-5">
+            <div class="col-12 d-flex align-items-center">
+                <img src="../../../../../assets/images/icons/back-btn.svg" class="back-btn" (click)="back()" />
+                <span class="header-text">{{ translations.offers.checkout.headerText | translate }}</span>
+            </div>
+        </div>
+        <div class="row user-selection mb-4 mb-md-5 mx-2 mx-md-5">
+            <div class="col-6 selection-info">
+                <div class="row">
+                    <div class="col-12 font-weight-bold mb-2">
+                        {{ translations.offers.checkout.userSelection.title | translate }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.checkout.userSelection.ageAndType | translate: {
+                        'age': age,
+                        'type' : ('wizard.sections.travelType.options.' + travelTypeKey | translate)
+                        } }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.checkout.userSelection.travelDestination | translate: {
+                        'destination': coverageArea
+                        } }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.checkout.userSelection.duration | translate: {
+                        'from': tripDuration.from | dateTranslation,
+                        'to': tripDuration.to | dateTranslation
+                        } }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 logo pt-4">
+                <img [src]="productLogoUrl" />
+            </div>
+        </div>
+        <div class="row mx-2 mx-md-5 mb-4">
+            <div class="col-12 col-md-6 p-3 p-md-4 upselling">
+                <div class="row">
+                    <div class="col-12 title">
+                        {{ translations.offers.checkout.upselling.title | translate }}
+                    </div>
+                </div>
+                <ng-container *ngIf="upsellingCovers?.length">
+                    <div class="row cover" *ngFor="let cover of upsellingCovers">
+                        <div class="col-12">
+                            <div class="row my-2">
+                                <div class="col-12 header">
+                                    <span class="checkbox">
+                                        <p-checkbox [(ngModel)]="cover.checked" [binary]="true"
+                                            (onChange)="onCheckboxCheck($event, cover.propertyName)">
+                                        </p-checkbox>
+                                    </span>
+                                    <span class="cover-label">
+                                        {{ getLocalizedValue(cover.title) }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 description">
+                                    {{ getLocalizedValue(cover.description) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-12 col-md-6 p-3 p-md-4 price-summary">
+                <div class="row">
+                    <div class="col-12 title">
+                        {{ translations.offers.checkout.priceSummary.title | translate }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 offset-md-5 offer">
+                        <div class="row">
+                            <div class="col-6 name">
+                                {{ getLocalizedValue(offer.titleTranslation) }}:
+                            </div>
+                            <div class="col-6 price">
+                                {{ offerPrice | number:'1.0': locale }} {{ offer.currency }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="addedCovers?.length">
+                    <div class="row" *ngFor="let cover of addedCovers">
+                        <div class="col-7 offset-md-5 added-cover">
+                            <div class="row">
+                                <div class="col-6 name">
+                                    {{ getLocalizedValue(cover.title) }}:
+                                </div>
+                                <div class="col-6 price">
+                                    {{ cover.value | number:'1.0': locale }} {{ offer.currency }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="addedCoupons?.length">
+                    <div class="row" *ngFor="let coupon of addedCoupons">
+                        <div class="col-7 offset-md-5 added-coupon">
+                            <div class="row">
+                                <div class="col-6 name">
+                                    {{ coupon.code }}:
+                                </div>
+                                <div class="col-6 price">
+                                    {{ coupon.value | number:'1.0': locale }} {{ offer.currency }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="row my-2">
+                    <div class="col-12 coupon-section">
+                        <div class="row">
+                            <div class="col-12 pb-2 label">
+                                {{ translations.offers.checkout.priceSummary.couponSection.title | translate }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 input-section">
+                                <input class="coupon-code-input"
+                                    [placeholder]="translations.offers.checkout.priceSummary.couponSection.inputLabel | translate "
+                                    pInputText disabled />
+                                <button class="apply-coupon-code-btn disabled" disabled>
+                                    {{ translations.offers.checkout.priceSummary.couponSection.buttonLabel | translate
+                                    }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-7 offset-md-5 grand-total">
+                        <div class="row">
+                            <div class="col-6 label">
+                                {{ translations.offers.checkout.priceSummary.grandTotal | translate }}:
+                            </div>
+                            <div class="col-6 value">
+                                {{ grandTotal | number:'1.0': locale }} {{ offer.currency }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-12 buttons px-5">
+                        <button class="checkout-btn" (click)="checkout()">
+                            {{ translations.offers.checkout.buttons.checkout | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

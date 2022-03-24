@@ -29,7 +29,8 @@ export class RepriceOffersPayload extends GetOffersPayload {
 
 export class PurchaseOfferPayload {
     public dateOfBirth: Date;
-    public offer: Offer;
+    public offerCode: string;
     public dimensions: Array<DimensionInput>;
-    public cumulativeDays: number;
+    public from: Date;
+    public to: Date;
 }

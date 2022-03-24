@@ -13,6 +13,24 @@
         "signIn": "Sign In"
     },
     "offers": {
+        "checkout": {
+            "buttons": {
+                "checkout": "Checkout"
+            },
+            "headerText": "Get the best travel insurance offer that fits your needs",
+            "priceSummary": {
+                "title": "Price Summary"
+            },
+            "upselling": {
+                "title": "Would you like to add?"
+            },
+            "userSelection": {
+                "ageAndType": "{{type}} with {{age}} years old",
+                "duration": "From {{from}} to {{to}}",
+                "title": "Your selection:",
+                "travelDestination": "Traveling to {{destination}}"
+            }
+        },
         "list": {
             "headerText": "Get the best travel insurance offer that fits your needs",
             "offersNumberLabel": "We've got you {{number}} offers!",

@@ -1,0 +1,114 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.checkout-component {
+    .header {
+        .header-text {
+            color: $primary-color;
+            font-size: 20px;
+        }
+        .back-btn {
+            padding-right: 1rem;
+            html.rtl & {
+                padding-right: unset;
+                padding-left: 1rem;
+            }
+        }
+    }
+    .user-selection {
+        background-color: $white;
+        border-radius: 5px;
+        @include shadow();
+        .selection-info {
+            padding: 1rem 2.5rem;
+        }
+        .logo {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+    .upselling {
+        .title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .cover {
+            .header {
+                .checkbox {
+                    p-checkbox {
+                        .ui-chkbox-box {
+                            border: 3px solid $primary-alt-color;
+                            .pi-check:before {
+                                color: $primary-alt-color;
+                            }
+                        }
+                    }
+                }
+                .cover-label {
+                    font-weight: 600;
+                    font-size: 1.1em;
+                }
+            }
+        }
+    }
+    .price-summary {
+        background-color: $primary-transparent-color;
+        border-radius: 5px;
+        .title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .coupon-section {
+            .label {
+                font-size: 0.75em;
+            }
+            .input-section {
+                .coupon-code-input {
+                    @include shadow();
+                    background-color: $white;
+                    border-radius: 5px;
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.75em;
+                    border: 0;
+                }
+                .apply-coupon-code-btn {
+                    @include btn();
+                    @include shadow();
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.75em;
+                    margin-left: 0.5rem;
+                    html.rtl & {
+                        margin-left: unset;
+                        margin-right: 0.5rem;
+                    }
+                    &.disabled {
+                        opacity: .4;
+                    }
+                }
+            }
+        }
+        .grand-total {
+            font-weight: 600;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row-reverse;
+            .checkout-btn {
+                @include btn();
+                padding: 0.25rem 2rem;
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .checkout-component {
+        .user-selection {
+            .selection-info {
+                padding: 1rem;
+            }
+        }
+    }
+}

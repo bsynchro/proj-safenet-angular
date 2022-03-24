@@ -37,6 +37,13 @@ export class OffersDatalistResolver extends DatalistResolver {
 }
 
 @Injectable()
+export class CheckoutDatalistResolver extends DatalistResolver {
+    constructor(_datalistService: DataListService) {
+        super(_datalistService, AppConstants.CHECKOUT_DATA_LISTS);
+    }
+}
+
+@Injectable()
 export class PersonalInformationDatalistResolver extends DatalistResolver {
     constructor(_datalistService: DataListService) {
         super(_datalistService, AppConstants.PERSONALINFORMATION_DATA_LISTS);
