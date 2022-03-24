@@ -31,8 +31,8 @@
                 <div class="row">
                     <div class="col-12">
                         {{ translations.offers.checkout.userSelection.duration | translate: {
-                        'from': tripDuration.from | dateTranslation,
-                        'to': tripDuration.to | dateTranslation
+                        'from': tripDuration.from | dateTranslation : 'dd MMM,yy' : 'from',
+                        'to': tripDuration.to | dateTranslation : 'dd MMM,yy' : 'to'
                         } }}
                     </div>
                 </div>
