@@ -13,7 +13,7 @@ export const environment = {
   DataLists: 'http://localhost:23322',
   // DataLists: 'http://safenet.cora-api-staging-mt.dev.bsynchro.com/data-list',
   CRM: 'http://localhost:30282',
-  // CRM: 'http://Crm-ls-egypt.libanosuisse.dev.bsynchro.com',
+  // CRM: 'http://crm.safenet.dev.bsynchro.com',
   GlobalVariables: 'http://localhost:52032',
   // GlobalVariables: 'http://safenet.cora-api-staging-mt.dev.bsynchro.com/global-variable'
 };
