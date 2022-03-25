@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DateTranslationPipe, LocalizedValue, SerializationService, UITranslateService } from '@bsynchro/services';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AppWizardConstants } from 'src/app/modules/wizard/constants/wizard.constants';
@@ -12,11 +12,14 @@ import { Translations } from 'src/app/shared/services/translation.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { isNullOrUndefined } from 'util';
 import { OffersConstants } from '../../constants/offers.constants';
+import { PaymentConstants } from '../../constants/payment.constants';
+import { CheckoutResolvedData } from '../../models/checkout-resolved-data.model';
 import { OfferResult } from '../../models/offer-result.model';
 import { Benefit, BenefitProperty, Offer } from '../../models/offer.model';
 import { GetOffersPayload } from '../../models/offers-payload.model';
 import { UpsellingCover } from '../../models/offers-view.model';
 import { OffersService } from '../../services/offers.service';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -42,6 +45,7 @@ export class CheckoutComponent implements OnInit {
   private _addedCoupons: Array<{ code: string, value: number }> = [];
   private _smiPayload: { [key: string]: any };
   private _grandTotal: number = 0;
+  private _errorCodes: Array<string>;
   private _languageSubscription: Subscription = new Subscription();
   //#endregion
 
@@ -93,6 +97,10 @@ export class CheckoutComponent implements OnInit {
   public get offerPrice(): number {
     return this._offer.price - this._addedCovers.reduce((total, cover) => total += cover.value, 0);
   }
+
+  public get errorCodes(): Array<string> {
+    return this._errorCodes;
+  }
   //#endregion
 
   //#region setters
@@ -104,6 +112,7 @@ export class CheckoutComponent implements OnInit {
     private _router: Router,
     private _offersService: OffersService,
     private _serializationService: SerializationService,
+    private _paymentService: PaymentService,
     private _translateService: UITranslateService,
     public translations: Translations
   ) { }
@@ -111,16 +120,17 @@ export class CheckoutComponent implements OnInit {
 
   //#region lifecycle hooks
   ngOnInit() {
-    this.setUserInfo();
+    this.setErrorCodes();
     this.setQuote();
     this.setOffer();
+    this.setOfferPayload();
+    this.setUserInfo();
     this.setContact();
     this.handleLanguageChange();
     this.setTravelType();
     this.setAge();
     this.setTripDuration();
     this.setLogoUrl();
-    this.setOfferPayload();
     this.setUpsellingCovers();
   }
   //#endregion
@@ -136,28 +146,50 @@ export class CheckoutComponent implements OnInit {
 
   public async onCheckboxCheck(checked: boolean, propertyName: string) {
     // Get user info with updated checkbox value
-    const userInfo = Object.assign({}, this._userInfo);
-    userInfo[propertyName] = checked ?
+    // const userInfo = Object.assign({}, this._userInfo);
+    this._userInfo[propertyName] = checked ?
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.YES :
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.NO;
     // Reprice
-    await this.repriceOffer(this._offer.code, userInfo)
+    await this.repriceOffer(this._offer.code, this._userInfo)
   }
 
-  public checkout() {
-
+  public async checkout() {
+    const redirectUrl = await this._paymentService.checkout(
+      this._offer.code,
+      this._smiPayload,
+      this._userInfo,
+      this._quote.id,
+      this._addedCoupons.map(c => c.code)
+    ).toPromise();
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    }
   }
   //#endregion
 
   //#region helpers
+  private setErrorCodes() {
+    const routeResolversData = this._activatedRoute.snapshot.data;
+    if (routeResolversData) {
+      const checkoutResolvedData = routeResolversData.resolvedData as CheckoutResolvedData;
+      if (checkoutResolvedData.paymentFailed && checkoutResolvedData.errorCodes) {
+        this._errorCodes = checkoutResolvedData.errorCodes;
+      }
+    }
+  }
+
   private setUserInfo() {
     this._userInfo = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO, null, false);
+    this._userInfo[OffersConstants.WITH_DEDUCIBLE.PROPERTY_NAME] = this._smiPayload[OffersConstants.WITH_DEDUCIBLE.PROPERTY_NAME];
+    this._userInfo[OffersConstants.SPORTS_ACTIVITY.PROPERTY_NAME] = this._smiPayload[OffersConstants.SPORTS_ACTIVITY.PROPERTY_NAME];
   }
 
   private setQuote() {
     const routeResolversData = this._activatedRoute.snapshot.data;
     if (routeResolversData) {
-      this._quote = routeResolversData.purchaseOfferPayload.quote;
+      const checkoutResolvedData = routeResolversData.resolvedData as CheckoutResolvedData;
+      this._quote = checkoutResolvedData.purchaseOfferResult.quote;
     }
   }
 
@@ -168,7 +200,8 @@ export class CheckoutComponent implements OnInit {
   private setContact() {
     const routeResolversData = this._activatedRoute.snapshot.data;
     if (routeResolversData) {
-      this._contact = routeResolversData.purchaseOfferPayload.contact;
+      const checkoutResolvedData = routeResolversData.resolvedData as CheckoutResolvedData;
+      this._contact = checkoutResolvedData.purchaseOfferResult.contact;
     }
   }
 
@@ -303,9 +336,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   private setGrandTotal() {
-    const addedCoversPrice = this._addedCovers.reduce((total, cover) => total += cover.value, 0);
-    const addedCouponssPrice = this._addedCoupons.reduce((total, coupon) => total += coupon.value, 0);
-    this._grandTotal = this._offer.price + addedCouponssPrice;
+    const addedCouponsPrice = this._addedCoupons.reduce((total, coupon) => total += coupon.value, 0);
+    this._grandTotal = this._offer.price - addedCouponsPrice;
   }
   //#endregion
 }

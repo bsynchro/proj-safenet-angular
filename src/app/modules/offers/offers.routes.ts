@@ -24,7 +24,16 @@ const offersRoutes: Routes = [
         component: CheckoutComponent,
         canActivate: [RouteGuardService],
         resolve: {
-            purchaseOfferPayload: CheckoutResolver,
+            resolvedData: CheckoutResolver,
+            dataLists: CheckoutDatalistResolver,
+        }
+    },
+    {
+        path: `${AppConstants.ROUTES.CHECKOUT}/:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_FLAG}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_ERROR_CODE}`,
+        component: CheckoutComponent,
+        canActivate: [RouteGuardService],
+        resolve: {
+            resolvedData: CheckoutResolver,
             dataLists: CheckoutDatalistResolver,
         }
     }

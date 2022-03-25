@@ -84,6 +84,9 @@ export class AppConstants {
 
     public static ROUTE_DATA_KEYS = class {
         public static readonly EDIT_MODE = 'editMode';
+        public static readonly PAYMENT_FLAG = 'paymentFlag';
+        public static readonly PAYMENT_ERROR_CODE = 'paymentErrorCode';
+        public static readonly QUOTE_ID = 'quoteId';
     }
     //#endregion
 
@@ -111,6 +114,7 @@ export class AppConstants {
         //#region GlobalVariable
         public static readonly GLOBAL_VARIABLE = 'GlobalVariable';
         public static readonly OFFERS = 'Offers';
+        public static readonly PAYMENT = 'Payment';
         //#endregion
     };
 
@@ -126,6 +130,11 @@ export class AppConstants {
         public static readonly GET_OFFERS = 'GetOffers';
         public static readonly REPRICE_OFFER = 'RepriceOffer';
         public static readonly PURCHASE_OFFER = 'PurchaseOffer';
+        //#endregion
+
+        //#region Payment
+        public static readonly CHECKOUT = 'Checkout';
+        public static readonly VALIDATE = 'Validate';
         //#endregion
     };
     //#endregion

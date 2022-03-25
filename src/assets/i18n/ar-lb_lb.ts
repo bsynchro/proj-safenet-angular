@@ -17,7 +17,11 @@ export default {
             "buttons": {
                 "checkout": "الدفع"
             },
+            "errorCodes": {
+                "missingQuoteId": "معرف الاقتباس مفقود في المسار"
+            },
             "headerText": "احصل على أفضل عرض تأمين سفر يناسب احتياجاتك",
+            "paymentError": "عملية الدفع فشلت. حاول مرة اخرى.",
             "priceSummary": {
                 "title": "ملخص السعر"
             },

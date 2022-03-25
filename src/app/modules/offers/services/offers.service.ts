@@ -18,7 +18,7 @@ import { LocalStorageService } from "src/app/shared/services/local-storage.servi
 @Injectable()
 export class OffersService {
     //#region ctor
-    constructor(public _httpClient: HttpClient) { }
+    constructor(private _httpClient: HttpClient) { }
     //#endregion
 
     //#region public methods

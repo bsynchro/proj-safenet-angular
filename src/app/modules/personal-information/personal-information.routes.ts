@@ -1,10 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { RouteGuardService } from "src/app/core/auth-callback/route.guard";
-import { CommonModule } from '@angular/common';
 import { AppConstants } from "src/app/shared/constants/app.constants";
 import { PersonalInformationComponent } from "./components/personal-information.component";
 import { PersonalInformationDatalistResolver } from "src/app/core/resolvers/data-list.resolver";
+import { PaymentValidityResolver } from './resolvers/personal-information.resolver';
 
 const personalInformationRoutes: Routes = [
     {
@@ -12,7 +11,15 @@ const personalInformationRoutes: Routes = [
         component: PersonalInformationComponent,
         resolve: {
             dataLists: PersonalInformationDatalistResolver,
-            // personalInformationResult: PersonalInformationResolver
+            paymentValidity: PaymentValidityResolver
+        },
+    },
+    {
+        path: `:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}`,
+        component: PersonalInformationComponent,
+        resolve: {
+            dataLists: PersonalInformationDatalistResolver,
+            paymentValidity: PaymentValidityResolver
         }
     }
 ]

@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutResolver } from './resolvers/checkout.resolver';
 import { PipesModule } from '@bsynchro/services';
+import { PaymentService } from './services/payment.service';
+import { CheckoutPaymentValidityResolver } from './resolvers/checkout-payment-validity.resolver';
+import { PaymentValidityResolver } from '../personal-information/resolvers/personal-information.resolver';
+import { PurchaseOfferResolver } from './resolvers/purchase-offer.resolver';
 
 
 @NgModule({
@@ -32,8 +36,12 @@ import { PipesModule } from '@bsynchro/services';
     OffersResolver,
     OffersDatalistResolver,
     OffersGlobalVariablesResolver,
+    PaymentValidityResolver,
+    PurchaseOfferResolver,
+    CheckoutPaymentValidityResolver,
     CheckoutResolver,
-    CheckoutDatalistResolver
+    CheckoutDatalistResolver,
+    PaymentService
   ]
 })
 export class OffersModule { }

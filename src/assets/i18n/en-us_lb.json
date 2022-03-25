@@ -17,7 +17,11 @@
             "buttons": {
                 "checkout": "Checkout"
             },
+            "errorCodes": {
+                "missingQuoteId": "Quote id is missing in route"
+            },
             "headerText": "Get the best travel insurance offer that fits your needs",
+            "paymentError": "Payment failed. Please try again.",
             "priceSummary": {
                 "title": "Price Summary"
             },

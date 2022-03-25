@@ -2,6 +2,11 @@
 @import "../../../../../styles/mixins.scss";
 
 .checkout-component {
+    .error-messages {
+        .error-message {
+            color: $accent-color;
+        }
+    }
     .header {
         .header-text {
             color: $primary-color;

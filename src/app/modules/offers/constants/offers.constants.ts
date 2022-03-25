@@ -4,6 +4,7 @@ export class OffersConstants {
             public static readonly YES = 'yes';
             public static readonly NO = 'no';
         }
+        public static readonly PROPERTY_NAME = "withDeductible";
     }
 
     public static SPORTS_ACTIVITY = class {
@@ -11,6 +12,7 @@ export class OffersConstants {
             public static readonly YES = 'yes';
             public static readonly NO = 'no';
         }
+        public static readonly PROPERTY_NAME = "sportsActivity";
     }
 
     public static OFFER_PAYLOAD_PROPERTIES = class {

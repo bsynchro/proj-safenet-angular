@@ -1,5 +1,12 @@
 <div class="checkout-component">
     <div class="container-fluid">
+        <ng-container *ngIf="errorCodes?.length">
+            <div class="row error-messages mb-3 mb-md-4 mx-2 mx-md-5" *ngFor="let errorCode of errorCodes">
+                <div class="col-12 error-message">
+                    {{ 'translations.offers.checkout.errorCodes.' + errorCode | translate }}
+                </div>
+            </div>
+        </ng-container>
         <div class="row header mb-3 mb-md-4 mx-2 mx-md-5">
             <div class="col-12 d-flex align-items-center">
                 <img src="../../../../../assets/images/icons/back-btn.svg" class="back-btn" (click)="back()" />

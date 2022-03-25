@@ -1,31 +1,34 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, Router } from "@angular/router";
-import { IdentityService } from "@bsynchro/services";
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs/internal/Observable";
 import { AppConstants } from "src/app/shared/constants/app.constants";
 import { LocalStorageService } from "src/app/shared/services/local-storage.service";
+import { PaymentConstants } from "../constants/payment.constants";
+import { CheckoutResolvedData } from "../models/checkout-resolved-data.model";
 import { PurchaseOfferPayload } from "../models/offers-payload.model";
 import { PurchaseOfferResult } from "../models/purchase-offer-result.model";
 import { OffersService } from "../services/offers.service";
+import { PaymentService } from "../services/payment.service";
+import { CheckoutPaymentValidityResolver } from "./checkout-payment-validity.resolver";
+import { PurchaseOfferResolver } from "./purchase-offer.resolver";
 
 @Injectable()
-export class CheckoutResolver implements Resolve<PurchaseOfferResult>{
-    constructor(public _offersService: OffersService, private _identityService: IdentityService, private _router: Router) { }
-    resolve(route: ActivatedRouteSnapshot): Observable<PurchaseOfferResult> | Promise<PurchaseOfferResult> | PurchaseOfferResult {
-        // Try to return saved purchase result (if refreshing)
-        const purchaseOfferResult = LocalStorageService.getFromLocalStorage<PurchaseOfferResult>(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT, null, false);
-        if (purchaseOfferResult) {
-            return purchaseOfferResult;
+export class CheckoutResolver implements Resolve<CheckoutResolvedData>{
+    constructor(
+        public _offersService: OffersService,
+        private _checkoutPaymentValidityResolver: CheckoutPaymentValidityResolver,
+        private _purchaseOfferResolver: PurchaseOfferResolver,
+        private _router: Router
+    ) { }
+    async resolve(route: ActivatedRouteSnapshot): Promise<CheckoutResolvedData> {
+        const paymentValidationResult = await this._checkoutPaymentValidityResolver.resolve(route).toPromise();
+        const purchaseOfferResult = await this._purchaseOfferResolver.resolve(route).toPromise();
+        const result = new CheckoutResolvedData();
+        result.purchaseOfferResult = purchaseOfferResult;
+        if (paymentValidationResult) {
+            result.paymentFailed = !paymentValidationResult.paid;
+            result.errorCodes = paymentValidationResult.errors.map(e => e.code);
         }
-        // Prepare to purchase offer
-        const payload = LocalStorageService.getFromLocalStorage<PurchaseOfferPayload>(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD);
-        // Questions not answered or expired
-        if (!payload) {
-            // Redirect home
-            this._router.navigate([AppConstants.ROUTES.MAIN]);
-            return null;
-        }
-        const userInfo = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO, null, false);
-        return this._offersService.purchaseOffer(payload.offerCode, payload.dimensions, userInfo);
+        return result;
     }
 }
