@@ -57,7 +57,7 @@ export class PaymentService {
         payload.offerCode = offerCode;
         // Add user info to payload
         Object.keys(smiPayload).forEach((key) => {
-            switch (smiPayload[key]) {
+            switch (key) {
                 case AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION:
                     payload.from = userInfo[key].from;
                     payload.to = userInfo[key].to;
