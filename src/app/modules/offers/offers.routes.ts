@@ -29,6 +29,15 @@ const offersRoutes: Routes = [
         }
     },
     {
+        path: `${AppConstants.ROUTES.CHECKOUT}/:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_FLAG}`,
+        component: CheckoutComponent,
+        canActivate: [RouteGuardService],
+        resolve: {
+            resolvedData: CheckoutResolver,
+            dataLists: CheckoutDatalistResolver,
+        }
+    },
+    {
         path: `${AppConstants.ROUTES.CHECKOUT}/:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_FLAG}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_ERROR_CODE}`,
         component: CheckoutComponent,
         canActivate: [RouteGuardService],

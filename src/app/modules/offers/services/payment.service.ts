@@ -40,7 +40,7 @@ export class PaymentService {
     public validate(quoteId: string): Observable<ValidatePaymentResult> {
         return new Observable<ValidatePaymentResult>((observer) => {
             const api = new ApiService(this._httpClient, environment.CRM);
-            api.get(AppConstants.CONTROLLER_NAMES.PAYMENT, AppConstants.ACTION_NAMES.VALIDATE, { quoteId }).subscribe((res: any) => {
+            api.get(AppConstants.CONTROLLER_NAMES.PAYMENT, `${AppConstants.ACTION_NAMES.VALIDATE}/${quoteId}`).subscribe((res: any) => {
                 const result = res as ValidatePaymentResult;
                 observer.next(result);
                 observer.complete();

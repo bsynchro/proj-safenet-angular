@@ -12,7 +12,7 @@ export class PaymentValidityResolver implements Resolve<ValidatePaymentResult> {
     constructor(public paymentService: PaymentService) { }
     resolve(route: ActivatedRouteSnapshot): Observable<ValidatePaymentResult> {
         return new Observable<ValidatePaymentResult>((observer) => {
-            const quoteId = route.data[AppConstants.ROUTE_DATA_KEYS.QUOTE_ID];
+            const quoteId = route.params[AppConstants.ROUTE_DATA_KEYS.QUOTE_ID];
             if (!quoteId) {
                 const error = new ValidationError();
                 error.code = PaymentConstants.PaymentErrorCodes.MISSING_QUOTE_ID;

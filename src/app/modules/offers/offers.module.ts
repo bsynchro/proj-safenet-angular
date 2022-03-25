@@ -14,7 +14,7 @@ import { CheckoutResolver } from './resolvers/checkout.resolver';
 import { PipesModule } from '@bsynchro/services';
 import { PaymentService } from './services/payment.service';
 import { CheckoutPaymentValidityResolver } from './resolvers/checkout-payment-validity.resolver';
-import { PaymentValidityResolver } from '../personal-information/resolvers/personal-information.resolver';
+import { PaymentValidityResolver } from '../personal-information/resolvers/payment-validity.resolver';
 import { PurchaseOfferResolver } from './resolvers/purchase-offer.resolver';
 
 

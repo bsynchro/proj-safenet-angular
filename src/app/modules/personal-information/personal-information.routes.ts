@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppConstants } from "src/app/shared/constants/app.constants";
 import { PersonalInformationComponent } from "./components/personal-information.component";
 import { PersonalInformationDatalistResolver } from "src/app/core/resolvers/data-list.resolver";
-import { PaymentValidityResolver } from './resolvers/personal-information.resolver';
+import { PaymentValidityResolver } from './resolvers/payment-validity.resolver';
 
 const personalInformationRoutes: Routes = [
     {
