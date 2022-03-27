@@ -2,10 +2,9 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { AppConstants } from "src/app/shared/constants/app.constants";
-import { ValidationError } from "src/app/shared/models/common.model";
-import { PaymentConstants } from "../../offers/constants/payment.constants";
-import { PaymentService } from "../../offers/services/payment.service";
-import { ValidatePaymentResult } from "../components/models/validate-payment-result.model";
+import { ValidatePaymentResult, ValidationError } from "src/app/shared/models/common.model";
+import { PaymentConstants } from "../../modules/offers/constants/payment.constants";
+import { PaymentService } from "../../modules/offers/services/payment.service";
 
 Injectable()
 export class PaymentValidityResolver implements Resolve<ValidatePaymentResult> {

@@ -2,9 +2,8 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 import { AppConstants } from "src/app/shared/constants/app.constants";
-import { ValidationError } from "src/app/shared/models/common.model";
-import { ValidatePaymentResult } from "../../personal-information/components/models/validate-payment-result.model";
-import { PaymentValidityResolver } from "../../personal-information/resolvers/payment-validity.resolver";
+import { ValidatePaymentResult, ValidationError } from "src/app/shared/models/common.model";
+import { PaymentValidityResolver } from "../../../shared/resolvers/payment-validity.resolver";
 import { PaymentConstants } from "../constants/payment.constants";
 
 @Injectable()

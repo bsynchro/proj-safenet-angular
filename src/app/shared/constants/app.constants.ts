@@ -111,10 +111,10 @@ export class AppConstants {
 
     //#region APIs
     public static CONTROLLER_NAMES = class {
-        //#region GlobalVariable
         public static readonly GLOBAL_VARIABLE = 'GlobalVariable';
         public static readonly OFFERS = 'Offers';
         public static readonly PAYMENT = 'Payment';
+        public static readonly BENEFICIARIES = 'Beneficiaries';
         //#endregion
     };
 
@@ -124,6 +124,7 @@ export class AppConstants {
         public static readonly GET_MANY = 'GetMany';
         public static readonly POST = 'Post';
         public static readonly SEARCH = 'Search';
+        public static readonly UPSERT = 'Upsert';
         //#endregion
 
         //#region Offers
