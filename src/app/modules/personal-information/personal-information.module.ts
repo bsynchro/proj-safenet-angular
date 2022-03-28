@@ -8,7 +8,7 @@ import { PersonalInformationDatalistResolver } from 'src/app/core/resolvers/data
 import { DropdownModule } from 'primeng/dropdown';
 import { PaymentValidityResolver } from './resolvers/payment-validity.resolver';
 import { PaymentService } from '../offers/services/payment.service';
-
+import { ToggleButtonModule } from 'primeng/togglebutton';
 @NgModule({
   declarations: [
     PersonalInformationComponent
@@ -19,7 +19,8 @@ import { PaymentService } from '../offers/services/payment.service';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    DropdownModule
+    DropdownModule,
+    ToggleButtonModule
   ],
   providers: [
     PaymentService,

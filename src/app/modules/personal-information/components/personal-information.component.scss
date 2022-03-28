@@ -2,29 +2,138 @@
 @import "../../../../styles/mixins.scss";
 
 .personalInformation-list-component {
-    .header {
-        .header-text {
-            color: $primary-color;
-            font-size: 20px;
-        }
-        .subHeader-text {           
-            font-size: 16px;
-        }
-        .firstLastNameSubLabel-text {
-            color: $accent-color;
-            font-size : 12px;
-        }
+  .header {
+    letter-spacing: 1px;
+    .header-text {
+      color: $primary-color;
+      font-size: 25px;
+      padding-bottom: 20px;
     }
-    .user-selection {
-        font-size: 14px;
-        .link {
-            cursor: pointer;
-            text-decoration: underline;
-            &::before {
-                content: "\f104";
-                cursor: pointer;
-                font-family: "FontAwesome";
-            }
-        }
-    }    
+    .subHeader-text {
+      font-size: 20px;
+      padding-bottom: 10px;
+    }
+    .firstLastNameSubLabel-text {
+      color: $accent-color;
+      font-size: 16px;
+    }
+  }
+  .user-selection {
+    font-size: 14px;
+    margin-left: -15px;
+    p-dropdown {
+      width: 100%;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      padding: 19px;
+    }
+
+    .custom-dropdown .ui-dropdown {
+      color: #404040 !important;
+      font-size: 14px;
+      width: 240px !important;
+    }
+  }
+
+  .mr-40 {
+    margin-right: 40px;
+  }
+
+  .mt-17 {
+    margin-top: 17px;
+  }
+
+  .custom-input {
+    color: #404040 !important;
+    font-size: 14px;
+    width: 281px;
+    height: 57px;
+  }
+
+  .custom-input.gender-input {
+    width: 75px;
+    height: 57px;
+  }
+
+  .family-selection {
+    font-size: 14px;
+    color: $primary-alt-color;
+    margin-left: 2px;
+    cursor: pointer;
+
+    .mr-45 {
+      margin-right: 45px;
+    }
+    .mr-57 {
+      margin-right: 57px;
+    }
+    .mr-75 {
+      margin-right: 75px;
+    }
+
+    .w-100 {
+      width: 100px;
+    }
+    p {
+      text-decoration: underline;
+    }
+
+    .date-div .year-container .ui-dropdown {
+      min-width: 35px !important;
+      max-width: 35px !important;
+    }
+    .date-div .month-container .ui-dropdown {
+      min-width: 75px !important;
+      max-width: 75px !important;
+    }
+    .date-div .day-container .ui-dropdown {
+      min-width: 30px !important;
+      max-width: 30px !important;
+    }
+
+    .ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon {
+      left: 170% !important;
+    }
+    // .dropdown-date-picker .yearmonthdayinput {
+    //   width: 35px !important;
+    // }
+  }
+
+  .footer {
+    .footer-text {
+      color: #f52424;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+    .footer-buttons {
+      font-size: 14px;
+    }
+    .footer-submit-button {
+      display: flex;
+      justify-content: end;
+    }
+    .cancel-button,
+    .close-button {
+      width: 140px;
+      height: 36px;
+      color: $primary-alt-color;
+      background-color: $background-color;
+      border: 1px solid $primary-alt-color;
+      border-radius: 5px;
+    }
+    .cancel-button {
+      margin-left: 10px;
+    }
+    .submit-button {
+      width: 140px;
+      height: 36px;
+      color: white;
+      background-color: $primary-alt-color;
+      border: 1px solid $primary-alt-color;
+      border-radius: 5px;
+      margin-top: -36px;
+    }
+  }
 }
