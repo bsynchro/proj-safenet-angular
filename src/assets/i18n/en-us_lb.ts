@@ -59,7 +59,21 @@ export default {
     "personalInformation": {
         "headerText": "Thank you for purchasing your travel policy from Basma. Your order has been placed successfully!",
         "subHeaderText": "To continue with your policy issuance, please proceed with providing few additional information related to the insured. ",
-        "firstLastNameSubLabel": "** First Name(s) and Last Name(s) should be as exist in passport"
+        "firstLastNameSubLabel": "** First Name(s) and Last Name(s) should be as exist in passport",
+        "firstNamePlaceholder": "First Name (as exist in Passport)*",
+        "lastNamePlaceholder": "Last Name (as exist in Passport)*",
+        "countryOfResidencePlaceholder": "Country of Residence*",
+        "passportNumbnerPlaceholder": "Passport Number",
+        "mobileNumbnerPlaceholder": "Mobile Number*",
+        "destinationCountryPlaceholder": "Destination Country*",
+        "spouseText": "+ Add Spouse",
+        "childrenText": "+ Add children",
+        "footerText": "You should enter at least one spouse or 1 children",
+        "buttons": {
+            "closeButton": "Close",
+            "cancelButton": "Cancel Offer",
+            "submitButton": "Submit",
+        },
     },
     "wizard": {
         "back": "Back",
