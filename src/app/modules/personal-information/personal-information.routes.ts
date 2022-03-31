@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
 import { AppConstants } from "src/app/shared/constants/app.constants";
-import { PersonalInformationComponent } from "./components/personal-information.component";
 import { PersonalInformationDatalistResolver } from "src/app/core/resolvers/data-list.resolver";
 import { PersonalInformationResolver } from './resolvers/personal-information.resolver';
+import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
 
 const personalInformationRoutes: Routes = [
     {
@@ -15,11 +15,11 @@ const personalInformationRoutes: Routes = [
         },
     },
     {
-        path: `:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}`,
+        path: ':quoteId',
         component: PersonalInformationComponent,
         resolve: {
             dataLists: PersonalInformationDatalistResolver,
-            resolvedData: PersonalInformationResolver
+            beneficiariesResult: PersonalInformationResolver
         }
     }
 ]

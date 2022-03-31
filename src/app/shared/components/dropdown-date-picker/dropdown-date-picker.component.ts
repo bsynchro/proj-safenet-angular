@@ -30,7 +30,7 @@ export class DropdownDatePickerComponent implements OnInit, OnChanges, ControlVa
   //#region decorators
   @Input() public responseMapper = this.mapToDate;
   @Input() public name: string;
-  @Input() public productId: number;
+  @Input() public reference: string;
   @Input() public oldestYear: number;
   @Input() public youngestYear: number;
   @Input() public format: string;

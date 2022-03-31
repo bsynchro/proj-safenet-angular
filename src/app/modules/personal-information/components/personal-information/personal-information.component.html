@@ -1,0 +1,151 @@
+<div class="personal-information-component">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row header mb-3 mb-md-4 mx-2 mx-md-5">
+            <div class="col-12">
+                <div class="row mb-2 mb-md-3">
+                    <div class="col-12 header-title">
+                        {{ translations.personalInformation.headerText | translate }}
+                    </div>
+                </div>
+                <div class="row mb-1 mb-md-2">
+                    <div class="col-12 sub-header">
+                        {{ translations.personalInformation.subHeaderText | translate }}
+                    </div>
+                </div>
+                <div class="row mb-1 mb-md-2">
+                    <div class="col-12 remark">
+                        {{ translations.personalInformation.firstLastNameSubLabel | translate }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms -->
+        <ng-container *ngIf="beneficiariesForm" [formGroup]="beneficiariesForm">
+            <!-- Principal -->
+            <div class="row user-section mx-2 mx-md-5" formGroupName="principal">
+                <div class="col-12">
+                    <ng-container [ngTemplateOutlet]="beneficiary"
+                        [ngTemplateOutletContext]="{relation:PRINCIPAL,form:principalFormGroup}">
+                    </ng-container>
+                </div>
+            </div>
+            <!-- Spouses -->
+            <ng-container *ngIf="isFamily">
+                <div class="row spouses-section mx-2 mx-md-5 mb-2 mb-md-3">
+                    <div class="col-12">
+                        <!-- Add Spouse Button -->
+                        <div class="row mb-2 mb-md-3">
+                            <div class="col-12">
+                                <span (click)="addSpouse()" [ngClass]="canAddSpouse ? 'add-btn' : 'add-btn disabled'">
+                                    {{ translations.personalInformation.spouseText | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Spouse Forms -->
+                        <ng-container *ngIf="spousesFormArray" formArrayName="spouses">
+                            <ng-container *ngFor="let form of spousesFormArray.controls; let i = index">
+                                <ng-container [ngTemplateOutlet]="beneficiary"
+                                    [ngTemplateOutletContext]="{relation:SPOUSE,index:i,form:form}">
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- Children -->
+            <ng-container *ngIf="isFamily">
+                <div class="row children-section mx-2 mx-md-5 mb-2 mb-md-3">
+                    <div class="col-12">
+                        <!-- Add Child Button -->
+                        <div class="row mb-2 mb-md-3">
+                            <div class="col-12">
+                                <span (click)="addChild()" [ngClass]="canAddChild ? 'add-btn' : 'add-btn disabled'">
+                                    {{ translations.personalInformation.childrenText | translate }}
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Children Forms -->
+                        <ng-container *ngIf="childrenFormArray" formArrayName="children">
+                            <ng-container *ngFor="let form of childrenFormArray.controls; let i = index">
+                                <ng-container [ngTemplateOutlet]="beneficiary"
+                                    [ngTemplateOutletContext]="{relation:CHILD,index:i,form:form}">
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <!-- Validation -->
+        <div *ngIf="showGlobalValidation" class="row global-validation mb-3 mb-md-4 mx-2 mx-md-5">
+            <div class="col-12 validation-msg">
+                {{ translations.personalInformation.footerText | translate }}
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="row btn-container mb-3 mb-md-4 mx-2 mx-md-5">
+            <div class="col-12">
+                <button class="close-btn secondary-btn d-none">
+                    {{ translations.personalInformation.buttons.closeButton | translate}}
+                </button>
+                <button class="cancel-btn secondary-btn d-none">
+                    {{ translations.personalInformation.buttons.cancelButton | translate}}
+                </button>
+                <button class="submit-btn primary-btn" (click)="submit()">
+                    {{ translations.personalInformation.buttons.submitButton | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #beneficiary let-relation="relation" let-index="index" let-form="form">
+    <div class="row beneficiary" [formGroup]="form">
+        <div class="col-12 col-md-3 mb-3 mb-md-4">
+            <input type="text" class="form-input" formControlName="firstName"
+                placeholder="{{ translations.personalInformation.firstNamePlaceholder | translate }}" pInputText />
+        </div>
+        <div class="col-12 col-md-3 mb-3 mb-md-4">
+            <input type="text" class="form-input" formControlName="lastName"
+                placeholder="{{ translations.personalInformation.lastNamePlaceholder | translate }}" pInputText />
+        </div>
+        <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
+            <p-dropdown class="dropdown form-input" [options]="countryOptions" formControlName="countryOfResidence"
+                [showClear]="true" [filter]="true"
+                placeholder="{{ translations.personalInformation.countryOfResidencePlaceholder | translate }}">
+            </p-dropdown>
+        </div>
+        <div *ngIf="relation != PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
+            <app-dropdown-date-picker #dateOfBirth class="date-picker-container" [reference]="relation"
+                (changeHandler)="onDobChange($event, relation, index)">
+            </app-dropdown-date-picker>
+        </div>
+        <div class="col-9 col-md-2 mb-3 mb-md-4 passport-col">
+            <input type="text" class="form-input" formControlName="passportNumber"
+                placeholder="{{ translations.personalInformation.passportNumbnerPlaceholder | translate }}"
+                pInputText />
+        </div>
+        <div class="col-3 col-md-1 mb-3 mb-md-4 gender-col">
+            <div class="gender-container">
+                <p-toggleButton formControlName="gender" [onIcon]="'male'" [offIcon]="'female'" class="gender-btn">
+                </p-toggleButton>
+            </div>
+        </div>
+        <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
+            <input type="text" class="form-input" formControlName="mobileNumber"
+                placeholder="{{ translations.personalInformation.mobileNumbnerPlaceholder | translate }}" pInputText />
+        </div>
+        <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
+            <p-dropdown class="dropdown form-input" [options]="countryOptions" formControlName="destinationCountry"
+                [showClear]="true" [filter]="true"
+                placeholder="{{ translations.personalInformation.destinationCountryPlaceholder | translate }}">
+            </p-dropdown>
+        </div>
+        <i *ngIf="relation != PRINCIPAL" class="fa fa-times remove-btn" (click)="removeBeneficiary(relation, index)"
+            aria-hidden="true"></i>
+    </div>
+</ng-template>

@@ -4,12 +4,21 @@
     display: flex;
     justify-content: center;
     .yearmonthdayinput {
-        @include answerBtn();
-        margin: 0.5rem;
-        padding: 0.5rem 0;
+        .date-container {
+            @include answerBtn();
+            padding: 0.5rem 0;
+        }
         .dropDown {
+            .ui-dropdown {
+                min-width: -webkit-fill-available;
+                width: -moz-available;
+                .ui-dropdown-label {
+                    text-align: center;
+                }
+            }
             .ui-dropdown-trigger {
                 color: $primary-alt-color;
+                z-index: 9;
                 margin-right: 0.5rem;
                 html.rtl & {
                     margin-right: unset;

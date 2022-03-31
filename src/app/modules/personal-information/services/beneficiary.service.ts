@@ -5,6 +5,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { AppConstants } from "src/app/shared/constants/app.constants";
 import { Beneficiary } from "src/app/shared/models/crm.model";
 import { environment } from "src/environments/environment";
+import { GetBeneficiariesResult } from "../models/get-beneficiaries-result.model";
 import { UpsertBeneficiariesResult } from "../models/upsert-beneficiaries-result.model";
 
 @Injectable()
@@ -14,12 +15,12 @@ export class BeneficiaryService {
     //#endregion
 
     //#region public methods
-    public getBeneficiaries(quoteId: string): Observable<Array<Beneficiary>> {
-        return new Observable<Array<Beneficiary>>((observer) => {
+    public getBeneficiaries(quoteId: string): Observable<GetBeneficiariesResult> {
+        return new Observable<GetBeneficiariesResult>((observer) => {
             const api = new ApiService(this._httpClient, environment.CRM);
             api.get(AppConstants.CONTROLLER_NAMES.BENEFICIARIES, quoteId).subscribe((res: any) => {
-                if (res && res.beneficiaries) {
-                    observer.next(res.benefits as Array<Beneficiary>)
+                if (res) {
+                    observer.next(res as GetBeneficiariesResult)
                     observer.complete();
                 }
                 else {

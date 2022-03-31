@@ -19,6 +19,7 @@ export class Beneficiary {
     public relation: DataListField;
     public mobileNumber: PhoneNumber;
     public countryOfResidence: DataListField;
+    public destinationCountry: DataListField;
 }
 
 export class PhoneNumber {

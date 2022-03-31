@@ -9,6 +9,7 @@ export class AppConstants {
         public static readonly DURATION = 'TDuration';
         public static readonly IC_GENERAL_INFO = 'ICGeneralInfo';
         public static readonly COUNTRY = 'TCountry';
+        public static readonly GENDER = 'Gender';
     };
 
     public static SYSTEM_DATA_LIST_NAMES = class {
@@ -37,8 +38,18 @@ export class AppConstants {
     ]
 
     public static PERSONALINFORMATION_DATA_LISTS = [
-        AppConstants.DATA_LIST_NAMES.COUNTRY
+        AppConstants.DATA_LIST_NAMES.COUNTRY,
+        AppConstants.DATA_LIST_NAMES.GENDER
     ]
+    //#endregion
+
+    //#region DataList Codes
+    public static DATA_LIST_CODES = class {
+        public static GENDER = class {
+            public static readonly MALE = 'Male';
+            public static readonly FEMALE = 'Female';
+        }
+    }
     //#endregion
 
     //#region Languages
@@ -80,6 +91,7 @@ export class AppConstants {
         public static readonly REFRESH = 'refresh';
         public static readonly CHECKOUT = 'checkout';
         public static readonly PERSONALINFORMATION = 'personalInformation';
+        public static readonly POLICY = 'policy';
     }
 
     public static ROUTE_DATA_KEYS = class {
@@ -160,8 +172,4 @@ export class AppConstants {
         public static readonly DATE_FORMAT = 'dd/mm/yy';// PRIME-NG CALENDAR COMPONENT COMPATIBLE EQUIVALENT TO dd/mm/yyyy
         public static readonly PLACEHOLDER = 'dd/mm/yyyy';
     }
-
-    //#region PersonalInformation
-    public static readonly PRINCIPAL = 'principle';
-    //#endregion
 }
