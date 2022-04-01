@@ -127,6 +127,7 @@ export class AppConstants {
         public static readonly OFFERS = 'Offers';
         public static readonly PAYMENT = 'Payment';
         public static readonly BENEFICIARIES = 'Beneficiaries';
+        public static readonly POLICY = 'Policy';
         //#endregion
     };
 
@@ -148,6 +149,10 @@ export class AppConstants {
         //#region Payment
         public static readonly CHECKOUT = 'Checkout';
         public static readonly VALIDATE = 'Validate';
+        //#endregion
+
+        //#region Policy
+        public static readonly ISSUE = 'Issue';
         //#endregion
     };
     //#endregion

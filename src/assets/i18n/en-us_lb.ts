@@ -75,6 +75,14 @@ export default {
             "submitButton": "Submit",
         },
     },
+    "policy": {
+        "policyDownload": {
+            "downloadButtonLabel": "Download Policy",
+            "policyError": "Your Policy couldn't be downloaded for technical reasons! Basma team will be contacting you to provide you with the policy.",
+            "subTitle": "Your Policy has been successfully issued and you can download your below travel policy certificate which has been also sent to your registered email.",
+            "title": "Thank you for choosing Basma travel insurance!"
+        }
+    },
     "wizard": {
         "back": "Back",
         "next": "Next",

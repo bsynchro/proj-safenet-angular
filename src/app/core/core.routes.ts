@@ -21,6 +21,10 @@ const coreRoutes: Routes = [
             {
                 path: AppConstants.ROUTES.PERSONALINFORMATION,
                 loadChildren: () => import('../modules/personal-information/personal-information.module').then((mod) => mod.PersonalInformationModule)
+            },
+            {
+                path: AppConstants.ROUTES.POLICY,
+                loadChildren: () => import('../modules/policy/policy.module').then((mod) => mod.PolicyModule)
             }
         ]
     },

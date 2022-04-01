@@ -162,7 +162,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       const quoteId = this._activatedRoute.snapshot.paramMap.get(AppConstants.ROUTE_DATA_KEYS.QUOTE_ID);
       const result = await this._beneficiaryService.upsertBeneficiaries(quoteId, beneficiaries).toPromise();
       if (result) {
-        this._router.navigate([[AppConstants.ROUTES.MAIN, AppConstants.ROUTES.POLICY]]);
+        this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.POLICY, quoteId]);
       }
     }
   }
@@ -227,6 +227,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       mobileNumber: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, Validators.required] : [null],
       destinationCountry: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, Validators.required] : [null],
       dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null] : [null, Validators.required],
+      maritalStatus: [null],
       relation: [relation]
     });
     return formGroup;
@@ -260,6 +261,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       switch (key) {
         case BeneficiariesConstants.Properties.COUNTRY_OF_RESIDENCE:
         case BeneficiariesConstants.Properties.DESTINATION_COUNTRY:
+        case BeneficiariesConstants.Properties.MARITAL_STATUS:
         case BeneficiariesConstants.Properties.RELATION:
           formGroup.get(key).setValue(beneficiary[key] && beneficiary[key].code ? beneficiary[key].code : null);
           break;
@@ -267,7 +269,8 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
           formGroup.get(key).setValue(beneficiary[key] && beneficiary[key].number ? beneficiary[key].number : null);
           break;
         case BeneficiariesConstants.Properties.GENDER:
-          formGroup.get(key).setValue(beneficiary[key] && beneficiary[key].code == AppConstants.DATA_LIST_CODES.GENDER.MALE);
+          const gender = beneficiary[key] ? beneficiary[key].code : null;
+          formGroup.get(key).setValue(isNullOrUndefined(gender) || gender == AppConstants.DATA_LIST_CODES.GENDER.MALE);
           break;
         default:
           formGroup.get(key).setValue(beneficiary[key]);
@@ -325,6 +328,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       switch (key) {
         case BeneficiariesConstants.Properties.COUNTRY_OF_RESIDENCE:
         case BeneficiariesConstants.Properties.DESTINATION_COUNTRY:
+        case BeneficiariesConstants.Properties.MARITAL_STATUS:
         case BeneficiariesConstants.Properties.RELATION:
           beneficiary[key] = new DataListField(formGroup.get(key).value);
           break;

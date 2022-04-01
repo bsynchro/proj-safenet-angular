@@ -16,6 +16,7 @@ export class BeneficiariesConstants {
         public static readonly DESTINATION_COUNTRY = 'destinationCountry';
         public static readonly DATE_OF_BIRTH = 'dateOfBirth';
         public static readonly RELATION = 'relation';
+        public static readonly MARITAL_STATUS = 'maritalStatus';
     }
 
     public static NumberOfBeneficiariesLimit = class {

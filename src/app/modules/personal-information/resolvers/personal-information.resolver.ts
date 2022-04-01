@@ -22,7 +22,7 @@ export class PersonalInformationResolver implements Resolve<GetBeneficiariesResu
             return beneficiariesResult;
         }
         // Unpaid => redirect to checkout screen
-        this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT, quoteId, PaymentConstants.PaymentStatus.PAYMENT_FAILED])
+        this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT, quoteId, PaymentConstants.PaymentStatus.PAYMENT_FAILED]);
         return null;
     }
 }
