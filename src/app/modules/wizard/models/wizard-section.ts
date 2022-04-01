@@ -111,7 +111,9 @@ export abstract class WizardSection extends Step {
         }
         const savedFormGroup = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO);
         if (savedFormGroup) {
-            this.updateFormControls(savedFormGroup);
+            let componentFormGroup = {};
+            componentFormGroup[this.userInfoPropertyName] = savedFormGroup[this.userInfoPropertyName];
+            this.updateFormControls(componentFormGroup);
         }
     }
     //#endregion
