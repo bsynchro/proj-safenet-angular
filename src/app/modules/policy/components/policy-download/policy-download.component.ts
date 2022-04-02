@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { AppConstants } from 'src/app/shared/constants/app.constants';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Translations } from 'src/app/shared/services/translation.service';
 import { PolicyConstants } from '../../constants/policy.constants';
 import { IssuePolicyResult } from '../../models/issue-policy-result.model';
@@ -43,6 +45,7 @@ export class PolicyDownloadComponent implements OnInit {
   //#region lifecycle hooks
   ngOnInit() {
     this.setPolicyProperties();
+    this.handleHandleUserInfoInLocalStorage();
   }
   //#endregion
 
@@ -64,6 +67,12 @@ export class PolicyDownloadComponent implements OnInit {
         this._policyUrl = issuePolicyResult.policyUrl;
         this._policyId = issuePolicyResult.id;
       }
+    }
+  }
+
+  private handleHandleUserInfoInLocalStorage() {
+    if (this._policyIssued) {
+      LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO);
     }
   }
   //#endregion
