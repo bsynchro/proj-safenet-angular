@@ -79,7 +79,7 @@ export class OffersService {
 
     private getPurchaseOfferPayload(offerCode: string, dimensions: DimensionInput[], userInfo: any): PurchaseOfferPayload {
         const dobObj = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB] as { year: number, month: number, day: number };
-        const dob = new Date(dobObj.year, dobObj.month, dobObj.day);
+        const dob = `${dobObj.day.toString().padStart(2, '0')}-${dobObj.month.toString().padStart(2, '0')}-${dobObj.year.toString()}`;
         const payload = new PurchaseOfferPayload();
         payload.offerCode = offerCode;
         payload.dimensions = dimensions;
