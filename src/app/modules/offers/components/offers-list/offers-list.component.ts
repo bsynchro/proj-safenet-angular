@@ -178,7 +178,7 @@ export class OffersListComponent implements OnInit {
 
   private setAge() {
     const dob = this._userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB];
-    const age = UtilsService.getAge(new Date(dob.year, dob.month, dob.day));
+    const age = UtilsService.getAge(new Date(dob.year, dob.month - 1, dob.day));
     this._age = age ? age.toString() : '';
   }
 

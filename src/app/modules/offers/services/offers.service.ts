@@ -90,7 +90,7 @@ export class OffersService {
     }
 
     private getAge(dob: { year: number, month: number, day: number }): number {
-        return UtilsService.getAge(new Date(dob.year, dob.month, dob.day));
+        return UtilsService.getAge(new Date(dob.year, dob.month - 1, dob.day));
     }
 
     private createOffersDimensions(userInfo: any): Array<DimensionInput> {

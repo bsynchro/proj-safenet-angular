@@ -47,8 +47,13 @@ export class UtilsService {
 
     public static getAge(dob: Date) {
         if (dob) {
-            let timeDiff = Math.abs(Date.now() - dob.getTime());
-            return Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const months = today.getMonth() - dob.getMonth();
+            if (months < 0 || (months === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age;
         }
     }
 

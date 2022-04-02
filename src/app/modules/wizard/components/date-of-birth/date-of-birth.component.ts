@@ -152,7 +152,7 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
   }
 
   private getAge(formValue: any): number {
-    const dob = new Date(formValue.year, formValue.month, formValue.day);
+    const dob = new Date(formValue.year, formValue.month - 1, formValue.day);
     return UtilsService.getAge(dob);
   }
   //#endregion
