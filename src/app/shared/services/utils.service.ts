@@ -55,9 +55,9 @@ export class UtilsService {
     public static getDateDiffernnceInDays(from: Date, to: Date): number {
         const _MS_PER_DAY = 1000 * 60 * 60 * 24;
         // Discard the time and time-zone information.
-        const utc1 = Date.UTC(from.getFullYear(), from.getMonth(), from.getDate());
-        const utc2 = Date.UTC(to.getFullYear(), to.getMonth(), to.getDate());
-        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+        const d1 = new Date(from.getFullYear(), from.getMonth(), from.getDate()) as any;
+        const d2 = new Date(to.getFullYear(), to.getMonth(), to.getDate()) as any;
+        return Math.ceil((d2 - d1 + 1) / _MS_PER_DAY);
     }
     //#endregion
 }
