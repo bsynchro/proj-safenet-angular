@@ -1,11 +1,11 @@
 export const environment = {
-  name: 'prod',
-  production: true,
+  name: "prod",
+  production: !0,
   defaultLcid: 1033,
-  location: 'LB',
-  Portal: 'https://portal.askbasma.com',
-  IdentityServer: 'https://safenet.identity-staging-mt.askbasma.com',
-  DataLists: 'https://safenet.cora-api-staging-mt.askbasma.com/data-list',
-  CRM: 'https://crm.askbasma.com',
-  GlobalVariables: 'https://safenet.cora-api-staging-mt.askbasma.com/global-variable'
+  location: "LB",
+  Portal: "https://portal.askbasma.com",
+  IdentityServer: "https://identity.askbasma.com",
+  DataLists: "https://cora-api.askbasma.com/data-list",
+  CRM: "https://cora-api.askbasma.com/crm",
+  GlobalVariables: "https://cora-api.askbasma.com/global-variable"
 };
