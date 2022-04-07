@@ -17,6 +17,9 @@
                 .phone {
                     display: flex;
                     align-items: center;
+                    .phone-text {
+                        color: $font-color;
+                    }
                 }
                 .sign-in {
                     margin-left: 2rem;

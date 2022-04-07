@@ -5,12 +5,14 @@
                 <img class="logo-img" src="../../../assets/images/logo-safenet.svg" />
             </div>
             <div class="right-header">
-                <div class="phone">
-                    <span class="phone-ic">
-                        <img src="../../../assets/images/icons//ic-phone.svg" />
-                    </span>
-                    <span>123456789</span>
-                </div>
+                <a href="tel:">
+                    <div class="phone">
+                        <span class="phone-ic">
+                            <img src="../../../assets/images/icons//ic-phone.svg" />
+                        </span>
+                        <span class="phone-text">+965 2228 6250</span>
+                    </div>
+                </a>
                 <div class="sign-in" *ngIf="!isLoggedIn">
                     <button class="sign-in-btn" (click)="login()">{{ translations.header.signIn | translate}}</button>
                 </div>
