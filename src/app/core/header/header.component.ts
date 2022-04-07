@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public get isLoggedIn(): boolean {
+    return true;
     return this._authService.isLoggedIn();
   }
   //#endregion

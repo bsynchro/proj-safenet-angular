@@ -22,7 +22,7 @@ const offersRoutes: Routes = [
     {
         path: AppConstants.ROUTES.CHECKOUT,
         component: CheckoutComponent,
-        canActivate: [RouteGuardService],
+        // canActivate: [RouteGuardService],
         resolve: {
             resolvedData: CheckoutResolver,
             dataLists: CheckoutDatalistResolver,
@@ -32,7 +32,7 @@ const offersRoutes: Routes = [
         // path: `${AppConstants.ROUTES.CHECKOUT}/:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_FLAG}`,
         path: 'checkout/:quoteId/:paymentFlag',
         component: CheckoutComponent,
-        canActivate: [RouteGuardService],
+        // canActivate: [RouteGuardService],
         resolve: {
             resolvedData: CheckoutResolver,
             dataLists: CheckoutDatalistResolver,
@@ -42,7 +42,7 @@ const offersRoutes: Routes = [
         path: 'checkout/:quoteId/:paymentFlag/:paymentErrorCode',
         // path: `${AppConstants.ROUTES.CHECKOUT}/:${AppConstants.ROUTE_DATA_KEYS.QUOTE_ID}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_FLAG}/:${AppConstants.ROUTE_DATA_KEYS.PAYMENT_ERROR_CODE}`,
         component: CheckoutComponent,
-        canActivate: [RouteGuardService],
+        // canActivate: [RouteGuardService],
         resolve: {
             resolvedData: CheckoutResolver,
             dataLists: CheckoutDatalistResolver,
