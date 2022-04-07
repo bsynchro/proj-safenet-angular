@@ -21,5 +21,11 @@
                 </p-calendar>
             </div>
         </div>
+        <div class="row validation-messages" *ngIf="dateFormGroup?.errors">
+            <div class="col-12 validation-message d-flex justify-content-center"
+                *ngIf="dateFormGroup.errors.invalidDate">
+                {{ translations.wizard.sections.travelDuration.validationMessages.invalidDate | translate }}
+            </div>
+        </div>
     </div>
 </div>

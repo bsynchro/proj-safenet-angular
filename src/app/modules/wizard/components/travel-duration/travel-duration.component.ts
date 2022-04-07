@@ -119,6 +119,7 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
     });
     this.formGroup.addControl(this.userInfoPropertyName, dateFormGroup);
     this._dateFormGroup = this.formGroup.get(this.userInfoPropertyName) as FormGroup;
+    this._dateFormGroup.setValidators(this.dateValidator);
   }
 
   public updateFormControls(savedFormGroup: any) {
@@ -136,6 +137,14 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
   //#region public methods
   public onValueChange() {
     this.selectAnswer(this._dateFormGroup.getRawValue());
+  }
+  //#endregion
+
+  //#region private methods
+  private dateValidator: ValidatorFn = (group: FormGroup) => {
+    if (group.get('from').value && group.get('to').value) {
+      return group.get('from').value < group.get('to').value ? null : { invalidDate: true };
+    }
   }
   //#endregion
 }

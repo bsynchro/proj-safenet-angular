@@ -76,7 +76,10 @@ export default {
             "travelDuration": {
                 "from": "من",
                 "title": "ما هي مدة سفرك؟",
-                "to": "الى"
+                "to": "الى",
+                "validationMessages": {
+                    "invalidDate": "يجب أن يكون تاريخ السفر أقل من أو يساوي تاريخ العودة"
+                }
             },
             "travelType": {
                 "options": {

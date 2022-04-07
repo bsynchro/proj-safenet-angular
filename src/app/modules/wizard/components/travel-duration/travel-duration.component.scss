@@ -2,116 +2,123 @@
 @import "../../../../../styles/mixins.scss";
 
 .travel-duration {
-    .title {
-        color: $primary-color;
-        font-size: 20px;
-    }
-    .choices {
-        margin: auto;
-        width: 70%;
+    .container-fluid {
         min-height: calc(100vh - #{$header-height} - #{$progress-bar-height} - 1px);
-        .date-picker {
-            &.from {
-                text-align: right;
-                html.rtl & {
-                    text-align: left;
-                }
-            }
-            &.to {
-                text-align: left;
-                html.rtl & {
+        .title {
+            color: $primary-color;
+            font-size: 20px;
+        }
+        .choices {
+            margin: auto;
+            width: 70%;
+            .date-picker {
+                &.from {
                     text-align: right;
+                    html.rtl & {
+                        text-align: left;
+                    }
                 }
-            }
-            p-calendar {
-                .ui-widget {
-                    top: 0 !important;
-                    border-radius: 5px !important;
+                &.to {
+                    text-align: left;
+                    html.rtl & {
+                        text-align: right;
+                    }
                 }
-                .ui-calendar {
-                    display: flex;
-                    align-items: center;
-                    min-width: 20rem;
-                    @include shadow();
-                    width: -webkit-fill-available;
-                    width: -moz-available;
-                    border: none;
-                    padding: 0.5rem;
-                    border-radius: 5px;
-                    background-color: $white;
-                    .ui-inputtext {
+                p-calendar {
+                    .ui-widget {
+                        top: 0 !important;
+                        border-radius: 5px !important;
+                    }
+                    .ui-calendar {
+                        display: flex;
+                        align-items: center;
+                        min-width: 20rem;
+                        @include shadow();
                         width: -webkit-fill-available;
                         width: -moz-available;
                         border: none;
-                    }
-                    .ui-calendar-button {
-                        border: none !important;
+                        padding: 0.5rem;
+                        border-radius: 5px;
                         background-color: $white;
-                        color: $primary-light-color;
-                        font-size: 1.5rem;
+                        .ui-inputtext {
+                            width: -webkit-fill-available;
+                            width: -moz-available;
+                            border: none;
+                        }
+                        .ui-calendar-button {
+                            border: none !important;
+                            background-color: $white;
+                            color: $primary-light-color;
+                            font-size: 1.5rem;
+                        }
+                    }
+                    .ui-calendar {
+                        .ui-datepicker {
+                            background-color: white;
+                            border-radius: 5px;
+                            border: none;
+                            @include shadow();
+                            .ui-datepicker-group {
+                                padding-bottom: 1rem;
+                                .ui-datepicker-header {
+                                    .ui-datepicker-title {
+                                        display: flex;
+                                        justify-content: center;
+                                        select {
+                                            outline: none;
+                                            border: none;
+                                            border-radius: 5px;
+                                        }
+                                    }
+                                }
+                                .ui-datepicker-calendar-container {
+                                    .ui-datepicker-calendar {
+                                        a {
+                                            border-radius: 5px;
+                                            color: black;
+                                            &.ui-state-active {
+                                                background-color: $white;
+                                                color: white;
+                                            }
+                                            &:hover {
+                                                background-color: $grey;
+                                                color: white;
+                                            }
+                                        }
+                                        span.ui-state-disabled {
+                                            cursor: not-allowed !important;
+                                            opacity: 0.5;
+                                        }
+                                    }
+                                }
+                            }
+                            .ui-datepicker-buttonbar {
+                                display: none;
+                            }
+                        }
                     }
                 }
-                .ui-calendar {
-                    .ui-datepicker {
-                        background-color: white;
-                        border-radius: 5px;
-                        border: none;
-                        @include shadow();
-                        .ui-datepicker-group {
-                            padding-bottom: 1rem;
-                            .ui-datepicker-header {
-                                .ui-datepicker-title {
-                                    display: flex;
-                                    justify-content: center;
-                                    select {
-                                        outline: none;
-                                        border: none;
-                                        border-radius: 5px;
-                                    }
-                                }
-                            }
-                            .ui-datepicker-calendar-container {
-                                .ui-datepicker-calendar {
-                                    a {
-                                        border-radius: 5px;
-                                        color: black;
-                                        &.ui-state-active {
-                                            background-color: $white;
-                                            color: white;
-                                        }
-                                        &:hover {
-                                            background-color: $grey;
-                                            color: white;
-                                        }
-                                    }
-                                    span.ui-state-disabled {
-                                        cursor: not-allowed !important;
-                                        opacity: 0.5;
-                                    }
-                                }
-                            }
-                        }
-                        .ui-datepicker-buttonbar {
-                            display: none;
-                        }
-                    }
+            }
+            .answer {
+                padding: 1.5rem 2rem 1.5rem 2rem;
+                z-index: 10;
+                .box {
+                    @include answerBtn();
+                    padding: 2rem;
+                    width: 70%;
+                    height: 5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .selected {
+                    background-color: $light-accent-color;
                 }
             }
         }
-        .answer {
-            padding: 1.5rem 2rem 1.5rem 2rem;
-            z-index: 10;
-            .box {
-                @include answerBtn();
-                padding: 2rem;
-                width: 70%;
-                height: 5rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .selected {
-                background-color: $light-accent-color;
+        .validation-messages {
+            .validation-message {
+                color: $red;
             }
         }
     }

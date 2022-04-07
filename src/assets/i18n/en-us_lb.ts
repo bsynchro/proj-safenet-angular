@@ -96,7 +96,10 @@ export default {
             "travelDuration": {
                 "from": "From",
                 "title": "What Is The Duration Of Your Travel?",
-                "to": "To"
+                "to": "To",
+                "validationMessages": {
+                    "invalidDate": "From Date Should Be Less Than Or Equal To The To Date"
+                }
             },
             "travelType": {
                 "options": {
