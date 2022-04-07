@@ -21,11 +21,11 @@ export class TravelTypeComponent extends WizardSection implements OnInit {
     {
       code: AppWizardConstants.TRAVEL_TYPES.CODES.INDIVIDUAL,
       key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.INDIVIDUAL
-    },
-    {
-      code: AppWizardConstants.TRAVEL_TYPES.CODES.FAMILY,
-      key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.FAMILY
     }
+    // {
+    //   code: AppWizardConstants.TRAVEL_TYPES.CODES.FAMILY,
+    //   key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.FAMILY
+    // }
   ];
   //#endregion
 
