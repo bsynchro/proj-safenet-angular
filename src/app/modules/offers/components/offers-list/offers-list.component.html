@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="col-12 col-md-3 checkboxes align-self-center">
                                     <ng-container *ngFor="let chk of offer.checkboxes">
-                                        <span class="checkbox">
+                                        <span class="checkbox" *ngIf="chk.visible">
                                             <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
                                                 (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName)">
                                             </p-checkbox>

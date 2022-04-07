@@ -8,7 +8,13 @@ export class OffersView {
 export class OfferView {
     logoUrl: string;
     title: Array<LocalizedValue>;
-    checkboxes: Array<{ title: Array<LocalizedValue>, value: Array<LocalizedValue>, checked: boolean; propertyName: string }>;
+    checkboxes: Array<{
+        title: Array<LocalizedValue>,
+        value: Array<LocalizedValue>,
+        checked: boolean;
+        propertyName: string,
+        visible: boolean
+    }>;
     code: string;
     premium: number;
     currency: string;

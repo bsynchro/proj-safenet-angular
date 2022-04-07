@@ -278,19 +278,20 @@ export class OffersListComponent implements OnInit {
     offer: Offer,
     offersPayload: { [key: string]: any },
     flattenedBenefitProperties: Array<BenefitProperty> = null
-  ): { title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string }[] {
-    const checkboxes = new Array<{ title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string }>();
+  ): { title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string, visible: boolean }[] {
+    const checkboxes = new Array<{ title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string, visible: boolean }>();
     if (isNull(flattenedBenefitProperties)) {
       flattenedBenefitProperties = offer && offer.benefits ? this.flattenBenefitProperties(offer.benefits) : [];
     }
     flattenedBenefitProperties.forEach((property) => {
-      if (this.isOfferListItemHeader(property) && property.isOptional) {
+      if (this.isOfferListItemHeader(property)) {
         const propertyName = this.getOfferListItemHeaderPropertyName(property.tags);
         const checkbox = {
           title: property.titleTranslation,
           value: property.displayValueTranslation,//rate.total.toString(),
           propertyName: propertyName,
-          checked: this.isItemHeaderPropertyChecked(propertyName, offersPayload)
+          checked: this.isItemHeaderPropertyChecked(propertyName, offersPayload),
+          visible: property.isOptional
         }
         checkboxes.push(checkbox);
       }
