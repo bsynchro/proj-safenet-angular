@@ -95,7 +95,7 @@
                 <button class="cancel-btn secondary-btn d-none">
                     {{ translations.personalInformation.buttons.cancelButton | translate}}
                 </button>
-                <button class="submit-btn primary-btn" (click)="submit()">
+                <button class="submit-btn primary-btn" type="submit" (click)="submit()">
                     {{ translations.personalInformation.buttons.submitButton | translate}}
                 </button>
             </div>
@@ -108,36 +108,73 @@
         <div class="col-12 col-md-3 mb-3 mb-md-4">
             <input type="text" class="form-input" formControlName="firstName"
                 placeholder="{{ translations.personalInformation.firstNamePlaceholder | translate }}" pInputText />
+            <span
+                *ngIf="(submitClicked || form.controls?.firstName?.touched) && form.controls?.firstName?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
         </div>
         <div class="col-12 col-md-3 mb-3 mb-md-4">
             <input type="text" class="form-input" formControlName="lastName"
                 placeholder="{{ translations.personalInformation.lastNamePlaceholder | translate }}" pInputText />
+            <span
+                *ngIf="(submitClicked || form.controls?.lastName?.touched) && form.controls?.lastName?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
         </div>
         <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
             <p-dropdown class="dropdown form-input" [options]="countryOptions" formControlName="countryOfResidence"
                 [showClear]="true" [filter]="true"
                 placeholder="{{ translations.personalInformation.countryOfResidencePlaceholder | translate }}">
             </p-dropdown>
+            <span
+                *ngIf="(submitClicked || form.controls?.countryOfResidence?.touched) && form.controls?.countryOfResidence?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
         </div>
         <div *ngIf="relation != PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
             <app-dropdown-date-picker #dateOfBirth class="date-picker-container" [reference]="relation"
                 (changeHandler)="onDobChange($event, relation, index)">
             </app-dropdown-date-picker>
+            <span
+                *ngIf="(submitClicked || form.controls?.dateOfBirth?.touched) && form.controls?.dateOfBirth?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
         </div>
         <div class="col-9 col-md-2 mb-3 mb-md-4 passport-col">
             <input type="text" class="form-input" formControlName="passportNumber"
                 placeholder="{{ translations.personalInformation.passportNumbnerPlaceholder | translate }}"
                 pInputText />
+            <span
+                *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
+            <span
+                *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.invalidPassportNumber"
+                class="validation-msg">{{ translations.personalInformation.validationMessages.invalidPassportNumber |
+                translate }}
+            </span>
         </div>
         <div class="col-3 col-md-1 mb-3 mb-md-4 gender-col">
             <div class="gender-container">
                 <p-toggleButton formControlName="gender" [onIcon]="'male'" [offIcon]="'female'" class="gender-btn">
                 </p-toggleButton>
             </div>
+            <span *ngIf="(submitClicked || form.controls?.gender?.touched) && form.controls?.gender?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
         </div>
         <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
-            <input type="text" class="form-input" formControlName="mobileNumber"
-                placeholder="{{ translations.personalInformation.mobileNumbnerPlaceholder | translate }}" pInputText />
+            <app-phone-number initialCountry="KW" [preferredCountries]="['KW']" elementId="mobileNumber"
+                formControlName="mobileNumber" (validationFunctionEvent)="setMobileNumberValidationFn($event)">
+            </app-phone-number>
+            <span
+                *ngIf="(submitClicked || form.controls?.mobileNumber?.touched) && form.controls?.mobileNumber?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
+            <span class="validation-msg"
+                *ngIf="(submitClicked || form.controls?.mobileNumber?.touched) && form.errors?.InvalidPhoneNumber && !form.controls?.mobileNumber?.errors?.required">
+                {{ translations.personalInformation.validationMessages.invalidPhoneNumber | translate }}
+            </span>
         </div>
         <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
             <p-dropdown class="dropdown form-input" [options]="countryOptions" formControlName="destinationCountry"

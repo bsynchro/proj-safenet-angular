@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ValidationErrors, ValidatorFn, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataListField, LabelValueObject, UITranslateService } from '@bsynchro/services';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -32,12 +32,15 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   private _genderDataList: Array<any> = [];
   private _childrenNumber: number;
   private _spousesNumber: number;
+  private _submitClicked: boolean;
   private _languageSubscription: Subscription = new Subscription();
 
   public readonly PRINCIPAL = BeneficiariesConstants.Relation.PRINCIPAL;
   public readonly SPOUSE = BeneficiariesConstants.Relation.SPOUSE;
   public readonly CHILD = BeneficiariesConstants.Relation.CHILD;
   public countryOptions: Array<LabelValueObject> = [];
+
+  private mobileNumberValidationFn: () => ValidationErrors | null;
   //#endregion
 
   //#region getters
@@ -72,6 +75,10 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   public get showGlobalValidation(): boolean {
     return this.isFamily && this._childrenNumber < 1 && this._spousesNumber < 1;
+  }
+
+  public get submitClicked(): boolean {
+    return this._submitClicked;
   }
   //#endregion
 
@@ -157,6 +164,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   }
 
   public async submit() {
+    this._submitClicked = true;
     if (this._beneficiariesForm.valid) {
       const beneficiaries = this.mapFormToBeneficiaries();
       const quoteId = this._activatedRoute.snapshot.paramMap.get(AppConstants.ROUTE_DATA_KEYS.QUOTE_ID);
@@ -177,6 +185,9 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     }
   }
 
+  public setMobileNumberValidationFn(event) {
+    this.mobileNumberValidationFn = event;
+  }
   //#endregion
 
   //#region private methods
@@ -217,19 +228,23 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   }
 
   private createBeneficiaryFormGroup(relation: string): FormGroup {
-    const formGroup = this._fb.group({
-      id: [null],
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      countryOfResidence: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, Validators.required] : [null],
-      passportNumber: [null, Validators.required],
-      gender: [true, Validators.required],
-      mobileNumber: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, Validators.required] : [null],
-      destinationCountry: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, Validators.required] : [null],
-      dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null] : [null, Validators.required],
-      maritalStatus: [null],
-      relation: [relation]
-    });
+    const formGroup = this._fb.group(
+      {
+        id: [null],
+        firstName: [null, [Validators.required]],
+        lastName: [null, [Validators.required]],
+        countryOfResidence: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
+        passportNumber: [null, [Validators.required, this.passportNumberValidatorFn]],
+        gender: [true, [Validators.required]],
+        mobileNumber: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
+        destinationCountry: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
+        dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null] : [null, [Validators.required]],
+        maritalStatus: [null],
+        relation: [relation]
+      },
+      { updateOn: 'blur' }
+    );
+    formGroup.setValidators(this.isMobileNumberValid)
     return formGroup;
   }
 
@@ -396,5 +411,23 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     }
     return formGroup;
   }
+
+  //#region validation
+  private isMobileNumberValid = (): ValidationErrors | null => {
+    if (
+      !isNullOrUndefined(this.mobileNumberValidationFn)
+    ) {
+      return this.mobileNumberValidationFn.apply(this);
+    }
+    return null;
+  }
+
+  private passportNumberValidatorFn: ValidatorFn = (control: FormControl) => {
+    if (control.value) {
+      return control.value.length > 9 ? { invalidPassportNumber: true } : null;
+    }
+    return null;
+  }
+  //#endregion
   //#endregion
 }

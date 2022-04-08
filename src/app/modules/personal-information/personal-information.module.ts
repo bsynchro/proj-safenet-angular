@@ -11,6 +11,7 @@ import { PersonalInformationResolver } from './resolvers/personal-information.re
 import { BeneficiaryService } from './services/beneficiary.service';
 import { ToggleButtonModule } from 'primeng/components/togglebutton/togglebutton';
 import { PersonalInformationComponent } from './components/personal-information/personal-information.component';
+import { PhoneNumberModule } from '@bsynchro/services';
 @NgModule({
   declarations: [
     PersonalInformationComponent
@@ -22,7 +23,8 @@ import { PersonalInformationComponent } from './components/personal-information/
     ReactiveFormsModule,
     SharedModule,
     DropdownModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    PhoneNumberModule
   ],
   providers: [
     PaymentService,

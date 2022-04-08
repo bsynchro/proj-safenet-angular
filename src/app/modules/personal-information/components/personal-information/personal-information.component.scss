@@ -18,6 +18,12 @@
   .beneficiary {
     .form-input {
       padding: 1rem 0.75rem;
+    }
+    app-phone-number .intl-tel-input .ui-inputtext {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .form-input, app-phone-number .intl-tel-input .ui-inputtext {
       border: 0;
       border-radius: 5px;
       font-size: 0.8em;
@@ -123,13 +129,9 @@
       }
     }
   }
-  .global-validations {
-    .validation-msg {
-      font-size: 0.9em;
-    }
-  }
   .validation-msg {
     color: $error-color;
+    font-size: 0.9em;
   }
 }
 

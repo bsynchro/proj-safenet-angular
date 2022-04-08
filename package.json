@@ -26,6 +26,8 @@
     "bootstrap": "^4.4.1",
     "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
+    "intl": "^1.2.5",
+    "intl-tel-input": "^15.0.0",
     "json-logic-js": "^1.2.2",
     "lodash": "^4.17.21",
     "oidc-client": "^1.10.1",
