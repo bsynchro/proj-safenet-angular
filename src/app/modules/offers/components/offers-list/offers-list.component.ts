@@ -220,7 +220,7 @@ export class OffersListComponent implements OnInit {
     return offersView;
   }
 
-  private mapOfferToOfferView(offer: Offer, offersPayload: any) {
+  private mapOfferToOfferView(offer: Offer, offersPayload: any, originalOfferView?: OfferView) {
     const offerView = new OfferView();
     offerView.payload = offersPayload;
     offerView.code = offer.code;
@@ -230,7 +230,7 @@ export class OffersListComponent implements OnInit {
     offerView.logoUrl = this.getLogoUrl(offer.entityId);
     offerView.benefits = offer.benefits ? this.mapBenefitsToBenefitViews(offer.benefits) : [];
     const flattenedProperties = offer && offer.benefits ? this.flattenBenefitProperties(offer.benefits) : [];
-    offerView.checkboxes = this.getOfferViewCheckboxes(offer, offersPayload, flattenedProperties);
+    offerView.checkboxes = this.getOfferViewCheckboxes(offer, offersPayload, flattenedProperties, originalOfferView);
     offerView.highlightedProperties = this.getHighlightedProperties(flattenedProperties);
     return offerView;
   }
@@ -277,7 +277,8 @@ export class OffersListComponent implements OnInit {
   private getOfferViewCheckboxes(
     offer: Offer,
     offersPayload: { [key: string]: any },
-    flattenedBenefitProperties: Array<BenefitProperty> = null
+    flattenedBenefitProperties: Array<BenefitProperty> = null,
+    originalOfferView?: OfferView
   ): { title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string, visible: boolean }[] {
     const checkboxes = new Array<{ title: LocalizedValue[]; value: LocalizedValue[]; checked: boolean; propertyName: string, visible: boolean }>();
     if (isNull(flattenedBenefitProperties)) {
@@ -288,7 +289,7 @@ export class OffersListComponent implements OnInit {
         const propertyName = this.getOfferListItemHeaderPropertyName(property.tags);
         const checkbox = {
           title: property.titleTranslation,
-          value: property.displayValueTranslation,//rate.total.toString(),
+          value: this.getCheckboxValue(property, propertyName, originalOfferView),
           propertyName: propertyName,
           checked: this.isItemHeaderPropertyChecked(propertyName, offersPayload),
           visible: property.isOptional
@@ -297,6 +298,21 @@ export class OffersListComponent implements OnInit {
       }
     });
     return checkboxes;
+  }
+
+  /**
+   * Get checkbox value from original offer if exists. Else from current offer. To avoid displaying the updated property value on uncheck.
+   * @param property 
+   * @param propertyName 
+   * @param originalOfferView 
+   * @returns 
+   */
+  private getCheckboxValue(property: BenefitProperty, propertyName: string, originalOfferView: OfferView): Array<LocalizedValue> {
+    if (isNullOrUndefined(originalOfferView)) {
+      return property.displayValueTranslation;
+    }
+    const originalCheckbox = originalOfferView.checkboxes.find(c => c.propertyName == propertyName);
+    return originalCheckbox.value;
   }
 
   private getOfferListItemHeaderPropertyName(tags: string): string {
@@ -341,7 +357,8 @@ export class OffersListComponent implements OnInit {
     const smiDimension = result && result.dimensions ? result.dimensions.find(d => d.name == OffersConstants.DIMENSION.NAMES.SMI) : null;
     const offersPayload = smiDimension && smiDimension.policyLevel ? smiDimension.policyLevel : this._userInfo;
     // Map offer to view
-    const offerView = offer && offersPayload ? this.mapOfferToOfferView(offer, offersPayload) : null;
+    const originalOfferView = this._offerViews.offers.find(o => o.code == offerCode);
+    const offerView = offer && offersPayload ? this.mapOfferToOfferView(offer, offersPayload, originalOfferView) : null;
     // Remove or replace old offer by repriced offer
     const offerIndex = this._offers.findIndex(o => o.code == offerCode);
     if (offerIndex != -1) {
