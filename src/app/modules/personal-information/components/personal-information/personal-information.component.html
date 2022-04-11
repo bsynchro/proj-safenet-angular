@@ -177,6 +177,17 @@
             </span>
         </div>
         <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
+            <input type="text" class="form-input" formControlName="email"
+                placeholder="{{ translations.personalInformation.emailPlaceholder | translate }}" pInputText />
+            <span *ngIf="(submitClicked || form.controls?.email?.touched) && form.controls?.email?.errors?.required"
+                class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
+            <span *ngIf="(submitClicked || form.controls?.email?.touched) && form.controls?.email?.errors?.email && 
+                !form.controls?.email?.errors?.required" class="validation-msg">
+                {{ translations.personalInformation.validationMessages.invalidEmail | translate }}
+            </span>
+        </div>
+        <div *ngIf="relation == PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
             <p-dropdown class="dropdown form-input" [options]="countryOptions" formControlName="destinationCountry"
                 [showClear]="true" [filter]="true"
                 placeholder="{{ translations.personalInformation.destinationCountryPlaceholder | translate }}">

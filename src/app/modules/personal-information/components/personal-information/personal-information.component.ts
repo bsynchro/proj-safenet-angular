@@ -240,6 +240,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
         destinationCountry: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
         dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null] : [null, [Validators.required]],
         maritalStatus: [null],
+        email: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required, Validators.email]] : [null],
         relation: [relation]
       },
       { updateOn: 'blur' }

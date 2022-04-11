@@ -59,6 +59,7 @@ export default {
     "personalInformation": {
         "headerText": "Thank you for purchasing your travel policy from Basma. Your order has been placed successfully!",
         "subHeaderText": "To continue with your policy issuance, please proceed with providing few additional information related to the insured. ",
+        "emailPlaceholder": "Email Address",
         "firstLastNameSubLabel": "** First Name(s) and Last Name(s) should be as exist in passport",
         "firstNamePlaceholder": "First Name (as exists in Passport)*",
         "lastNamePlaceholder": "Last Name (as exists in Passport)*",
@@ -75,8 +76,9 @@ export default {
             "submitButton": "Submit",
         },
         "validationMessages": {
+            "invalidEmail": "Invalid email",
             "invalidPassportNumber": "Should be maximum 9 digits",
-            "invalidPhoneNumber": "Please enter a valid phone number"
+            "invalidPhoneNumber": "Please enter a valid phone number",
         }
     },
     "policy": {

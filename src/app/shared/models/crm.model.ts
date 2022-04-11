@@ -20,6 +20,7 @@ export class Beneficiary {
     public mobileNumber: PhoneNumber;
     public countryOfResidence: DataListField;
     public destinationCountry: DataListField;
+    public email: string;
 }
 
 export class PhoneNumber {
