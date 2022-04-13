@@ -33,4 +33,5 @@ export class PurchaseOfferPayload {
     public dimensions: Array<DimensionInput>;
     public from: Date;
     public to: Date;
+    public referrer: string;
 }

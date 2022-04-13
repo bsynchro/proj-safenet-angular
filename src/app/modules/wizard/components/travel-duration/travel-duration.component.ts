@@ -124,13 +124,15 @@ export class TravelDurationComponent extends WizardSection implements OnInit {
 
   public updateFormControls(savedFormGroup: any) {
     const dateFormValue = savedFormGroup[this.userInfoPropertyName];
-    if (dateFormValue.from) {
-      dateFormValue.from = new Date(dateFormValue.from);
+    if (dateFormValue) {
+      if (dateFormValue.from) {
+        dateFormValue.from = new Date(dateFormValue.from);
+      }
+      if (dateFormValue.to) {
+        dateFormValue.to = new Date(dateFormValue.to);
+      }
+      super.updateFormControls(savedFormGroup);
     }
-    if (dateFormValue.to) {
-      dateFormValue.to = new Date(dateFormValue.to);
-    }
-    super.updateFormControls(savedFormGroup);
   }
   //#endregion
 

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EventPayload, Step, WizardComponent } from '@bsynchro/services';
+import { EventPayload, Step, UITranslateService, WizardComponent } from '@bsynchro/services';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { AppWizardConstants } from '../../constants/wizard.constants';
 
 @Component({
@@ -63,15 +64,22 @@ export class WizardContainerComponent implements OnInit {
   //#endregion
 
   //#region ctor
-  constructor(private _fb: FormBuilder, private _router: Router, private _activatedRoute: ActivatedRoute,) {
+  constructor(
+    private _fb: FormBuilder,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _translateService: UITranslateService
+  ) {
     this._formGroup = this._fb.group({});
     this.setEditMode();
+    this.setRefferalParams();
   }
   //#endregion
 
   //#region lifecycle hooks
   ngOnInit() {
   }
+
   //#endregion
 
   //#region public methods
@@ -107,6 +115,31 @@ export class WizardContainerComponent implements OnInit {
     if (activatedRouteSnapshot && activatedRouteSnapshot.params && activatedRouteSnapshot.params[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE]) {
       this._editMode = activatedRouteSnapshot.params[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE];
     }
+  }
+
+  private setRefferalParams() {
+    const activatedRouteSnapshot = this._activatedRoute.snapshot;
+    if (activatedRouteSnapshot && activatedRouteSnapshot.queryParams) {
+      const refferal = activatedRouteSnapshot.queryParams[AppConstants.ROUTE_DATA_KEYS.REF];
+      if (refferal) {
+        LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.REFFERER, refferal);
+        const countryOfArrivalIsoCode = activatedRouteSnapshot.queryParams[AppConstants.ROUTE_DATA_KEYS.CA];
+        const countryOfArrival = this.getCountryCodeByIsoCode(countryOfArrivalIsoCode);
+        LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_ARRIVAL, countryOfArrival);
+        const countryOfDepartureIsoCode = activatedRouteSnapshot.queryParams[AppConstants.ROUTE_DATA_KEYS.CD];
+        const countryOfDeparture = this.getCountryCodeByIsoCode(countryOfDepartureIsoCode);
+        LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_DEPARTURE, countryOfDeparture);
+      }
+    }
+  }
+
+  private getCountryCodeByIsoCode(countryIsoCode: any) {
+    const routeResolversData = this._activatedRoute.snapshot.data;
+    const dataLists = this._translateService.getLocalizedDataLists(routeResolversData.dataLists);
+    const countryDataList = dataLists.find((d) => d[0].dataListName === AppConstants.DATA_LIST_NAMES.COUNTRY);
+    const row = countryDataList.find(d => d.isoCode.toUpperCase() == countryIsoCode.toUpperCase());
+    const countryCode = row.code;
+    return countryCode;
   }
   //#endregion
 }

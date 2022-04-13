@@ -7,7 +7,7 @@
         </div>
         <div class="row date-picker-container">
             <div class="col-12 text-center">
-                <app-dropdown-date-picker #dateOfBirth [formGroupValidators]="formGroupValidators"
+                <app-dropdown-date-picker #dateOfBirth [formGroupValidators]="formGroupValidators" autoOpen="true"
                     (changeHandler)="onValueChange($event)">
                 </app-dropdown-date-picker>
             </div>

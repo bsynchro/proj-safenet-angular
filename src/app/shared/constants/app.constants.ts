@@ -23,7 +23,8 @@ export class AppConstants {
 
     public static WIZARD_DATA_LISTS = [
         AppConstants.DATA_LIST_NAMES.GEOGRAPHICAL_COVERAGE,
-        AppConstants.DATA_LIST_NAMES.DURATION
+        AppConstants.DATA_LIST_NAMES.DURATION,
+        AppConstants.DATA_LIST_NAMES.COUNTRY
     ];
 
     public static OFFERS_DATA_LISTS = [
@@ -80,6 +81,9 @@ export class AppConstants {
         public static readonly DEFAULT_TTL = 60;
         public static readonly PURCHASE_OFFER_PAYLOAD = "PurchaseOfferPayload";
         public static readonly PURCHASE_OFFER_RESULT = "PurchaseOfferResult";
+        public static readonly REFFERER = "Referrer";
+        public static readonly COUNTRY_OF_ARRIVAL = "CountryOfArrival";
+        public static readonly COUNTRY_OF_DEPARTURE = "CountryOfDeparture";
     }
     //#endregion
 
@@ -99,6 +103,9 @@ export class AppConstants {
         public static readonly PAYMENT_FLAG = 'paymentFlag';
         public static readonly PAYMENT_ERROR_CODE = 'paymentErrorCode';
         public static readonly QUOTE_ID = 'quoteId';
+        public static readonly REF = 'ref';
+        public static readonly CA = 'ca';
+        public static readonly CD = 'cd';
     }
     //#endregion
 

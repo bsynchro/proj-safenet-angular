@@ -9,6 +9,7 @@ import { AppConstants } from 'src/app/shared/constants/app.constants';
 import { CrmConstants } from 'src/app/shared/constants/crm.constants';
 import { PhoneType } from 'src/app/shared/enums/crm.enums';
 import { Beneficiary, PhoneNumber } from 'src/app/shared/models/crm.model';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Translations } from 'src/app/shared/services/translation.service';
 import { isNullOrUndefined } from 'util';
 import { BeneficiariesConstants } from '../../constants/beneficiaries.constants';
@@ -98,6 +99,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     this.setBeneficiaries();
     this.setTravelType();
     this.initForm();
+    this.tryToSetCountries();
     this.handleLanguageChange();
   }
 
@@ -411,6 +413,22 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
         throw new Error(`Invalid relation ${relation} in DOB change listener.`);
     }
     return formGroup;
+  }
+
+  private tryToSetCountries() {
+    const countryOfArrival = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_ARRIVAL, null, false);
+    const countryOfDeparture = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_DEPARTURE, null, false);
+    const principalFormGroup = this._beneficiariesForm.get('principal') as FormGroup;
+    const countryOfResidenceControl = principalFormGroup.get(BeneficiariesConstants.Properties.COUNTRY_OF_RESIDENCE);
+    const destinationCountryControl = principalFormGroup.get(BeneficiariesConstants.Properties.DESTINATION_COUNTRY);
+    if (!countryOfResidenceControl.value) {
+      countryOfResidenceControl.setValue(countryOfDeparture);
+      countryOfResidenceControl.disable();
+    }
+    if (!destinationCountryControl.value) {
+      destinationCountryControl.setValue(countryOfArrival);
+      destinationCountryControl.disable();
+    }
   }
 
   //#region validation

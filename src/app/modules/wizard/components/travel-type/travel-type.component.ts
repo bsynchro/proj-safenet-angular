@@ -76,6 +76,7 @@ export class TravelTypeComponent extends WizardSection implements OnInit {
 
   public initialize(input: any): void {
     super.initialize(input);
+    this.selectAnswer(AppWizardConstants.TRAVEL_TYPES.CODES.INDIVIDUAL); // Temp
   }
 
   public getValue() {

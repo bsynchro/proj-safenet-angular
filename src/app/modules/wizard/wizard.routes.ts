@@ -12,6 +12,14 @@ const wizardRoutes: Routes = [
             dataLists: WizardDatalistResolver,
             globalVariables: WizardGlobalVariablesResolver
         }
+    },
+    {
+        path: ':ref/:cd/:ca',
+        component: WizardContainerComponent,
+        resolve: {
+            dataLists: WizardDatalistResolver,
+            globalVariables: WizardGlobalVariablesResolver
+        }
     }
 ]
 

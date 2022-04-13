@@ -73,6 +73,9 @@ export class PolicyDownloadComponent implements OnInit {
   private handleHandleUserInfoInLocalStorage() {
     if (this._policyIssued) {
       LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO);
+      LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.REFFERER);
+      LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_ARRIVAL);
+      LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.COUNTRY_OF_DEPARTURE);
     }
   }
   //#endregion

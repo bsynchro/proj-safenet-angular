@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms
 import { ActivatedRoute } from '@angular/router';
 import { UITranslateService } from '@bsynchro/services';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Translations } from 'src/app/shared/services/translation.service';
 import { AppWizardConstants } from '../../constants/wizard.constants';
 import { WizardSection } from '../../models/wizard-section';
@@ -66,6 +67,7 @@ export class TravelDestinationComponent extends WizardSection implements OnInit 
 
   public initialize(input: any): void {
     super.initialize(input);
+    this.tryToSetCoverageAreaFromDestinationCountry();
   }
 
   public getValue() {
@@ -81,5 +83,24 @@ export class TravelDestinationComponent extends WizardSection implements OnInit 
 
   //#region public methods
 
+  //#endregion
+
+  //#region private methods
+  private tryToSetCoverageAreaFromDestinationCountry() {
+    const countryOfArrival = LocalStorageService.getFromLocalStorage<string>(AppConstants.LOCAL_STORAGE.COUNTRY_OF_ARRIVAL, null, false);
+    if (countryOfArrival) {
+      const coverageArea = this.getCoverageAreaByCountry(countryOfArrival);
+      // this.selectAnswer(coverageArea);
+    }
+  }
+
+  private getCoverageAreaByCountry(countryOfArrival: string): string {
+    const routeResolversData = this.activatedRoute.snapshot.data;
+    const dataLists = this.translateService.getLocalizedDataLists(routeResolversData.dataLists);
+    const countryDataList = dataLists.find((d) => d[0].dataListName === AppConstants.DATA_LIST_NAMES.COUNTRY);
+    const row = countryDataList.find(d => d.code == countryOfArrival);
+    const coverageArea = row.coverageArea;
+    return coverageArea;
+  }
   //#endregion
 }
