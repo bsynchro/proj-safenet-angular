@@ -421,11 +421,11 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     const principalFormGroup = this._beneficiariesForm.get('principal') as FormGroup;
     const countryOfResidenceControl = principalFormGroup.get(BeneficiariesConstants.Properties.COUNTRY_OF_RESIDENCE);
     const destinationCountryControl = principalFormGroup.get(BeneficiariesConstants.Properties.DESTINATION_COUNTRY);
-    if (!countryOfResidenceControl.value) {
+    if (countryOfDeparture) {
       countryOfResidenceControl.setValue(countryOfDeparture);
       countryOfResidenceControl.disable();
     }
-    if (!destinationCountryControl.value) {
+    if (countryOfArrival) {
       destinationCountryControl.setValue(countryOfArrival);
       destinationCountryControl.disable();
     }
