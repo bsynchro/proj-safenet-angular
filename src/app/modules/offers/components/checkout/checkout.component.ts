@@ -46,6 +46,8 @@ export class CheckoutComponent implements OnInit {
   private _smiPayload: { [key: string]: any };
   private _grandTotal: number = 0;
   private _errorCodes: Array<string>;
+  private _termsAndConditionsAgreed: boolean;
+  private _isaId: string;
   private _languageSubscription: Subscription = new Subscription();
   //#endregion
 
@@ -101,9 +103,20 @@ export class CheckoutComponent implements OnInit {
   public get errorCodes(): Array<string> {
     return this._errorCodes;
   }
+
+  public get termsAndConditionsAgreed(): boolean {
+    return this._termsAndConditionsAgreed;
+  }
+
+  public get isaId(): string {
+    return this._isaId;
+  }
   //#endregion
 
   //#region setters
+  public set termsAndConditionsAgreed(v: boolean) {
+    this._termsAndConditionsAgreed = v;
+  }
   //#endregion
 
   //#region ctor
@@ -123,6 +136,7 @@ export class CheckoutComponent implements OnInit {
     this.setErrorCodes();
     this.setQuote();
     this.setOffer();
+    this.setIsaId();
     this.setOfferPayload();
     this.setUserInfo();
     this.setContact();
@@ -137,14 +151,14 @@ export class CheckoutComponent implements OnInit {
 
   //#region public methods
   public back() {
-    this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS])
+    this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS], { replaceUrl: true });
   }
 
   public getLocalizedValue(translations: Array<LocalizedValue>) {
     return this._translateService.getTranslationFromArray(translations);
   }
 
-  public async onCheckboxCheck(checked: boolean, propertyName: string) {
+  public async onCoverCheck(checked: boolean, propertyName: string) {
     // Get user info with updated checkbox value
     // const userInfo = Object.assign({}, this._userInfo);
     this._userInfo[propertyName] = checked ?
@@ -152,6 +166,10 @@ export class CheckoutComponent implements OnInit {
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.NO;
     // Reprice
     await this.repriceOffer(this._offer.code, this._userInfo)
+  }
+
+  private onTermsAndConditionsCheck(checked: boolean) {
+    this._termsAndConditionsAgreed = checked;
   }
 
   public async checkout() {
@@ -195,6 +213,10 @@ export class CheckoutComponent implements OnInit {
 
   private setOffer() {
     this._offer = this._serializationService.camelizeObjectKeys(JSON.parse(this._quote.products[0].metadata[CrmConstants.QUOTE_PRODUCT_METADATA.OFFER])) as Offer;
+  }
+
+  private setIsaId() {
+    this._isaId = this._offer.tags ? this._offer.tags.split(', ')[0] : null;
   }
 
   private setContact() {

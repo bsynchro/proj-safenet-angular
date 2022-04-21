@@ -41,19 +41,19 @@
         }
         .cover {
             .header {
-                .checkbox {
-                    p-checkbox {
-                        .ui-chkbox-box {
-                            border: 3px solid $primary-alt-color;
-                            .pi-check:before {
-                                color: $primary-alt-color;
-                            }
-                        }
-                    }
-                }
                 .cover-label {
                     font-weight: 600;
                     font-size: 1.1em;
+                }
+            }
+        }
+        .terms-and-conditions {
+            display: flex;
+            .declaration {
+                padding-left: 1rem;
+                html.rtl & {
+                    padding-left: unset;
+                    padding-right: 1rem;
                 }
             }
         }
@@ -88,9 +88,6 @@
                         margin-left: unset;
                         margin-right: 0.5rem;
                     }
-                    &.disabled {
-                        opacity: .4;
-                    }
                 }
             }
         }
@@ -104,6 +101,29 @@
                 @include btn();
                 padding: 0.25rem 2rem;
             }
+        }
+    }
+    .checkbox {
+        p-checkbox {
+            .ui-chkbox-box {
+                border: 1px solid $primary-alt-color;
+                .pi-check:before {
+                    color: $primary-alt-color;
+                }
+                .ui-checkbox-icon {
+                    margin-left: -1px;
+                    html.rtl & .ui-checkbox-icon {
+                        margin-left: unset;
+                        margin-right: -1px;
+                    }
+                }
+            }
+        }
+    }
+    .btn {
+        &:disabled {
+            opacity: .4;
+            cursor: not-allowed !important;
         }
     }
 }

@@ -7,6 +7,14 @@
             color: $primary-color;
             font-size: 20px;
         }
+        .back-btn {
+            padding-right: 1rem;
+            cursor: pointer;
+            html.rtl & {
+                padding-right: unset;
+                padding-left: 1rem;
+            }
+        }
     }
     .user-selection {
         font-size: 14px;

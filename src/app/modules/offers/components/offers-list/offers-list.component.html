@@ -1,8 +1,9 @@
 <div class="offers-list-component">
     <div class="container-fluid">
         <div class="row header mb-3 mb-md-5">
-            <div class="col-12 header-text px-4 px-md-5">
-                {{ translations.offers.list.headerText | translate }}
+            <div class="col-12 px-4 px-md-5">
+                <img src="../../../../../assets/images/icons/back-btn.svg" class="back-btn" (click)="back()" />
+                <span class="header-text">{{ translations.offers.list.headerText | translate }}</span>
             </div>
         </div>
         <div class="row">
@@ -34,13 +35,13 @@
                         } }}
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-12 mt-2">
                         <span class="link font-weight-bold" (click)="refineSelection()">
                             {{ translations.offers.list.userSelection.refineSelection | translate }}
                         </span>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-8 offers-repeater" *ngIf="offerViews?.offers">
                 <div class="row header mb-3">

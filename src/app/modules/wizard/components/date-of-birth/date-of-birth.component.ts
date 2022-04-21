@@ -2,6 +2,8 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChil
 import { FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UITranslateService } from '@bsynchro/services';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { DropdownDatePickerComponent } from 'src/app/shared/components/dropdown-date-picker/dropdown-date-picker.component';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
 import { GlobalVariable } from 'src/app/shared/models/global-variable.model';
@@ -25,6 +27,8 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
   //#region fields
   private _formGroupValidators: Array<ValidatorFn> = [];
   private _maxAge: GlobalVariable;
+  private _visibilitySubscription: Subscription = new Subscription();
+  private _viewInitReplaySubject: ReplaySubject<boolean> = new ReplaySubject<boolean>();
   //#endregion
 
   //#region getters
@@ -41,6 +45,7 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
     public translations: Translations
   ) {
     super(activatedRoute, translateService, fb);
+    this.handleVisibilityChange();
     this.loadGlobalVariables();
     this.setValidators();
   }
@@ -51,13 +56,9 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
   }
 
   ngAfterViewInit(): void {
-    const dob = this.formGroup.get(this.userInfoPropertyName).value;
-    if (dob) {
-      this.dobPickerComponent.dobFormGroup.patchValue(dob);
-      this.formGroup.get(this.userInfoPropertyName).updateValueAndValidity();
-      // Emit event to trigger wizard validation so wizard would autotrigger next if form is valid after it has been patched
-      this.onDatePickerReady.emit(this.order);
-    }
+    setTimeout(() => {
+      this._viewInitReplaySubject.next(true)
+    }, 10);
   }
   //#endregion
 
@@ -154,6 +155,32 @@ export class DateOfBirthComponent extends WizardSection implements OnInit, After
   private getAge(formValue: any): number {
     const dob = new Date(formValue.year, formValue.month - 1, formValue.day);
     return UtilsService.getAge(dob);
+  }
+
+  private handleVisibilityChange() {
+    this._visibilitySubscription.unsubscribe();
+    this._visibilitySubscription = this.visibilityEventEmmiter.subscribe((visible) => {
+      if (visible) {
+        this._viewInitReplaySubject.subscribe((init) => {
+          if (init) {
+            setTimeout(() => {
+              this.setFormGroup();
+            }, 10);
+          }
+        });
+      }
+    });
+  }
+
+  private setFormGroup() {
+    const dob = this.formGroup.get(this.userInfoPropertyName).value;
+    if (dob) {
+      this.dobPickerComponent.dobFormGroup.patchValue(dob);
+      this.dobPickerComponent.dobFormGroup.updateValueAndValidity();
+      this.formGroup.get(this.userInfoPropertyName).updateValueAndValidity();
+      // Emit event to trigger wizard validation so wizard would autotrigger next if form is valid after it has been patched
+      this.onDatePickerReady.emit(this.order);
+    }
   }
   //#endregion
 }

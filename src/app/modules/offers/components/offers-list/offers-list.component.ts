@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalizedValue, UITranslateService } from '@bsynchro/services';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -103,19 +103,19 @@ export class OffersListComponent implements OnInit {
   //#endregion
 
   //#region public methods
-  public refineSelection() {
+  public back() {
     const routData = {};
     routData[AppConstants.ROUTE_DATA_KEYS.EDIT_MODE] = true;
-    this._router.navigate([AppConstants.ROUTES.MAIN, routData]);
+    this._router.navigate([AppConstants.ROUTES.MAIN, routData], { replaceUrl: true });
   }
 
-  public sortOffers(proertyName: string, sortDirection: string = null) {
+  public sortOffers(propertyName: string, sortDirection: string = null) {
     if (this._offerViews && this._offerViews.offers && this._offerViews.offers.length) {
       if (sortDirection) {
         this._sortDirection = sortDirection;
       }
       this._sortDirection = this._sortDirection == 'asc' ? 'desc' : 'asc';
-      this._offerViews.offers.sort((a, b) => this._sortDirection == 'asc' ? a[proertyName] - b[proertyName] : b[proertyName] - a[proertyName]);
+      this._offerViews.offers.sort((a, b) => this._sortDirection == 'asc' ? a[propertyName] - b[propertyName] : b[propertyName] - a[propertyName]);
     }
   }
 
@@ -145,6 +145,13 @@ export class OffersListComponent implements OnInit {
     LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD, purchaseOfferPayload);
     LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT);
     this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT])
+  }
+
+  @HostListener('window:popstate', ['$event'])
+  public onPopState(event) {
+    console.log('Back button pressed');
+    event.preventDefault();
+    this.back();
   }
   //#endregion
 

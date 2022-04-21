@@ -14,6 +14,7 @@ import { WizardSection } from '../../models/wizard-section';
 export class TravelTypeComponent extends WizardSection implements OnInit {
   //#region decorators
   @Input() public formGroup: FormGroup;
+  @Input() public editMode: boolean;
   //#endregion
 
   //#region fields
@@ -21,11 +22,11 @@ export class TravelTypeComponent extends WizardSection implements OnInit {
     {
       code: AppWizardConstants.TRAVEL_TYPES.CODES.INDIVIDUAL,
       key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.INDIVIDUAL
+    },
+    {
+      code: AppWizardConstants.TRAVEL_TYPES.CODES.FAMILY,
+      key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.FAMILY
     }
-    // {
-    //   code: AppWizardConstants.TRAVEL_TYPES.CODES.FAMILY,
-    //   key: AppWizardConstants.TRAVEL_TYPES.TRANSLATION_KEYS.FAMILY
-    // }
   ];
   //#endregion
 
@@ -67,7 +68,7 @@ export class TravelTypeComponent extends WizardSection implements OnInit {
   }
 
   public get autoTriggerNext(): boolean {
-    return !this.alreadyTriggered;
+    return !this.alreadyTriggered && !this.editMode;
   }
 
   public checkVisibility = (): boolean => {
@@ -76,7 +77,7 @@ export class TravelTypeComponent extends WizardSection implements OnInit {
 
   public initialize(input: any): void {
     super.initialize(input);
-    this.selectAnswer(AppWizardConstants.TRAVEL_TYPES.CODES.INDIVIDUAL); // Temp
+    // this.selectAnswer(AppWizardConstants.TRAVEL_TYPES.CODES.INDIVIDUAL); // Temp
   }
 
   public getValue() {

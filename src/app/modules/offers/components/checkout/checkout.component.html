@@ -62,7 +62,7 @@
                                 <div class="col-12 header">
                                     <span class="checkbox">
                                         <p-checkbox [(ngModel)]="cover.checked" [binary]="true"
-                                            (onChange)="onCheckboxCheck($event, cover.propertyName)">
+                                            (onChange)="onCoverCheck($event, cover.propertyName)">
                                         </p-checkbox>
                                     </span>
                                     <span class="cover-label">
@@ -78,6 +78,17 @@
                         </div>
                     </div>
                 </ng-container>
+                <div class="row mt-4">
+                    <div class="col-12 terms-and-conditions">
+                        <span class="checkbox">
+                            <p-checkbox [(ngModel)]="termsAndConditionsAgreed" [binary]="true">
+                            </p-checkbox>
+                        </span>
+                        <span *ngIf="isaId" class="declaration" [innerHTML]="translations.offers.checkout.termsAndConditionsDeclartation | translate: {
+                                id: isaId
+                            }"></span>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-6 p-3 p-md-4 price-summary">
                 <div class="row">
@@ -137,7 +148,7 @@
                                 <input class="coupon-code-input"
                                     [placeholder]="translations.offers.checkout.priceSummary.couponSection.inputLabel | translate "
                                     pInputText disabled />
-                                <button class="apply-coupon-code-btn disabled" disabled>
+                                <button class="apply-coupon-code-btn btn disabled" disabled>
                                     {{ translations.offers.checkout.priceSummary.couponSection.buttonLabel | translate
                                     }}
                                 </button>
@@ -159,7 +170,7 @@
                 </div>
                 <div class="row mb-2 mt-4">
                     <div class="col-12 buttons px-5">
-                        <button class="checkout-btn" (click)="checkout()">
+                        <button class="checkout-btn btn" (click)="checkout()" [disabled]="!termsAndConditionsAgreed">
                             {{ translations.offers.checkout.buttons.checkout | translate }}
                         </button>
                     </div>

@@ -1,4 +1,4 @@
-import { HostBinding, Input } from "@angular/core";
+import { EventEmitter, HostBinding, Input } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Step, UITranslateService } from "@bsynchro/services";
@@ -14,6 +14,7 @@ export abstract class WizardSection extends Step {
     //#region fields
     public dataList: Array<any> = [];
     public formGroup: FormGroup;
+    public visibilityEventEmmiter: EventEmitter<boolean> = new EventEmitter<boolean>();
     private _languageSubscription: Subscription = new Subscription();
     //#endregion
 
@@ -51,6 +52,7 @@ export abstract class WizardSection extends Step {
     }
 
     public set hidden(v: boolean) {
+        this.visibilityEventEmmiter.emit(!v);
         this.classHidden = v;
     }
 

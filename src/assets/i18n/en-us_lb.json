@@ -31,6 +31,7 @@
                 "grandTotal": "Grand Total",
                 "title": "Price Summary"
             },
+            "termsAndConditionsDeclartation": "I hereby declare that I have read and agreed to Safenet Travel Insurance <a class=\"terms-and-conditions-link\" href=\"https://www.isatravelonline.com/PdfRedirection.aspx?pdfId={{id}}\">Terms and Conditions</a>",
             "upselling": {
                 "title": "Would you like to add?"
             },

@@ -4,6 +4,6 @@
         <app-travel-duration #step step [formGroup]="formGroup"></app-travel-duration>
         <app-date-of-birth #step step [formGroup]="formGroup" (onDatePickerReady)="triggerWizardValidation($event)">
         </app-date-of-birth>
-        <app-travel-type #step step [formGroup]="formGroup"></app-travel-type>
+        <app-travel-type #step step [formGroup]="formGroup" [editMode]="editMode"></app-travel-type>
     </lib-wizard>
 </div>

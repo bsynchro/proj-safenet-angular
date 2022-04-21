@@ -88,7 +88,8 @@ export class WizardContainerComponent implements OnInit {
   }
 
   public async nextEventHandler(event: EventPayload) {
-    if (this.isLastStep() && this.wizard.isValid()) {
+    console.log(event);
+    if (this.isLastStep() && this.wizard.isValid() && (!this._editMode || !event.payload.autoTriggerNext)) {
       this.navigateToGetOffers();
       // Manually set alreadyTriggered to true to avoid emitNext loop
       this.wizard.stepsArray[this.wizard.selectedIndex].alreadyTriggered = true;
