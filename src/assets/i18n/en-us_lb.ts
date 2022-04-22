@@ -77,8 +77,9 @@ export default {
             "submitButton": "Submit",
         },
         "validationMessages": {
+            "invalidChildAge": "Age cannot be greater than 18",
             "invalidEmail": "Invalid email",
-            "invalidPassportNumber": "Should be maximum 9 digits",
+            "invalidPassportNumber": "Should be 9 digits",
             "invalidPhoneNumber": "Please enter a valid phone number",
         }
     },

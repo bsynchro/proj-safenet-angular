@@ -11,6 +11,7 @@ import { PhoneType } from 'src/app/shared/enums/crm.enums';
 import { Beneficiary, PhoneNumber } from 'src/app/shared/models/crm.model';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Translations } from 'src/app/shared/services/translation.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 import { isNullOrUndefined } from 'util';
 import { BeneficiariesConstants } from '../../constants/beneficiaries.constants';
 import { BeneficiaryService } from '../../services/beneficiary.service';
@@ -34,6 +35,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   private _childrenNumber: number;
   private _spousesNumber: number;
   private _submitClicked: boolean;
+  private _formGroupValidators: Array<ValidatorFn> = [];
   private _languageSubscription: Subscription = new Subscription();
 
   public readonly PRINCIPAL = BeneficiariesConstants.Relation.PRINCIPAL;
@@ -80,6 +82,10 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   public get submitClicked(): boolean {
     return this._submitClicked;
+  }
+
+  public get formGroupValidators(): Array<ValidatorFn> {
+    return this._formGroupValidators;
   }
   //#endregion
 
@@ -184,6 +190,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
       const dob = this.getFormattedDate(rawDob);
       const formGroupToUpdate = this.getFormGroup(relation, index);
       formGroupToUpdate.get(BeneficiariesConstants.Properties.DATE_OF_BIRTH).setValue(dob);
+      formGroupToUpdate.updateValueAndValidity();
     }
   }
 
@@ -240,14 +247,24 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
         gender: [true, [Validators.required]],
         mobileNumber: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
         destinationCountry: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required]] : [null],
-        dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null] : [null, [Validators.required]],
+        dateOfBirth: relation == BeneficiariesConstants.Relation.PRINCIPAL ?
+          [null] :
+          relation == BeneficiariesConstants.Relation.CHILD ?
+            [null, [Validators.required, this.childMaxAgeValidator]] :
+            [null, [Validators.required]],
         maritalStatus: [null],
         email: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required, Validators.email]] : [null],
         relation: [relation]
       },
       { updateOn: 'blur' }
     );
-    formGroup.setValidators(this.isMobileNumberValid)
+    switch (relation) {
+      case BeneficiariesConstants.Relation.PRINCIPAL:
+        formGroup.setValidators(this.isMobileNumberValid);
+        break;
+      default:
+        break;
+    }
     return formGroup;
   }
 
@@ -431,6 +448,17 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private getAge(date: string): number {
+    if (date) {
+      const splittedDate = date.split('-');
+      if (splittedDate.length == 3 && splittedDate.every(part => part && part != 'null')) {
+        const dob = new Date(parseInt(splittedDate[2]), parseInt(splittedDate[1]) - 1, parseInt(splittedDate[0]));
+        return UtilsService.getAge(dob);
+      }
+    }
+    return null;
+  }
+
   //#region validation
   private isMobileNumberValid = (): ValidationErrors | null => {
     if (
@@ -443,7 +471,19 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   private passportNumberValidatorFn: ValidatorFn = (control: FormControl) => {
     if (control.value) {
-      return control.value.length > 9 ? { invalidPassportNumber: true } : null;
+      return control.value.length != 9 ? { invalidPassportNumber: true } : null;
+    }
+    return null;
+  }
+
+  private childMaxAgeValidator: ValidatorFn = (control: FormControl) => {
+    if (control && control.value) {
+      const age = this.getAge(control.value);
+      if (!age) {
+        return { required: true };
+      }
+      control.markAsTouched();
+      return age > 18 ? { invalidChildAge: true } : null;
     }
     return null;
   }

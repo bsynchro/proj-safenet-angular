@@ -133,11 +133,16 @@
         </div>
         <div *ngIf="relation != PRINCIPAL" class="col-12 col-md-3 mb-3 mb-md-4">
             <app-dropdown-date-picker #dateOfBirth class="date-picker-container" [reference]="relation"
-                (changeHandler)="onDobChange($event, relation, index)">
+                [formGroupValidators]="formGroupValidators" (changeHandler)="onDobChange($event, relation, index)">
             </app-dropdown-date-picker>
             <span
                 *ngIf="(submitClicked || form.controls?.dateOfBirth?.touched) && form.controls?.dateOfBirth?.errors?.required"
                 class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
+            </span>
+            <span
+                *ngIf="(submitClicked || form.controls?.dateOfBirth?.touched) && form.controls?.dateOfBirth?.errors?.invalidChildAge"
+                class="validation-msg">{{ translations.personalInformation.validationMessages.invalidChildAge |
+                translate }}
             </span>
         </div>
         <div class="col-9 col-md-2 mb-3 mb-md-4 passport-col">
