@@ -91,13 +91,13 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 p-3 p-md-4 price-summary">
-                <div class="row">
+                <div class="row mb-3">
                     <div class="col-12 title">
                         {{ translations.offers.checkout.priceSummary.title | translate }}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-7 offset-md-5 offer">
+                    <div class="col-md-7 offset-md-5 offer">
                         <div class="row">
                             <div class="col-6 name">
                                 {{ getLocalizedValue(offer.titleTranslation) }}:
@@ -110,7 +110,7 @@
                 </div>
                 <ng-container *ngIf="addedCovers?.length">
                     <div class="row" *ngFor="let cover of addedCovers">
-                        <div class="col-7 offset-md-5 added-cover">
+                        <div class="col-md-7 offset-md-5 added-cover">
                             <div class="row">
                                 <div class="col-6 name">
                                     {{ getLocalizedValue(cover.title) }}:
@@ -124,7 +124,7 @@
                 </ng-container>
                 <ng-container *ngIf="addedCoupons?.length">
                     <div class="row" *ngFor="let coupon of addedCoupons">
-                        <div class="col-7 offset-md-5 added-coupon">
+                        <div class="col-md-7 offset-md-5 added-coupon">
                             <div class="row">
                                 <div class="col-6 name">
                                     {{ coupon.code }}:
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div class="row my-2">
-                    <div class="col-7 offset-md-5 grand-total">
+                    <div class="col-md-7 offset-md-5 grand-total">
                         <div class="row">
                             <div class="col-6 label">
                                 {{ translations.offers.checkout.priceSummary.grandTotal | translate }}:

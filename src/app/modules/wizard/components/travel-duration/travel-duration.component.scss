@@ -99,22 +99,6 @@
                     }
                 }
             }
-            .answer {
-                padding: 1.5rem 2rem 1.5rem 2rem;
-                z-index: 10;
-                .box {
-                    @include answerBtn();
-                    padding: 2rem;
-                    width: 70%;
-                    height: 5rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .selected {
-                    background-color: $light-accent-color;
-                }
-            }
         }
         .validation-messages {
             .validation-message {
@@ -129,11 +113,9 @@
     .travel-duration {
         .choices {
             width: 100%;
-            .answer {
-                padding: 1.5rem 1rem 1.5rem 1rem;
-                .box {
-                    width: 100%;
-                }
+            .date-picker {
+                display: flex;
+                justify-content: center;
             }
         }
     }

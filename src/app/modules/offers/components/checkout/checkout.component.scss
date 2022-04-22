@@ -44,6 +44,11 @@
                 .cover-label {
                     font-weight: 600;
                     font-size: 1.1em;
+                    padding-left: 1rem;
+                    html.rtl & {
+                        padding-left: unset;
+                        padding-right: 1rem;
+                    }
                 }
             }
         }

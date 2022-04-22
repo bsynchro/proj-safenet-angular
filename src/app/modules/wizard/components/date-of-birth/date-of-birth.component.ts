@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UITranslateService } from '@bsynchro/services';
@@ -15,7 +15,8 @@ import { WizardSection } from '../../models/wizard-section';
 @Component({
   selector: 'app-date-of-birth',
   templateUrl: './date-of-birth.component.html',
-  styleUrls: ['./date-of-birth.component.scss']
+  styleUrls: ['./date-of-birth.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DateOfBirthComponent extends WizardSection implements OnInit, AfterViewInit {
   //#region decorators

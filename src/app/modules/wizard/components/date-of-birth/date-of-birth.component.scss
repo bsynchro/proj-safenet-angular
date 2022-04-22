@@ -18,6 +18,13 @@
     .date-of-birth {
         .date-picker-container {
             width: 100%;
+            app-dropdown-date-picker {
+                .dropdown-date-picker {
+                    .yearmonthdayinput {
+                    padding: 0 0.25rem !important;
+                    }
+                }
+            }
         }
     }
 }
