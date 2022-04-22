@@ -49,14 +49,16 @@ export class AutoOpenSubscribeToDirective implements OnInit, OnDestroy {
     private subscribeToEvent() {
         if (this.autoOpenSubscribeTo) {
             this._eventSubscription = this._broadcastService.on(this.autoOpenSubscribeTo).subscribe((res) => {
-                if (this._ngControl.value) {
-                    this._broadcastService.broadcast(new EventPayload(this.name, this._ngControl.value));
-                } else {
-                    this.openDropdown();
-                }
-                if (this.autoOpenOnce !== 'false') {
-                    this._eventSubscription.unsubscribe();
-                }
+                setTimeout(() => {
+                    if (this._ngControl.value) {
+                        this._broadcastService.broadcast(new EventPayload(this.name, this._ngControl.value));
+                    } else {
+                        this.openDropdown();
+                    }
+                    if (this.autoOpenOnce !== 'false') {
+                        this._eventSubscription.unsubscribe();
+                    }
+                }, 10);
             });
         }
     }

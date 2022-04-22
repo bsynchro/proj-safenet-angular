@@ -33,7 +33,7 @@ export class AutoOpenDefaultDirective implements OnInit {
             if (this.autoOpenDefault !== 'false' && !this._ngControl.value) {
                 this._elementRef.firstChild.click();
             }
-        });
+        }, 10);
     }
     //#endregion private methods
 }
