@@ -471,7 +471,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   private passportNumberValidatorFn: ValidatorFn = (control: FormControl) => {
     if (control.value) {
-      return control.value.length != 9 ? { invalidPassportNumber: true } : null;
+      return control.value.length > 9 ? { invalidPassportNumber: true } : null;
     }
     return null;
   }
