@@ -4,6 +4,7 @@
     .close-btn {
         color: $primary-alt-color;
         cursor: pointer;
+        z-index: 1;
         position: absolute;
         top: 1rem;
         right: 2rem;
