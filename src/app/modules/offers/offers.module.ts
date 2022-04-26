@@ -16,12 +16,14 @@ import { PaymentService } from './services/payment.service';
 import { CheckoutPaymentValidityResolver } from './resolvers/checkout-payment-validity.resolver';
 import { PaymentValidityResolver } from '../../shared/resolvers/payment-validity.resolver';
 import { PurchaseOfferResolver } from './resolvers/purchase-offer.resolver';
+import { OfferDetailsComponent } from './components/offer-details/offer-details.component';
 
 
 @NgModule({
   declarations: [
     OffersListComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OfferDetailsComponent
   ],
   imports: [
     OffersRouterModule,

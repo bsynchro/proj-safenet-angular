@@ -154,6 +154,14 @@ export class OffersListComponent implements OnInit {
     event.preventDefault();
     this.back();
   }
+
+  public viewAllBenefits(offer: OfferView) {
+    offer.showDetails = true;
+  }
+
+  public hideAllBenefits(offer: OfferView) {
+    offer.showDetails = false;
+  }
   //#endregion
 
   //#region helpers
@@ -256,6 +264,7 @@ export class OffersListComponent implements OnInit {
     return benefits.map((benefit) => {
       const benefitView = new BenefitView();
       benefitView.code = benefit.code;
+      benefitView.title = benefit.titleTranslation
       benefitView.properties = benefit.properties ? this.mapBenefitPropertiesToBenefitPropertyViews(benefit.properties) : [];
       return benefitView;
     });
@@ -268,6 +277,8 @@ export class OffersListComponent implements OnInit {
       propertyView.isOptional = property.isOptional;
       propertyView.tags = property.tags;
       propertyView.value = property.value;
+      propertyView.title = property.titleTranslation;
+      propertyView.displayValue = property.displayValueTranslation;
       return propertyView;
     });
   }

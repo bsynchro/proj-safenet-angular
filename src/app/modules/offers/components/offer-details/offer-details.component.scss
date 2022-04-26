@@ -1,0 +1,44 @@
+@import "../../../../../styles/variables.scss";
+
+.offer-details-component {
+    .close-btn {
+        color: $primary-alt-color;
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        html.rtl & {
+            right: unset;
+            left: 2rem;
+        }
+    }
+    .benefit {
+        .benefit-header {
+            color: $primary-alt-color;
+        }
+        .benefit-property {
+            .property-value {
+                &.padding-end-0 {
+                    padding-right: 0;
+                    html.rtl & {
+                        padding-right: unset;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .offer-details-component {
+        .close-btn {
+            top: 0.5rem;
+            right: 1rem;
+            html.rtl & {
+                right: unset;
+                left: 1rem;
+            }
+        }
+    }
+}

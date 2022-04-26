@@ -22,6 +22,7 @@ export class OfferView {
     highlightedProperties: Array<HighlightedProperty>;
     payload: { [key: string]: any };
     entityId: number;
+    showDetails: boolean;
 }
 
 export class HighlightedProperty {
@@ -32,6 +33,7 @@ export class HighlightedProperty {
 
 export class BenefitView {
     code: string;
+    title: Array<LocalizedValue>;
     properties: Array<PropertyView>;
 }
 
@@ -40,6 +42,8 @@ export class PropertyView {
     tags: string;
     value: string;
     isOptional: boolean;
+    title: Array<LocalizedValue>;
+    displayValue: Array<LocalizedValue>;
 }
 
 export class UpsellingCover {

@@ -87,7 +87,7 @@
                                         <div class="col-1 checkbox p-0 m-0">
                                             <img [src]="propery.checked ? 
                                                 '../../../../../assets/images/icons/check.svg' : 
-                                                '../../../../../assets/images/icons/x.svg'" />
+                                                '../../../../../assets/images/icons/x-red.svg'" />
                                         </div>
                                         <div class="col-11 px-1">{{ getLocalizedValue(propery.title) }}</div>
                                     </div>
@@ -109,8 +109,9 @@
                             </div>
                             <div class="row buttons">
                                 <div class="col-6 col-md-3 offset-md-3 view-all-benefits">
-                                    <span class="link d-none">{{ translations.offers.list.viewAllBenefits | translate
-                                        }}</span>
+                                    <span class="link" (click)="viewAllBenefits(offer)">
+                                        {{ translations.offers.list.viewAllBenefits | translate }}
+                                    </span>
                                 </div>
                                 <div class="col-6 col-md-3 offset-md-3 purchase text-center">
                                     <span class="button" (click)="purchase(offer.code, offer.entityId)">{{
@@ -123,6 +124,11 @@
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row offer-details" *ngIf="offer.showDetails">
+                        <div class="col-12">
+                            <app-offer-details [(offer)]="offer"></app-offer-details>
                         </div>
                     </div>
                 </ng-container>
