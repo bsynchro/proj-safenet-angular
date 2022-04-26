@@ -9,11 +9,12 @@ export class GetOffersPayload {
     public type: string;
     public from: Date;
     public to: Date;
+    public entityId: number;
 }
 
 export class RepriceOffersPayload extends GetOffersPayload {
     public offerCode: string;
-    public static fromGetOffersPayload(getOffersPayload: GetOffersPayload, offerCode: string = undefined): RepriceOffersPayload {
+    public static fromGetOffersPayload(getOffersPayload: GetOffersPayload, entityId: number, offerCode: string = undefined): RepriceOffersPayload {
         const repriceOffersPayload = new this();
         repriceOffersPayload.age = getOffersPayload.age;
         repriceOffersPayload.coverageArea = getOffersPayload.coverageArea;
@@ -23,6 +24,7 @@ export class RepriceOffersPayload extends GetOffersPayload {
         repriceOffersPayload.offerCode = offerCode;
         repriceOffersPayload.from = getOffersPayload.from;
         repriceOffersPayload.to = getOffersPayload.to;
+        repriceOffersPayload.entityId = entityId
         return repriceOffersPayload;
     }
 }
@@ -34,4 +36,5 @@ export class PurchaseOfferPayload {
     public from: Date;
     public to: Date;
     public referrer: string;
+    public entityId: number;
 }

@@ -165,7 +165,7 @@ export class CheckoutComponent implements OnInit {
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.YES :
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.NO;
     // Reprice
-    await this.repriceOffer(this._offer.code, this._userInfo)
+    await this.repriceOffer(this._offer.code, this._userInfo, this._offer.entityId);
   }
 
   private onTermsAndConditionsCheck(checked: boolean) {
@@ -178,7 +178,8 @@ export class CheckoutComponent implements OnInit {
       this._smiPayload,
       this._userInfo,
       this._quote.id,
-      this._addedCoupons.map(c => c.code)
+      this._addedCoupons.map(c => c.code),
+      this._offer.entityId
     ).toPromise();
     if (redirectUrl) {
       window.location.href = redirectUrl;
@@ -335,9 +336,9 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  private async repriceOffer(offerCode: string, userInfo: any): Promise<void> {
+  private async repriceOffer(offerCode: string, userInfo: any, entityId: number): Promise<void> {
     // Reprice and get result
-    const result = await this._offersService.repriceOffer(offerCode, userInfo).toPromise<OfferResult>();
+    const result = await this._offersService.repriceOffer(offerCode, userInfo, entityId).toPromise<OfferResult>();
     // Update offer
     if (result && result.offers && result.offers.length) {
       this._offer = result.offers[0];

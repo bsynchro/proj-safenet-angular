@@ -29,18 +29,18 @@ export class OffersService {
         });
     }
 
-    public repriceOffer(offerCode: string, userInfo: any): Observable<OfferResult> {
+    public repriceOffer(offerCode: string, userInfo: any, entityId: number): Observable<OfferResult> {
         return new Observable<OfferResult>((observer) => {
             const getOffersPayload = this.mapToGetOffersPayload(userInfo)
-            const payload = RepriceOfferPayload.fromGetOffersPayload(getOffersPayload, offerCode);
+            const payload = RepriceOfferPayload.fromGetOffersPayload(getOffersPayload, entityId, offerCode);
             this.handleOfferRequest(observer, payload, userInfo, AppConstants.CONTROLLER_NAMES.OFFERS, AppConstants.ACTION_NAMES.REPRICE_OFFER);
         });
 
     }
 
-    public purchaseOffer(offerCode: string, dimensions: Array<DimensionInput>, userInfo: any, referrer: string): Observable<PurchaseOfferResult> {
+    public purchaseOffer(offerCode: string, dimensions: Array<DimensionInput>, userInfo: any, referrer: string, entityId: number): Observable<PurchaseOfferResult> {
         return new Observable<PurchaseOfferResult>((observer) => {
-            const payload = this.getPurchaseOfferPayload(offerCode, dimensions, userInfo, referrer);
+            const payload = this.getPurchaseOfferPayload(offerCode, dimensions, userInfo, referrer, entityId);
             const api = new ApiService(this._httpClient, environment.CRM);
             api.post(AppConstants.CONTROLLER_NAMES.OFFERS, AppConstants.ACTION_NAMES.PURCHASE_OFFER, payload).subscribe((res: any) => {
                 const result = res as PurchaseOfferResult;
@@ -77,7 +77,7 @@ export class OffersService {
         return payload;
     }
 
-    private getPurchaseOfferPayload(offerCode: string, dimensions: DimensionInput[], userInfo: any, referrer: string): PurchaseOfferPayload {
+    private getPurchaseOfferPayload(offerCode: string, dimensions: DimensionInput[], userInfo: any, referrer: string, entityId: number): PurchaseOfferPayload {
         const dobObj = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB] as { year: number, month: number, day: number };
         const dob = `${dobObj.day.toString().padStart(2, '0')}-${dobObj.month.toString().padStart(2, '0')}-${dobObj.year.toString()}`;
         const payload = new PurchaseOfferPayload();
@@ -87,6 +87,7 @@ export class OffersService {
         payload.from = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].from;
         payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].to;
         payload.referrer = referrer;
+        payload.entityId = entityId
         return payload;
     }
 

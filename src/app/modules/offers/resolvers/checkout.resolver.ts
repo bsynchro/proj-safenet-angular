@@ -1,14 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs/internal/Observable";
-import { AppConstants } from "src/app/shared/constants/app.constants";
-import { LocalStorageService } from "src/app/shared/services/local-storage.service";
-import { PaymentConstants } from "../constants/payment.constants";
 import { CheckoutResolvedData } from "../models/checkout-resolved-data.model";
-import { PurchaseOfferPayload } from "../models/offers-payload.model";
-import { PurchaseOfferResult } from "../models/purchase-offer-result.model";
 import { OffersService } from "../services/offers.service";
-import { PaymentService } from "../services/payment.service";
 import { CheckoutPaymentValidityResolver } from "./checkout-payment-validity.resolver";
 import { PurchaseOfferResolver } from "./purchase-offer.resolver";
 

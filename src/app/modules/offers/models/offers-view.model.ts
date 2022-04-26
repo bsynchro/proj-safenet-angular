@@ -21,6 +21,7 @@ export class OfferView {
     benefits: Array<BenefitView>;
     highlightedProperties: Array<HighlightedProperty>;
     payload: { [key: string]: any };
+    entityId: number;
 }
 
 export class HighlightedProperty {

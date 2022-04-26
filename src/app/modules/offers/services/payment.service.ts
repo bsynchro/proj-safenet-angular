@@ -19,9 +19,9 @@ export class PaymentService {
     //#endregion
 
     //#region public methods
-    public checkout(offerCode: string, smiPayload: { [key: string]: any }, userInfo: any, quoteId: string, couponCodes: Array<string>): Observable<string> {
+    public checkout(offerCode: string, smiPayload: { [key: string]: any }, userInfo: any, quoteId: string, couponCodes: Array<string>, entityId: number): Observable<string> {
         return new Observable<string>((observer) => {
-            const payload = this.getCheckoutPayload(quoteId, couponCodes, offerCode, smiPayload, userInfo);
+            const payload = this.getCheckoutPayload(quoteId, couponCodes, offerCode, smiPayload, userInfo, entityId);
             const api = new ApiService(this._httpClient, environment.CRM);
             api.post(AppConstants.CONTROLLER_NAMES.PAYMENT, AppConstants.ACTION_NAMES.CHECKOUT, payload).subscribe((res: any) => {
                 const result = res as CheckoutResult;
@@ -50,11 +50,12 @@ export class PaymentService {
     //#endregion
 
     //#region private methods
-    private getCheckoutPayload(quoteId: string, couponCodes: string[], offerCode: string, smiPayload: { [key: string]: any }, userInfo: any): CheckoutPayload {
+    private getCheckoutPayload(quoteId: string, couponCodes: string[], offerCode: string, smiPayload: { [key: string]: any }, userInfo: any, entityId: number): CheckoutPayload {
         const payload = new CheckoutPayload();
         payload.quoteId = quoteId;
         payload.couponCodes = couponCodes;
         payload.offerCode = offerCode;
+        payload.entityId = entityId;
         // Add user info to payload
         Object.keys(smiPayload).forEach((key) => {
             switch (key) {

@@ -68,7 +68,7 @@
                                     <ng-container *ngFor="let chk of offer.checkboxes">
                                         <span class="checkbox" *ngIf="chk.visible">
                                             <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
-                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName)">
+                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName, offer.entityId)">
                                             </p-checkbox>
                                         </span>
                                         <span class="checkbox-label">
@@ -98,7 +98,7 @@
                                     <ng-container *ngFor="let chk of offer.checkboxes">
                                         <span class="checkbox">
                                             <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
-                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName)">
+                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName, offer.entityId)">
                                             </p-checkbox>
                                         </span>
                                         <span class="checkbox-label">
@@ -113,11 +113,11 @@
                                         }}</span>
                                 </div>
                                 <div class="col-6 col-md-3 offset-md-3 purchase text-center">
-                                    <span class="button" (click)="purchase(offer.code)">{{
+                                    <span class="button" (click)="purchase(offer.code, offer.entityId)">{{
                                         translations.offers.list.purchase | translate }}</span>
                                     <span class="mobile-only">
                                         <span class="premium">{{ offer.currency }} {{ offer.premium }}</span>
-                                        <span class="mobile-btn" (click)="purchase(offer.code)">
+                                        <span class="mobile-btn" (click)="purchase(offer.code, offer.entityId)">
                                             <img src="../../../../../assets/images/icons/arrow-btn.svg" />
                                         </span>
                                     </span>

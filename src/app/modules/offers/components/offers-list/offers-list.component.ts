@@ -123,25 +123,26 @@ export class OffersListComponent implements OnInit {
     return this._translateService.getTranslationFromArray(translations);
   }
 
-  public async onCheckboxCheck(checked: boolean, offerCode: string, propertyName: string) {
+  public async onCheckboxCheck(checked: boolean, offerCode: string, propertyName: string, entityId: number) {
     // Get user info with updated checkbox value
     const userInfo = Object.assign({}, this._userInfo);
     userInfo[propertyName] = checked ?
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.YES :
       OffersConstants.OFFER_PAYLOAD_PROPERTIES.CODES.NO;
     // Reprice
-    await this.repriceOffer(offerCode, userInfo)
+    await this.repriceOffer(offerCode, userInfo, entityId)
   }
 
-  public purchase(offerCode: string) {
-    const offer = this._offers.find(o => o.code == offerCode);
-    const offerView = this._offerViews.offers.find(o => o.code == offerCode);
+  public purchase(offerCode: string, entityId: number) {
+    const offer = this._offers.find(o => o.code == offerCode && o.entityId == entityId);
+    const offerView = this._offerViews.offers.find(o => o.code == offerCode && o.entityId == entityId);
     const dimensions: Array<DimensionInput> = cloneDeep(this._offersDimensions);
     const smiDimension = dimensions.find(d => d.name == OffersConstants.DIMENSION.NAMES.SMI);
     smiDimension.policyLevel = offerView.payload;
     const purchaseOfferPayload = new PurchaseOfferPayload();
     purchaseOfferPayload.offerCode = offer.code;
     purchaseOfferPayload.dimensions = dimensions;
+    purchaseOfferPayload.entityId = offer.entityId;
     LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_PAYLOAD, purchaseOfferPayload);
     LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.PURCHASE_OFFER_RESULT);
     this._router.navigate([AppConstants.ROUTES.MAIN, AppConstants.ROUTES.OFFERS, AppConstants.ROUTES.CHECKOUT])
@@ -239,6 +240,7 @@ export class OffersListComponent implements OnInit {
     const flattenedProperties = offer && offer.benefits ? this.flattenBenefitProperties(offer.benefits) : [];
     offerView.checkboxes = this.getOfferViewCheckboxes(offer, offersPayload, flattenedProperties, originalOfferView);
     offerView.highlightedProperties = this.getHighlightedProperties(flattenedProperties);
+    offerView.entityId = offer.entityId;
     return offerView;
   }
 
@@ -356,23 +358,23 @@ export class OffersListComponent implements OnInit {
     return [];
   }
 
-  private async repriceOffer(offerCode: string, userInfo: any): Promise<void> {
+  private async repriceOffer(offerCode: string, userInfo: any, entityId: number): Promise<void> {
     // Reprice and get result
-    const result = await this._offersService.repriceOffer(offerCode, userInfo).toPromise<OfferResult>();
+    const result = await this._offersService.repriceOffer(offerCode, userInfo, entityId).toPromise<OfferResult>();
     const offer = result && result.offers ? result.offers[0] : null;
     // Get offer updated payload
     const smiDimension = result && result.dimensions ? result.dimensions.find(d => d.name == OffersConstants.DIMENSION.NAMES.SMI) : null;
     const offersPayload = smiDimension && smiDimension.policyLevel ? smiDimension.policyLevel : this._userInfo;
     // Map offer to view
-    const originalOfferView = this._offerViews.offers.find(o => o.code == offerCode);
+    const originalOfferView = this._offerViews.offers.find(o => o.code == offerCode && o.entityId == entityId);
     const offerView = offer && offersPayload ? this.mapOfferToOfferView(offer, offersPayload, originalOfferView) : null;
     // Remove or replace old offer by repriced offer
-    const offerIndex = this._offers.findIndex(o => o.code == offerCode);
+    const offerIndex = this._offers.findIndex(o => o.code == offerCode && o.entityId == entityId);
     if (offerIndex != -1) {
       offer ? this._offers.splice(offerIndex, 1, offer) : this._offers.splice(offerIndex, 1);
     }
     // Remove or replace old offer view by repriced offer
-    const offerViewIndex = this._offerViews.offers.findIndex(o => o.code == offerCode);
+    const offerViewIndex = this._offerViews.offers.findIndex(o => o.code == offerCode && o.entityId == entityId);
     if (offerIndex != -1) {
       offerView ? this._offerViews.offers.splice(offerViewIndex, 1, offerView) : this._offerViews.offers.splice(offerViewIndex, 1);
     }

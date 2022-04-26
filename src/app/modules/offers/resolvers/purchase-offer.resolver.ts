@@ -33,7 +33,7 @@ export class PurchaseOfferResolver implements Resolve<PurchaseOfferResult>{
                     const userInfo = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO, null, false);
                     const referrer = LocalStorageService.getFromLocalStorage<string>(AppConstants.LOCAL_STORAGE.REFFERER, null, false);
                     // Call purchase offer
-                    this._offersService.purchaseOffer(payload.offerCode, payload.dimensions, userInfo, referrer).subscribe((result) => {
+                    this._offersService.purchaseOffer(payload.offerCode, payload.dimensions, userInfo, referrer, payload.entityId).subscribe((result) => {
                         observer.next(result);
                         observer.complete();
                     });
