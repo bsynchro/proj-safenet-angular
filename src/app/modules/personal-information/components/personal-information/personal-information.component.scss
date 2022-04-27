@@ -128,6 +128,12 @@
         float: right;
       }
     }
+    .primary-btn, .secondary-btn {
+      &:disabled {
+        opacity: .4;
+        cursor: not-allowed !important;
+      }
+    }
   }
   .validation-msg {
     color: $error-color;

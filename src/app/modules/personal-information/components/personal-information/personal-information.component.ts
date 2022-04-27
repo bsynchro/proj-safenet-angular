@@ -87,6 +87,10 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   public get formGroupValidators(): Array<ValidatorFn> {
     return this._formGroupValidators;
   }
+
+  public get submitDisabled(): boolean {
+    return !this._beneficiariesForm || !this._beneficiariesForm.valid || this.showGlobalValidation;
+  }
   //#endregion
 
   //#region ctor
@@ -173,7 +177,7 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   public async submit() {
     this._submitClicked = true;
-    if (this._beneficiariesForm.valid) {
+    if (!this.submitDisabled) {
       const beneficiaries = this.mapFormToBeneficiaries();
       const quoteId = this._activatedRoute.snapshot.paramMap.get(AppConstants.ROUTE_DATA_KEYS.QUOTE_ID);
       const result = await this._beneficiaryService.upsertBeneficiaries(quoteId, beneficiaries).toPromise();
@@ -251,7 +255,9 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
           [null] :
           relation == BeneficiariesConstants.Relation.CHILD ?
             [null, [Validators.required, this.childMaxAgeValidator]] :
-            [null, [Validators.required]],
+            relation == BeneficiariesConstants.Relation.SPOUSE ?
+              [null, [Validators.required, this.spouseMaxAgeValidator]] :
+              [null, [Validators.required]],
         maritalStatus: [null],
         email: relation == BeneficiariesConstants.Relation.PRINCIPAL ? [null, [Validators.required, Validators.email]] : [null],
         relation: [relation]
@@ -459,6 +465,30 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
     return null;
   }
 
+  private isPassportNumberUnique(passportNumber: string): boolean {
+    if (isNullOrUndefined(passportNumber)) {
+      return true;
+    }
+    const beneficiaryValues = this.getRawBeneficiariesArrayFromForm();
+    return beneficiaryValues.filter(b => b.passportNumber == passportNumber).length <= 1;
+  }
+
+  private getRawBeneficiariesArrayFromForm(): Array<any> {
+    const beneficiaries = [];
+    if (this._beneficiariesForm) {
+      const beneficiaryValues = this._beneficiariesForm.getRawValue();
+      if (beneficiaryValues.principal) {
+        beneficiaries.push(beneficiaryValues.principal);
+      }
+      if (beneficiaryValues.spouses && beneficiaryValues.spouses.length) {
+        beneficiaries.push(...beneficiaryValues.spouses);
+      }
+      if (beneficiaryValues.children && beneficiaryValues.children.length) {
+        beneficiaries.push(...beneficiaryValues.children);
+      }
+    }
+    return beneficiaries;
+  }
   //#region validation
   private isMobileNumberValid = (): ValidationErrors | null => {
     if (
@@ -471,7 +501,14 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
 
   private passportNumberValidatorFn: ValidatorFn = (control: FormControl) => {
     if (control.value) {
-      return control.value.length > 9 ? { invalidPassportNumber: true } : null;
+      // Validate length
+      if (control.value.length > 9) {
+        return { invalidPassportNumber: true };
+      }
+      // Validate uniqueness within the form
+      if (!this.isPassportNumberUnique(control.value)) {
+        return { passportNumberNotUnique: true };
+      }
     }
     return null;
   }
@@ -479,11 +516,23 @@ export class PersonalInformationComponent implements OnInit, AfterViewInit {
   private childMaxAgeValidator: ValidatorFn = (control: FormControl) => {
     if (control && control.value) {
       const age = this.getAge(control.value);
-      if (!age) {
+      if (isNullOrUndefined(age)) {
         return { required: true };
       }
       control.markAsTouched();
       return age > 18 ? { invalidChildAge: true } : null;
+    }
+    return null;
+  }
+
+  private spouseMaxAgeValidator: ValidatorFn = (control: FormControl) => {
+    if (control && control.value) {
+      const age = this.getAge(control.value);
+      if (isNullOrUndefined(age)) {
+        return { required: true };
+      }
+      control.markAsTouched();
+      return age > 90 ? { invalidSpouseAge: true } : null;
     }
     return null;
   }

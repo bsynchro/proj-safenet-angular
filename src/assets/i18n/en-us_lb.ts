@@ -81,6 +81,8 @@ export default {
             "invalidEmail": "Invalid email",
             "invalidPassportNumber": "Should be maximum 9 digits",
             "invalidPhoneNumber": "Please enter a valid phone number",
+            "invalidSpouseAge": "Age cannot be greater than 90",
+            "passportNumberNotUnique": "Should be unique"
         }
     },
     "policy": {

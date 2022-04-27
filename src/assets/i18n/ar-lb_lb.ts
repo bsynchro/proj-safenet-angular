@@ -58,7 +58,9 @@ export default {
             "invalidChildAge": "يجب أن يكون العمر أكبر من 18 عامًا",
             "invalidEmail": "بريد إلكتروني خاطئ",
             "invalidPassportNumber": "يجب أن يكون الحد الأقصى 9 أرقام",
-            "invalidPhoneNumber": "الرجاء إدخال رقم هاتف صالح"
+            "invalidPhoneNumber": "الرجاء إدخال رقم هاتف صالح",
+            "invalidSpouseAge": "لا يمكن أن يكون العمر أكبر من 90",
+            "passportNumberNotUnique": "يجب أن يكون فريدًا"
         }
     },
     "policy": {

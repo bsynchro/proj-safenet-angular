@@ -144,6 +144,11 @@
                 class="validation-msg">{{ translations.personalInformation.validationMessages.invalidChildAge |
                 translate }}
             </span>
+            <span
+                *ngIf="(submitClicked || form.controls?.dateOfBirth?.touched) && form.controls?.dateOfBirth?.errors?.invalidSpouseAge"
+                class="validation-msg">{{ translations.personalInformation.validationMessages.invalidSpouseAge |
+                translate }}
+            </span>
         </div>
         <div class="col-9 col-md-2 mb-3 mb-md-4 passport-col">
             <input type="text" class="form-input" formControlName="passportNumber"
@@ -153,10 +158,13 @@
                 *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.required"
                 class="validation-msg">{{ translations.errorMessages.fieldIsRequired | translate }}
             </span>
-            <span
-                *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.invalidPassportNumber"
-                class="validation-msg">{{ translations.personalInformation.validationMessages.invalidPassportNumber |
-                translate }}
+            <span class="validation-msg"
+                *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.invalidPassportNumber">
+                {{ translations.personalInformation.validationMessages.invalidPassportNumber | translate }}
+            </span>
+            <span class="validation-msg"
+                *ngIf="(submitClicked || form.controls?.passportNumber?.touched) && form.controls?.passportNumber?.errors?.passportNumberNotUnique">
+                {{ translations.personalInformation.validationMessages.passportNumberNotUnique | translate }}
             </span>
         </div>
         <div class="col-3 col-md-1 mb-3 mb-md-4 gender-col">
