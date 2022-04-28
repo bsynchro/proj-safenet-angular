@@ -72,12 +72,12 @@
                                             </p-checkbox>
                                         </span>
                                         <span class="checkbox-label">
-                                            {{ getLocalizedValue(chk.title) }} {{ getLocalizedValue(chk.value) }}
+                                            {{ getLocalizedValue(chk.value) }}
                                         </span>
                                     </ng-container>
                                 </div>
                                 <div class="col-12 col-md-3 premium align-self-center text-center">
-                                    {{ offer.currency }} {{ offer.premium }}
+                                    {{ offer.currency }} {{ offer.premium | number : '1.0-2' }}
                                 </div>
                             </div>
                             <div class="row benefits px-1 mb-2" *ngIf="offer.highlightedProperties">
@@ -117,7 +117,9 @@
                                     <span class="button" (click)="purchase(offer.code, offer.entityId)">{{
                                         translations.offers.list.purchase | translate }}</span>
                                     <span class="mobile-only">
-                                        <span class="premium">{{ offer.currency }} {{ offer.premium }}</span>
+                                        <span class="premium">
+                                            {{ offer.currency }} {{ offer.premium | number : '1.0-2' }}
+                                        </span>
                                         <span class="mobile-btn" (click)="purchase(offer.code, offer.entityId)">
                                             <img src="../../../../../assets/images/icons/arrow-btn.svg" />
                                         </span>

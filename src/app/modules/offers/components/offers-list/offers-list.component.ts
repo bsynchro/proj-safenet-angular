@@ -15,12 +15,14 @@ import { PurchaseOfferPayload } from '../../models/offers-payload.model';
 import { BenefitView, HighlightedProperty, OffersView, OfferView, PropertyView } from '../../models/offers-view.model';
 import { OffersService } from '../../services/offers.service';
 import cloneDeep from 'lodash/cloneDeep';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-offers-list',
   templateUrl: './offers-list.component.html',
   styleUrls: ['./offers-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [DecimalPipe],
 })
 export class OffersListComponent implements OnInit {
   //#region fields
@@ -328,11 +330,12 @@ export class OffersListComponent implements OnInit {
    * @returns 
    */
   private getCheckboxValue(property: BenefitProperty, propertyName: string, originalOfferView: OfferView): Array<LocalizedValue> {
-    if (isNullOrUndefined(originalOfferView)) {
-      return property.displayValueTranslation;
-    }
-    const originalCheckbox = originalOfferView.checkboxes.find(c => c.propertyName == propertyName);
-    return originalCheckbox.value;
+    // if (isNullOrUndefined(originalOfferView)) {
+    //   return property.displayValueTranslation;
+    // }
+    // const originalCheckbox = originalOfferView.checkboxes.find(c => c.propertyName == propertyName);
+    // return originalCheckbox.value;
+    return property.displayValueTranslation;
   }
 
   private getOfferListItemHeaderPropertyName(tags: string): string {

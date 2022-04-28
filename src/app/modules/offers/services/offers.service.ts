@@ -57,7 +57,7 @@ export class OffersService {
     private mapToGetOffersPayload(userInfo: any): GetOffersPayload {
         const payload = new GetOffersPayload();
         // Default values
-        payload.withDeductible = userInfo.withDeductible ? userInfo.withDeductible : OffersConstants.WITH_DEDUCIBLE.CODES.YES;
+        payload.withDeductible = userInfo.withDeductible ? userInfo.withDeductible : OffersConstants.WITH_DEDUCIBLE.CODES.NO;
         payload.sportsActivity = userInfo.sportsActivity ? userInfo.sportsActivity : OffersConstants.SPORTS_ACTIVITY.CODES.NO;
         // Saved data
         Object.keys(AppWizardConstants.USER_INFO_PROPERTIES).forEach((key) => {
