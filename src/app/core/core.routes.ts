@@ -25,6 +25,10 @@ const coreRoutes: Routes = [
             {
                 path: AppConstants.ROUTES.POLICY,
                 loadChildren: () => import('../modules/policy/policy.module').then((mod) => mod.PolicyModule)
+            },
+            {
+                path: AppConstants.ROUTES.PRODUCER,
+                loadChildren: () => import('../modules/producer/producer.module').then((mod) => mod.ProducerModule)
             }
         ]
     },

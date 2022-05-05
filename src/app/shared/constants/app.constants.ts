@@ -96,6 +96,8 @@ export class AppConstants {
         public static readonly CHECKOUT = 'checkout';
         public static readonly PERSONALINFORMATION = 'personalInformation';
         public static readonly POLICY = 'policy';
+        public static readonly PRODUCER = 'producer';
+        public static readonly PRODUCTION_REPORT = 'productionReport';
     }
 
     public static ROUTE_DATA_KEYS = class {
@@ -106,6 +108,7 @@ export class AppConstants {
         public static readonly REF = 'ref';
         public static readonly CA = 'ca';
         public static readonly CD = 'cd';
+        public static readonly PAYMENT_ID = 'paymentId';
     }
     //#endregion
 
@@ -135,6 +138,8 @@ export class AppConstants {
         public static readonly PAYMENT = 'Payment';
         public static readonly BENEFICIARIES = 'Beneficiaries';
         public static readonly POLICY = 'Policy';
+        public static readonly PRODUCTION_REPORTS = 'ProductionReports';
+        public static readonly FILE = 'File';
         //#endregion
     };
 
@@ -161,6 +166,10 @@ export class AppConstants {
         //#region Policy
         public static readonly ISSUE = 'Issue';
         //#endregion
+
+        //#region ProductionReports
+        public static readonly TRAVEL = 'Travel';
+        //#endregion
     };
     //#endregion
 
@@ -184,4 +193,11 @@ export class AppConstants {
         public static readonly DATE_FORMAT = 'dd/mm/yy';// PRIME-NG CALENDAR COMPONENT COMPATIBLE EQUIVALENT TO dd/mm/yyyy
         public static readonly PLACEHOLDER = 'dd/mm/yyyy';
     }
+    //#endregion
+
+    //#region User constants
+    public static USER_PROPERTIES = class {
+        public static readonly CHANNEL = 'channel';
+    }
+    //#endregion
 }

@@ -71,6 +71,17 @@ export default {
             "title": "شكرا لاختيارك تأمين بسمة للسفر!"
         }
     },
+    "producer": {
+        "productionReport": {
+            "download": "تحميل",
+            "from": "من",
+            "title": "تقرير إنتاج السفر",
+            "to": "الى",
+            "validationMessages": {
+                "invalidDate": "يجب أن يكون تاريخ السفر أقل من أو يساوي تاريخ العودة"
+            }
+        }
+    },
     "wizard": {
         "back": "الرجوع",
         "next": "التالي",

@@ -1,14 +1,14 @@
 @import "../../../../../styles/variables.scss";
 @import "../../../../../styles/mixins.scss";
 
-.travel-duration {
+.production-report {
     .container-fluid {
         min-height: calc(100vh - #{$header-height} - #{$progress-bar-height} - 1px);
         .title {
             color: $primary-color;
             font-size: 20px;
         }
-        .choices {
+        .date-pickers {
             margin: auto;
             width: 70%;
             .date-picker {
@@ -105,12 +105,20 @@
                 color: $red;
             }
         }
+        .btn-container {
+            .btn {
+                @include btn();
+                &:disabled {
+                    cursor: not-allowed;
+                }
+            }
+        }
     }
 }
 
 // mobile
 @media all and (max-width:576px) {
-    .travel-duration {
+    .production-report {
         .date-pickers {
             width: 100%;
             .date-picker {

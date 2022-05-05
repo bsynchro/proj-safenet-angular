@@ -13,4 +13,4 @@ const policyRoutes: Routes = [
     },
 ]
 
-export const PoolicyRouterModule: ModuleWithProviders = RouterModule.forChild(policyRoutes);
+export const PolicyRouterModule: ModuleWithProviders = RouterModule.forChild(policyRoutes);

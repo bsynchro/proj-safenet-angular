@@ -38,9 +38,17 @@ export class OffersService {
 
     }
 
-    public purchaseOffer(offerCode: string, dimensions: Array<DimensionInput>, userInfo: any, referrer: string, entityId: number): Observable<PurchaseOfferResult> {
+    public purchaseOffer(
+        offerCode: string,
+        dimensions: Array<DimensionInput>,
+        userInfo: any,
+        referrer: string,
+        entityId: number,
+        countryOfArrival: string,
+        countryOfDeparture: string
+    ): Observable<PurchaseOfferResult> {
         return new Observable<PurchaseOfferResult>((observer) => {
-            const payload = this.getPurchaseOfferPayload(offerCode, dimensions, userInfo, referrer, entityId);
+            const payload = this.getPurchaseOfferPayload(offerCode, dimensions, userInfo, referrer, entityId, countryOfArrival, countryOfDeparture);
             const api = new ApiService(this._httpClient, environment.CRM);
             api.post(AppConstants.CONTROLLER_NAMES.OFFERS, AppConstants.ACTION_NAMES.PURCHASE_OFFER, payload).subscribe((res: any) => {
                 const result = res as PurchaseOfferResult;
@@ -77,7 +85,15 @@ export class OffersService {
         return payload;
     }
 
-    private getPurchaseOfferPayload(offerCode: string, dimensions: DimensionInput[], userInfo: any, referrer: string, entityId: number): PurchaseOfferPayload {
+    private getPurchaseOfferPayload(
+        offerCode: string,
+        dimensions: DimensionInput[],
+        userInfo: any,
+        referrer: string,
+        entityId: number,
+        countryOfArrival: string,
+        countryOfDeparture: string
+    ): PurchaseOfferPayload {
         const dobObj = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.DOB] as { year: number, month: number, day: number };
         const dob = `${dobObj.day.toString().padStart(2, '0')}-${dobObj.month.toString().padStart(2, '0')}-${dobObj.year.toString()}`;
         const payload = new PurchaseOfferPayload();
@@ -88,6 +104,8 @@ export class OffersService {
         payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].to;
         payload.referrer = referrer;
         payload.entityId = entityId
+        // payload.countryOfArrival = countryOfArrival;
+        // payload.countryOfDeparture = countryOfDeparture;
         return payload;
     }
 

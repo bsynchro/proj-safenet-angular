@@ -93,6 +93,17 @@ export default {
             "title": "Thank you for choosing Basma travel insurance!"
         }
     },
+    "producer": {
+        "productionReport": {
+            "download": "Download",
+            "from": "From",
+            "title": "Travel Production Report",
+            "to": "To",
+            "validationMessages": {
+                "invalidDate": "From Date Should Be Less Than Or Equal To The To Date"
+            }
+        }
+    },
     "wizard": {
         "back": "Back",
         "next": "Next",

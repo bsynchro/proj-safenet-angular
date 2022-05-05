@@ -37,4 +37,6 @@ export class PurchaseOfferPayload {
     public to: Date;
     public referrer: string;
     public entityId: number;
+    // public countryOfArrival: string;
+    // public countryOfDeparture: string;
 }

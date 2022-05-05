@@ -21,7 +21,8 @@ export class PaymentValidityResolver implements Resolve<ValidatePaymentResult> {
                 observer.complete();
             }
             else {
-                this.paymentService.validate(quoteId).subscribe((result) => {
+                const paymentId = route.queryParams[AppConstants.ROUTE_DATA_KEYS.PAYMENT_ID];
+                this.paymentService.validate(quoteId, paymentId).subscribe((result) => {
                     observer.next(result);
                     observer.complete();
                 });

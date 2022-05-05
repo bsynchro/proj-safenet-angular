@@ -32,11 +32,15 @@ export class PurchaseOfferResolver implements Resolve<PurchaseOfferResult>{
                 else {
                     const userInfo = LocalStorageService.getFromLocalStorage(AppConstants.LOCAL_STORAGE.USER_INFO, null, false);
                     const referrer = LocalStorageService.getFromLocalStorage<string>(AppConstants.LOCAL_STORAGE.REFFERER, null, false);
+                    const countryOfArrival = LocalStorageService.getFromLocalStorage<string>(AppConstants.LOCAL_STORAGE.COUNTRY_OF_ARRIVAL, null, false);
+                    const countryOfDeparture = LocalStorageService.getFromLocalStorage<string>(AppConstants.LOCAL_STORAGE.COUNTRY_OF_DEPARTURE, null, false);
                     // Call purchase offer
-                    this._offersService.purchaseOffer(payload.offerCode, payload.dimensions, userInfo, referrer, payload.entityId).subscribe((result) => {
-                        observer.next(result);
-                        observer.complete();
-                    });
+                    this._offersService
+                        .purchaseOffer(payload.offerCode, payload.dimensions, userInfo, referrer, payload.entityId, countryOfArrival, countryOfDeparture)
+                        .subscribe((result) => {
+                            observer.next(result);
+                            observer.complete();
+                        });
                 }
             }
         });
