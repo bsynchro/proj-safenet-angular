@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService, DialogService } from '@bsynchro/services';
+import { AuthenticationService, DialogService, UITranslateService } from '@bsynchro/services';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
 import { ActionMessage, NotificationStatus } from 'src/app/shared/models/section-message';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
@@ -52,6 +52,7 @@ export class ChangePasswordComponent implements OnInit {
     private _authService: AuthenticationService,
     private _notificationService: NotificationService,
     private _dialogService: DialogService,
+    private _translateService: UITranslateService,
     public translations: Translations
   ) { }
   //#endregion
@@ -100,7 +101,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   public close() {
-    this._dialogService.showConfirmationDialog('Are you sure you want to leave this page?', 'Yes', 'No').subscribe((accepted) => {
+    const dialogMessage = this._translateService.getInstantTranslation(this.translations.user.changePassword.notification.dialog.message);
+    const acceptLabel = this._translateService.getInstantTranslation(this.translations.user.changePassword.notification.dialog.acceptLabel);
+    const rejectLabel = this._translateService.getInstantTranslation(this.translations.user.changePassword.notification.dialog.rejectLabel);
+    this._dialogService.showConfirmationDialog(dialogMessage, acceptLabel, rejectLabel).subscribe((accepted) => {
       if (accepted) {
         this._location.back();
       }

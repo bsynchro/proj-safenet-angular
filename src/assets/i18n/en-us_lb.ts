@@ -127,6 +127,11 @@ export default {
             },
             "notification": {
                 "action": "Back to login",
+                "dialog": {
+                    "acceptLabel": "Yes",
+                    "message": "Are you sure you want to leave this page?",
+                    "rejectLabel": "No"
+                },
                 "text": "Your account's password has been reset successfully. You have been logged out of all your active sessions. Please login with your new credentials.",
                 "title": "Password Changed Successfully"
             },
