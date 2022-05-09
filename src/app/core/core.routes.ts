@@ -1,6 +1,7 @@
 import { ModuleWithProviders } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { SilentRefreshComponent } from "@bsynchro/services";
+import { NotificationComponent } from "../shared/components/notification/notification.component";
 import { AppConstants } from "../shared/constants/app.constants";
 import { AuthCallbackComponent } from "./auth-callback/auth-callback.component";
 import { HomeComponent } from "./home/home.component";
@@ -29,6 +30,14 @@ const coreRoutes: Routes = [
             {
                 path: AppConstants.ROUTES.PRODUCER,
                 loadChildren: () => import('../modules/producer/producer.module').then((mod) => mod.ProducerModule)
+            },
+            {
+                path: AppConstants.ROUTES.USER,
+                loadChildren: () => import('../modules/user/user.module').then((mod) => mod.UserModule)
+            },
+            {
+                path: AppConstants.ROUTES.NOTIFICATION,
+                component: NotificationComponent
             }
         ]
     },

@@ -10,15 +10,17 @@
             justify-content: space-between;
             min-height: $header-height;
             align-items: center;
-        
             .right-header {
                 display: flex;
                 flex-flow: row;
-                .phone {
-                    display: flex;
-                    align-items: center;
-                    .phone-text {
-                        color: $font-color;
+                .phone-link {
+                    height: auto;
+                    .phone {
+                        display: flex;
+                        align-items: center;
+                        .phone-text {
+                            color: $font-color;
+                        }
                     }
                 }
                 .sign-in {
@@ -28,6 +30,39 @@
                     .sign-in-btn {
                         @include btn();
                         border-radius: 2rem;
+                    }
+                }
+                .user-dropdown {
+                    height: auto;
+                    .logged-in-user {
+                        .nav-link {
+                            .username {
+                                cursor: pointer;
+                                position: relative;
+                                &::after {
+                                    content: "\f0d7";
+                                    font-family: "FontAwesome";
+                                    color: $primary-alt-color;
+                                    font-size: 1.2em;
+                                    position: absolute;
+                                    top: 0%;
+                                    right: -1rem;
+                                    html.rtl & {
+                                        right: unset;
+                                        left: -1rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    p-menu {
+                        .ui-menu {
+                            background-color: $white;
+                            @include shadow();
+                            .ui-menuitem-link {
+                                color: $font-color !important;
+                            }
+                        }
                     }
                 }
             }
@@ -46,19 +81,43 @@
         .header {
             .left-header {
                 .logo-img {
-                    width: 75%;
+                    width: 30vw;
                 }
             }
             .right-header {
+                padding-left: 1rem;
+                html.rtl & {
+                    padding-left: unset;
+                    padding-right: 1rem;
+                }
                 .phone {
                     .phone-ic {
                         img {
-                            width: 75%;
+                            width: 1rem;
                         }
+                    }
+                    .phone-text {
+                        font-size: .8em;
+                        white-space: nowrap;
                     }
                 }
                 .sign-in {
                     display: none;
+                }
+                .user-dropdown {
+                    .logged-in-user {
+                        .nav-link {
+                            margin-right: 0;
+                            html.rtl & {
+                                margin-right: 1rem;
+                                margin-left: 0;
+                            }
+                            .username {
+                                font-size: .8em;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
                 }
             }
         }

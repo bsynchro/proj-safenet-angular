@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 @import "./fonts.scss";
 
 html {
@@ -13,6 +14,100 @@ html {
     display: none;
 }
 
+// Dialog
+
+.ui-confirmdialog {
+    //Container element
+    width: 33rem;
+    max-width: 90%;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: $white;
+
+    .ui-dialog-titlebar {
+    //Container of header.
+    display: none !important;
+    background-color: $white !important;
+    border: none !important;
+
+    .ui-dialog-title {
+        //Header element.
+    }
+
+    .ui-dialog-titlebar-icon {
+        //Icon container inside header.
+    }
+
+    .ui-dialog-titlebar-close {
+        //Close icon element.
+    }
+    }
+
+    .ui-dialog-content {
+    //Content element.
+    border: none !important;
+    padding: 1rem !important;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 10px !important;
+
+    // height: 14rem;
+    .ui-confirmdialog-icon {
+        //confirmdialog-icon
+        color: #ED3B3B;
+        font-size: 80px;
+        top: 0;
+        line-height: 54px;
+        position: relative;
+        margin: 0;
+    }
+
+    .ui-confirmdialog-message {
+        //confirmdialog-message
+        font-size: 20px;
+        color: #3E3E3E;
+        text-align: center;
+        padding: 35px 3em 0;
+        display: block;
+        width: 100%;
+    }
+    }
+
+    .ui-dialog-footer {
+        border: none !important;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+        top: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 35px !important;
+
+        button {
+            &:first-child {
+                @include btn();
+            }
+
+            &:last-child {
+                @include btn(false);
+                border: 1px solid $primary-alt-color !important;
+            }
+
+        }
+
+        .ui-button-icon-left {
+            display: none;
+        }
+
+        .ui-button-text {
+            padding: 0.25em 1em !important;
+        }
+    }
+}
 
 
 // mobile

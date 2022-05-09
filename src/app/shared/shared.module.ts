@@ -10,6 +10,7 @@ import { AutoOpenPublisherDirective } from './directives/autoOpenPublisher';
 import { AutoOpenDefaultDirective } from './directives/autoOpenDefault';
 import { AutoOpenSubscribeToDirective } from './directives/autoOpenSubscribeTo';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AutoOpenPublisherDirective,
     AutoOpenDefaultDirective,
     AutoOpenSubscribeToDirective,
-    KeyboardAutoOpenMobileFixDirective
+    KeyboardAutoOpenMobileFixDirective,
+    NotificationComponent
   ],
   imports: [
     CommonModule,

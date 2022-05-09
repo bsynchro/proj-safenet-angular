@@ -7,10 +7,15 @@ export default {
     "errorMessages": {
         "ageGreaterThanMax": "Age cannot be greater than {{maxAge}}",
         "fieldIsRequired": "This field is required",
-        "incompleteDob": "Date of birth is incomplete"
+        "incompleteDob": "Date of birth is incomplete",
+        "shouldBeAtLeastMinCharacters": "Should be at least {{min}} characters"
     },
     "header": {
-        "signIn": "Sign In"
+        "signIn": "Sign In",
+        "userMenu": {
+            "changePassword": "Change Password",
+            "logOut": "Log Out"
+        }
     },
     "offers": {
         "checkout": {
@@ -102,6 +107,31 @@ export default {
             "validationMessages": {
                 "invalidDate": "From Date Should Be Less Than Or Equal To The To Date"
             }
+        }
+    },
+    "user": {
+        "changePassword": {
+            "buttons": {
+                "closeButton": "Close",
+                "submitButton": "Submit"
+            },
+            "errorMessages": {
+                "invalidPassword": "Invalid Password",
+                "invalidPasswordPattern": "The password should be composed of 8 characters having 1 uppercase letter, 1 lowercase letter and 1 number",
+                "passwordsDoNotMatch": "Passwords do not match"
+            },
+            "form": {
+                "confirmPassword": "Confirm New Password",
+                "newPassword": "New Password",
+                "oldPassword": "Old Password"
+            },
+            "notification": {
+                "action": "Back to login",
+                "text": "Your account's password has been reset successfully. You have been logged out of all your active sessions. Please login with your new credentials.",
+                "title": "Password Changed Successfully"
+            },
+            "subTitle": "Enter your old, new and new password confirmation below",
+            "title": "Change Your Password"
         }
     },
     "wizard": {

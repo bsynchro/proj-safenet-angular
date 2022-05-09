@@ -1,0 +1,43 @@
+@import "../../../../../src/styles/mixins.scss";
+@import "../../../../../src/styles/variables.scss";
+
+.notification-component {
+    max-width: 33vw;
+    @include shadow();
+    .icon {
+        .fa {
+            font-size: 2.5em;
+            color: $primary-alt-color;
+        }
+    }
+    .title {
+        h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: #006db7;
+        }
+    }
+    .action-container {
+        .btn, .btn-primary {
+            @include btn();
+        }
+        .btn-secondary {
+            @include btn(false);
+            border: 1px solid $primary-alt-color !important;
+        }
+        .link {
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            color: #006db7
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .notification-component {
+        max-width: 70vw;
+    }
+}

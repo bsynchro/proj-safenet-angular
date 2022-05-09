@@ -10,7 +10,11 @@ export default {
         "incompleteDob": "Date of birth is incomplete"
     },
     "header": {
-        "signIn": "تسجيل الدخول"
+        "signIn": "تسجيل الدخول",
+        "userMenu": {
+            "changePassword": "تغيير كلمة السر",
+            "logOut": "تسجيل الخروج"
+        }
     },
     "offers": {
         "checkout": {

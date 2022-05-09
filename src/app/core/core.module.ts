@@ -10,7 +10,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from '../shared/shared.module';
 import { INTERCEPTOR_PROVIDER } from './interceptors/interceptor-provider';
 import { BroadcastService } from '../shared/services/broadcast.service';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { MenuModule } from 'primeng/menu';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { UserService } from '../shared/services/user.service';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
     BSynchroServices,
     DropdownModule,
     SharedModule,
-    AuthorizationModule
+    AuthorizationModule,
+    MenuModule,
+    ConfirmDialogModule
   ],
 
   providers: [
@@ -33,7 +37,8 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
     },
     BroadcastService,
     LanguageResolver,
-    DataListService
+    DataListService,
+    UserService
   ]
 })
 export class CoreModule { }

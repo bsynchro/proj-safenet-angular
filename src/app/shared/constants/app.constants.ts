@@ -84,6 +84,7 @@ export class AppConstants {
         public static readonly REFFERER = "Referrer";
         public static readonly COUNTRY_OF_ARRIVAL = "CountryOfArrival";
         public static readonly COUNTRY_OF_DEPARTURE = "CountryOfDeparture";
+        public static readonly SHOULD_LOGIN = "SHOULD_LOGIN";
     }
     //#endregion
 
@@ -98,6 +99,9 @@ export class AppConstants {
         public static readonly POLICY = 'policy';
         public static readonly PRODUCER = 'producer';
         public static readonly PRODUCTION_REPORT = 'productionReport';
+        public static readonly USER = 'user';
+        public static readonly CHANGE_PASSWORD = 'changePassword';
+        public static readonly NOTIFICATION = 'notification';
     }
 
     public static ROUTE_DATA_KEYS = class {
@@ -126,8 +130,8 @@ export class AppConstants {
         userStore: new WebStorageStateStore({ store: window.sessionStorage }),
         // prompt: 'none',
         loadUserInfo: true,
-        filterProtocolClaims: true
-        // extraQueryParams: {}
+        filterProtocolClaims: true,
+        extraQueryParams: { client_id: 'safenet.portal' }
     };
     //#endregion
 

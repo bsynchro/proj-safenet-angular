@@ -5,7 +5,7 @@
                 <img class="logo-img" src="../../../assets/images/logo-safenet.svg" />
             </div>
             <div class="right-header">
-                <a href="tel:">
+                <a href="tel:" class="phone-link">
                     <div class="phone">
                         <span class="phone-ic">
                             <img src="../../../assets/images/icons//ic-phone.svg" />
@@ -13,8 +13,18 @@
                         <span class="phone-text">+965 2228 6250</span>
                     </div>
                 </a>
-                <div class="sign-in" *ngIf="!isLoggedIn">
+                <!-- <div class="sign-in" *ngIf="!isLoggedIn">
                     <button class="sign-in-btn" (click)="login()">{{ translations.header.signIn | translate}}</button>
+                </div> -->
+                <div class="user-dropdown" *ngIf="isLoggedIn">
+                    <div class="logged-in-user">
+                        <a class="nav-link p-0 mx-3" (click)="menu.toggle($event)">
+                            <span class="username" *ngIf="user">
+                                {{ user.fullName }}
+                            </span>
+                        </a>
+                    </div>
+                    <p-menu #menu [model]="profileSettings" [popup]="true" toggleable="true"></p-menu>
                 </div>
             </div>
         </div>

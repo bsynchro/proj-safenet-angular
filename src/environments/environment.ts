@@ -15,7 +15,8 @@ export const environment = {
   CRM: 'http://localhost:30282',
   // CRM: 'http://crm.safenet.dev.bsynchro.com',
   GlobalVariables: 'http://localhost:52032',
-  // GlobalVariables: 'http://safenet.cora-api-staging-mt.dev.bsynchro.com/global-variable'
+  // GlobalVariables: 'http://safenet.cora-api-staging-mt.dev.bsynchro.com/global-variable',
+  FileServer: 'http://localhost:57092'
 };
 
 /*

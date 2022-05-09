@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UITranslateService } from '@bsynchro/services';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 
