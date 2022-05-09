@@ -31,7 +31,8 @@ export class ProductionReportComponent implements OnInit, AfterViewInit {
   //#region fields
   private _dateFormGroup: FormGroup;
   private _todayDate: Date = new Date();
-  private _dateFormat: string = 'dd-MM-yyyy';
+  private _printDateFormat: string = 'dd-MM-yyyy';
+  private _dateFormat: string = 'dd/MM/yyyy';
   //#endregion
 
   //#region getters
@@ -135,7 +136,7 @@ export class ProductionReportComponent implements OnInit, AfterViewInit {
 
   private dateValidator: ValidatorFn = (group: FormGroup) => {
     if (group.get('from').value && group.get('to').value) {
-      return group.get('from').value < group.get('to').value ? null : { invalidDate: true };
+      return group.get('from').value <= group.get('to').value ? null : { invalidDate: true };
     }
   }
 
@@ -150,8 +151,8 @@ export class ProductionReportComponent implements OnInit, AfterViewInit {
   private getReportFileName(): string {
     const from: Date = this._dateFormGroup.get('from').value;
     const to: Date = this._dateFormGroup.get('to').value;
-    const formattedFromDate = UtilsService.getFormattedDateInstance(from, this._dateFormat);
-    const formattedToDate = UtilsService.getFormattedDateInstance(to, this._dateFormat);
+    const formattedFromDate = UtilsService.getFormattedDateInstance(from, this._printDateFormat);
+    const formattedToDate = UtilsService.getFormattedDateInstance(to, this._printDateFormat);
     return `Basma_Travel Production_Report_${formattedFromDate}_${formattedToDate}`
   }
 
@@ -160,8 +161,8 @@ export class ProductionReportComponent implements OnInit, AfterViewInit {
       .catch(error => this.handleHttpError(error));
     const channel = user.properties.find(p => p.name == AppConstants.USER_PROPERTIES.CHANNEL);
     const payload = new TravelProductionReportPayload();
-    payload.from = this._dateFormGroup.get('from').value;
-    payload.to = this._dateFormGroup.get('to').value;
+    payload.from = UtilsService.getFormattedDateInstance(this._dateFormGroup.get('from').value, this._dateFormat);
+    payload.to = UtilsService.getFormattedDateInstance(this._dateFormGroup.get('to').value, this._dateFormat);
     payload.channel = channel ? channel.value : null;
     payload.entityIds = user.entityId;
     payload.filters = new Array<ExportFilter>();
