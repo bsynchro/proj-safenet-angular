@@ -3,6 +3,7 @@ import { AuthenticationService, UITranslateService } from '@bsynchro/services';
 import { MenuItem } from 'primeng/components/common/menuitem';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AppConstants } from 'src/app/shared/constants/app.constants';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { Translations } from 'src/app/shared/services/translation.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -66,6 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public logOut = () => {
+    LocalStorageService.setInLocalStorage(AppConstants.LOCAL_STORAGE.SHOULD_LOGIN, true);
     this._authService.endAuthentication();
   }
   //#endregion

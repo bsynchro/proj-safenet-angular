@@ -4,13 +4,14 @@ import { AuthenticationService } from "@bsynchro/services";
 import { Observable } from "rxjs/internal/Observable";
 import { AppConstants } from "src/app/shared/constants/app.constants";
 import { LocalStorageService } from "src/app/shared/services/local-storage.service";
+import { NotificationService } from "src/app/shared/services/notification.service";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class AuthGuardService implements CanLoad {
-    constructor(private _authService: AuthenticationService) {
+    constructor(private _authService: AuthenticationService, private _notificationService: NotificationService) {
     }
 
     public canLoad(): Observable<boolean> {
@@ -35,6 +36,7 @@ export class AuthGuardService implements CanLoad {
                     if (shouldLogin) {
                         LocalStorageService.deleteFromLocalStorage(AppConstants.LOCAL_STORAGE.SHOULD_LOGIN);
                         this._authService.startAuthentication();
+                        this._notificationService.clearMessages();
                         observer.next(false);
                         observer.complete();
                     }

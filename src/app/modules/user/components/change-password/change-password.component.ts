@@ -115,7 +115,7 @@ export class ChangePasswordComponent implements OnInit {
   //#region private methods
   private initForm() {
     this._form = this._fb.group({
-      oldPassword: [null, [Validators.required, Validators.minLength(8)]],
+      oldPassword: [null, [Validators.required]],
       newPassword: [null, [Validators.required, Validators.pattern(this._passwordRegExp)]],
       confirmPassword: [null, [Validators.required, Validators.pattern(this._passwordRegExp)]]
     });
