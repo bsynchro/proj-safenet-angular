@@ -33,8 +33,8 @@ export class PurchaseOfferPayload {
     public dateOfBirth: string;
     public offerCode: string;
     public dimensions: Array<DimensionInput>;
-    public from: Date;
-    public to: Date;
+    public from: string;
+    public to: string;
     public referrer: string;
     public entityId: number;
     // public countryOfArrival: string;

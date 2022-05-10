@@ -17,6 +17,10 @@ import { LocalStorageService } from "src/app/shared/services/local-storage.servi
 
 @Injectable()
 export class OffersService {
+    //#region fields
+    private _dateFormat: string = 'dd/MM/yyyy';
+    //#endregion
+
     //#region ctor
     constructor(private _httpClient: HttpClient) { }
     //#endregion
@@ -100,8 +104,8 @@ export class OffersService {
         payload.offerCode = offerCode;
         payload.dimensions = dimensions;
         payload.dateOfBirth = dob;
-        payload.from = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].from;
-        payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].to;
+        payload.from = UtilsService.getFormattedDateInstance(userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].from, this._dateFormat);
+        payload.to = UtilsService.getFormattedDateInstance(userInfo[AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION].to, this._dateFormat);
         payload.referrer = referrer;
         payload.entityId = entityId
         // payload.countryOfArrival = countryOfArrival;
