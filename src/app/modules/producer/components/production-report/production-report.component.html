@@ -20,7 +20,7 @@
                     name="to" yearRange="1930:2100" formControlName="to"
                     [placeholder]='translations.producer.productionReport.to | translate'
                     [dateFormat]='calendarDateFormat' [showButtonBar]="true" [minDate]="minToDate" [maxDate]="todayDate"
-                    (onSelect)="onValueChange()">
+                    [disabled]="!dateFormGroup?.controls?.from?.value" (onSelect)="onValueChange()">
                 </p-calendar>
             </div>
         </div>

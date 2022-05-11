@@ -78,16 +78,16 @@ export class ProductionReportComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (!this.formControlHasValue('from')) {
-        this.showCalendar(this._fromCalendar);
-      }
-      else {
-        if (!this.formControlHasValue('to')) {
-          this.showCalendar(this._toCalendar);
-        }
-      }
-    }, 10);
+    // setTimeout(() => {
+    //   if (!this.formControlHasValue('from')) {
+    //     this.showCalendar(this._fromCalendar);
+    //   }
+    //   else {
+    //     if (!this.formControlHasValue('to')) {
+    //       this.showCalendar(this._toCalendar);
+    //     }
+    //   }
+    // }, 10);
   }
   //#endregion
 
