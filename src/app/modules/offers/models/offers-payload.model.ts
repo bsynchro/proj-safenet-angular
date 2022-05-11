@@ -7,8 +7,8 @@ export class GetOffersPayload {
     public age: number;
     public withDeductible: string;
     public type: string;
-    public from: Date;
-    public to: Date;
+    public from: string;
+    public to: string;
     public entityId: number;
 }
 

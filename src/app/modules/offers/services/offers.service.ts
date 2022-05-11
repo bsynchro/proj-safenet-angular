@@ -78,8 +78,8 @@ export class OffersService {
                     payload.age = this.getAge(userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]]);
                     break;
                 case AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION:
-                    payload.from = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].from;
-                    payload.to = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].to;
+                    payload.from = UtilsService.getFormattedDateInstance(userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].from, this._dateFormat);
+                    payload.to = UtilsService.getFormattedDateInstance(userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]].to, this._dateFormat);
                     break;
                 default:
                     payload[AppWizardConstants.USER_INFO_PROPERTIES[key]] = userInfo[AppWizardConstants.USER_INFO_PROPERTIES[key]];

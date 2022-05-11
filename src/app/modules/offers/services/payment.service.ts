@@ -14,6 +14,10 @@ import { PurchaseOfferResult } from "../models/purchase-offer-result.model";
 
 @Injectable()
 export class PaymentService {
+    //#region fields
+    private _dateFormat: string = 'dd/MM/yyyy';
+    //#endregion
+
     //#region ctor
     constructor(private _httpClient: HttpClient) { }
     //#endregion
@@ -61,8 +65,8 @@ export class PaymentService {
         Object.keys(smiPayload).forEach((key) => {
             switch (key) {
                 case AppWizardConstants.USER_INFO_PROPERTIES.TRIP_DURATION:
-                    payload.from = userInfo[key].from;
-                    payload.to = userInfo[key].to;
+                    payload.from = UtilsService.getFormattedDateInstance(userInfo[key].from, this._dateFormat);
+                    payload.to = UtilsService.getFormattedDateInstance(userInfo[key].to, this._dateFormat);
                     break;
                 default:
                     payload[key] = smiPayload[key];
