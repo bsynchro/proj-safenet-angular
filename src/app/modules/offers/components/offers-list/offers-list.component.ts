@@ -259,7 +259,7 @@ export class OffersListComponent implements OnInit {
   }
 
   private getLogoUrl(entityId: number): string {
-    return `../../../../../assets/images/company-logos/${entityId}.svg`;
+    return `../../../../../assets/images/company-logos/${entityId}.png`;
   }
 
   private mapBenefitsToBenefitViews(benefits: Array<Benefit>): Array<BenefitView> {
