@@ -1,0 +1,72 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.wizard-container {
+    overflow: hidden !important;
+    lib-wizard {
+        .wizard {
+            &> .row {
+                & > .col-12 {
+                    margin-right: auto !important;
+                    & > .row {
+                        margin: 0 2rem;
+                    }
+                }
+            } 
+            .card {
+                background-color: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .links-container {
+                position: absolute;
+                margin-bottom: 1rem;
+                bottom: 7rem;
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .links {
+                width: 100%;
+                justify-content: space-between !important;
+                button {
+                    @include btn();
+                    &.back-btn {
+                        &::before {
+                            content: "\f104";
+                            color: $primary-alt-color;
+                            font-family: "FontAwesome";
+                            font-size: 1.5rem;
+                            font-weight: bold;
+                            padding-right: 1rem;
+                            html.rtl & {
+                                padding-right: unset;
+                                padding-left: 1rem;
+                            }
+                        }
+                        @include linkBtn();
+                        align-items: center;
+                        display: flex;
+                        margin-right: 0 !important;
+                    }
+                    &.hidden {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .wizard-container {
+        lib-wizard {
+            .wizard {
+                .links-container {
+                    margin-bottom: 0.5rem;
+                }
+            }
+        }
+    }
+}

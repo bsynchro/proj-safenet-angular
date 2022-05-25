@@ -1,0 +1,34 @@
+<div class="policy-download-component">
+    <div class="container-fluid">
+        <div class="row title mb-3 mb-md-4 mx-2 mx-md-5">
+            <div class="col-12">
+                {{ translations.policy.policyDownload.title | translate }}
+            </div>
+        </div>
+        <ng-container *ngIf="policyIssued; else failed">
+            <div class="row sub-title mb-4 mb-md-5 mx-2 mx-md-5">
+                <div class="col-12">
+                    {{ translations.policy.policyDownload.subTitle | translate }}
+                </div>
+            </div>
+            <div class="row btn-container mb-3 mb-md-4 mx-2 mx-md-5">
+                <div class="col-12 btn download-btn">
+                    <!-- <button class="primary-btn" (click)="downloadPolicy()">
+                        {{ translations.policy.policyDownload.downloadButtonLabel | translate }}
+                    </button> -->
+                    <a class="primary-btn" [href]="policyUrl" [download]="policyFileName">
+                        {{ translations.policy.policyDownload.downloadButtonLabel | translate }}
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #failed>
+    <div class="row sub-title mb-3 mb-md-4 mx-2 mx-md-5">
+        <div class="col-12">
+            {{ translations.policy.policyDownload.policyError | translate }}
+        </div>
+    </div>
+</ng-template>

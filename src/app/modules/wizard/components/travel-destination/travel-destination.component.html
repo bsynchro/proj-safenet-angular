@@ -1,0 +1,19 @@
+<div class="travel-destination">
+    <div class="container-fluid">
+        <div class="row title mb-3 mb-md-5">
+            <div class="col-12 text-center">
+                {{ translations.wizard.sections.travelDestination.title | translate }}
+            </div>
+        </div>
+        <div class="row choices" *ngIf="dataList">
+            <ng-container *ngFor="let row of dataList">
+                <div class="col-12 col-md-6 answer text-center">
+                    <div class="box" [ngClass]="isSelected(row.code) ? 'selected' : ''"
+                        (click)="selectAnswer(row.code)">
+                        {{ row.title }}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

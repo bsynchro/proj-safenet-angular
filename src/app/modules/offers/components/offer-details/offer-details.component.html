@@ -1,0 +1,27 @@
+<div class="offer-details-component" *ngIf="offer && offer.benefits">
+    <div class="container-fluid mb-3">
+        <img src="../../../../../assets/images/icons/x-blue.svg" class="close-btn" (click)="close()" />
+        <div class="row benefit" *ngFor="let benefit of offer.benefits">
+            <div class="col-12">
+                <div class="row benefit-header mt-4 mt-md-3 mb-2 mb-md-1">
+                    <div class="col-12">
+                        {{ getLocalizedValue(benefit.title) }}
+                    </div>
+                </div>
+                <ng-container *ngIf="benefit.properties">
+                    <ng-container *ngFor="let property of benefit.properties">
+                        <div class="row benefit-property mb-1 mb-md-0" *ngIf="isPropertyVisible(property)">
+                            <div class="col-8 property-title">
+                                {{ getLocalizedValue(property.title) }}
+                            </div>
+                            <div class="col-4 property-value"
+                                [ngClass]="shouldNotWrap(property.displayValue) ? 'text-nowrap' : 'padding-end-0'">
+                                {{ getLocalizedValue(property.displayValue) }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

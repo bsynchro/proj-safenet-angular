@@ -1,0 +1,62 @@
+@import "../../../../styles/mixins.scss";
+
+.dropdown-date-picker {
+    display: flex;
+    justify-content: center;
+    .yearmonthdayinput {
+        .date-container {
+            @include answerBtn();
+            padding: 0.5rem 0;
+        }
+        .dropDown {
+            .ui-dropdown {
+                min-width: -webkit-fill-available;
+                width: -moz-available;
+                .ui-dropdown-label {
+                    text-align: center;
+                }
+            }
+            .ui-dropdown-trigger {
+                color: $primary-alt-color;
+                z-index: 9;
+                margin-right: 0.5rem;
+                html.rtl & {
+                    margin-right: unset;
+                    margin-left: 0.5rem;
+                }
+            }
+            .ui-dropdown-panel {
+                border-radius: 5px;
+                .ui-dropdown-items-wrapper {
+                    border-radius: 5px;
+                    background-color: $white;
+                    // overflow: hidden;
+                    @include shadow();
+                    .ui-dropdown-items {
+                        padding: 0;
+                        .ui-dropdown-item {
+                            &.ui-state-highlight {
+                                background-color: $light-accent-color;
+                            }
+                            margin: 0;
+                            padding: 0.75rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .dropdown-date-picker {
+        .yearmonthdayinput {
+            .dropDown {
+                .ui-dropdown {
+                    min-width: 5.5em;
+                }
+            }
+        }
+    }
+}

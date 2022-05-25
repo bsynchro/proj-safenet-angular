@@ -1,0 +1,49 @@
+<div [id]="elementId">
+  <form [formGroup]="dobFormGroup" [hidden]="!isVisible" class="container-fluid">
+    <div class="dropdown-date-picker row">
+      <div class="yearmonthdayinput yearmonthday-day-forced-dropdown-width no-margin no-padding col-4">
+
+        <div class="year-container date-container">
+          <label class="title" *ngIf="!watermarks.Year">{{labels.Year | translate: {'asterisk': ''} }}</label>
+          <span *ngIf="!noAsterisk && !watermarks.Year && required" class="requiredStar text-danger"> *</span>
+          <p-dropdown #yearDropdown class="dropDown value" id="year-dropdown" [options]="yearOptions" name="year"
+            formControlName="year" [required]="required"
+            [placeholder]="watermarks.Year | translate: {'asterisk': asterisk}" [autoDisplayFirst]="false"
+            [filter]="showFilter" (onChange)="onYearChange(yearDropdown, $event)" auto-open-publisher
+            auto-open-default="{{autoOpen}}" [appKeyboardAutoOpenMobileFix]="yearDropdown">
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="yearmonthdayinput yearmonthday-day-forced-dropdown-width no-margin no-padding col-4">
+        <div class="month-container date-container">
+          <label class="title" *ngIf="!watermarks.Month">{{labels.Month | translate: {'asterisk': ''} }}</label>
+          <span *ngIf="!noAsterisk && !watermarks.Month && required" class="requiredStar text-danger"> *</span>
+          <p-dropdown #monthDropdown class="dropDown value" id="month-dropdown" name="month" [options]="monthOptions"
+            formControlName="month" [required]="required" [disabled]="monthDisability"
+            [placeholder]="watermarks.Month | translate: {'asterisk': asterisk}" [autoDisplayFirst]="false"
+            [filter]="showFilter" (onChange)="onMonthChange(monthDropdown, $event)" auto-open-publisher
+            auto-open-subscribe-to="year" autoOpenOnce="false" [appKeyboardAutoOpenMobileFix]="monthDropdown">
+          </p-dropdown>
+        </div>
+      </div>
+      <div class="yearmonthdayinput yearmonthday-day-forced-dropdown-width no-margin no-padding col-4">
+        <div class="day-container date-container">
+          <label class="title" *ngIf="!watermarks.Day">{{labels.Day | translate: {'asterisk': ''} }}</label>
+          <span *ngIf="!noAsterisk && !watermarks.Day && required" class="requiredStar text-danger"> *</span>
+          <p-dropdown #dayDropdown class="dropDown value" id="day-dropdown" name="day" [options]="dayOptions"
+            formControlName="day" [required]="required" [disabled]="dayDisability"
+            [placeholder]="watermarks.Day | translate: {'asterisk': asterisk}" [autoDisplayFirst]="false"
+            [filter]="showFilter" (onChange)="onDayChange(dayDropdown, $event)" auto-open-subscribe-to="month"
+            autoOpenOnce="false" [appKeyboardAutoOpenMobileFix]="dayDropdown">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showHints && errorMessages">
+      <div class="error-required-messages text-danger">{{errorMessages | translate}}</div>
+    </div>
+    <div *ngIf="showHints && complexError">
+      <div class="error-required-messages text-danger">{{complexError.message | translate: complexError.params}}</div>
+    </div>
+  </form>
+</div>

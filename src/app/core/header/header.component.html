@@ -1,0 +1,33 @@
+<nav class="web-navbar">
+    <div class="header">
+        <div class="container-fluid">
+            <div class="left-header">
+                <img class="logo-img" src="../../../assets/images/logo-safenet.svg" />
+            </div>
+            <div class="right-header">
+                <a href="tel:+96522286250" class="phone-link">
+                    <div class="phone">
+                        <span class="phone-ic">
+                            <img src="../../../assets/images/icons//ic-phone.svg" />
+                        </span>
+                        <span class="phone-text">+965 2228 6250</span>
+                    </div>
+                </a>
+                <!-- <div class="sign-in" *ngIf="!isLoggedIn">
+                    <button class="sign-in-btn" (click)="login()">{{ translations.header.signIn | translate}}</button>
+                </div> -->
+                <div class="user-dropdown" *ngIf="isLoggedIn">
+                    <div class="logged-in-user">
+                        <a class="nav-link p-0 mx-3" (click)="menu.toggle($event)">
+                            <span class="username" *ngIf="user">
+                                {{ user.fullName }}
+                            </span>
+                        </a>
+                    </div>
+                    <p-menu #menu [model]="profileSettings" [popup]="true" toggleable="true"></p-menu>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+</nav>

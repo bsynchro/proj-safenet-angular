@@ -1,0 +1,145 @@
+<div class="offers-list-component">
+    <div class="container-fluid">
+        <div class="row header mb-3 mb-md-5">
+            <div class="col-12 px-4 px-md-5">
+                <img src="../../../../../assets/images/icons/back-btn.svg" class="back-btn" (click)="back()" />
+                <span class="header-text">{{ translations.offers.list.headerText | translate }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 user-selection px-5">
+                <div class="row">
+                    <div class="col-12 font-weight-bold mb-2">
+                        {{ translations.offers.list.userSelection.title | translate }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.list.userSelection.ageAndType | translate: {
+                        'age': age,
+                        'type' : ('wizard.sections.travelType.options.' + travelTypeKey | translate)
+                        } }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.list.userSelection.travelDestination | translate: {
+                        'destination': coverageArea
+                        } }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ translations.offers.list.userSelection.duration | translate: {
+                        'duration': tripDuration
+                        } }}
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-12 mt-2">
+                        <span class="link font-weight-bold" (click)="refineSelection()">
+                            {{ translations.offers.list.userSelection.refineSelection | translate }}
+                        </span>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-md-8 offers-repeater" *ngIf="offerViews?.offers">
+                <div class="row header mb-3">
+                    <div class="col-10 col-md-6 px-0 offers-number">
+                        {{ translations.offers.list.offersNumberLabel | translate: {'number' : offerViews.offers.length}
+                        }}
+                    </div>
+                    <div [ngClass]="isRtl ? 'text-left' : 'text-right'" class="col-2 col-md-6 sort">
+                        <span class="sort-label">{{ translations.offers.list.sortByPremium | translate }}</span>
+                        <img [src]="sortIcon" class="sort-btn" (click)="sortOffers('premium')" />
+                    </div>
+                </div>
+                <ng-container *ngFor="let offer of offerViews.offers; let i = index">
+                    <div class="row offer-item my-4 py-2" *ngIf="i < offersRowsPerPage">
+                        <div class="col-12">
+                            <div class="row offer-item-header">
+                                <div class="col-6 col-md-3 logo align-self-center">
+                                    <img [src]="offer.logoUrl" />
+                                </div>
+                                <div class="col-6 col-md-3 title align-self-center">
+                                    {{ getLocalizedValue(offer.title) }}
+                                </div>
+                                <div class="col-12 col-md-3 checkboxes align-self-center">
+                                    <ng-container *ngFor="let chk of offer.checkboxes">
+                                        <span class="checkbox" *ngIf="chk.visible">
+                                            <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
+                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName, offer.entityId)">
+                                            </p-checkbox>
+                                        </span>
+                                        <span class="checkbox-label">
+                                            {{ getLocalizedValue(chk.value) }}
+                                        </span>
+                                    </ng-container>
+                                </div>
+                                <div class="col-12 col-md-3 premium align-self-center text-center">
+                                    {{ offer.currency }} {{ offer.premium | number : '1.0-2' }}
+                                </div>
+                            </div>
+                            <div class="row benefits px-1 mb-2" *ngIf="offer.highlightedProperties">
+                                <div class="col-6 benefit-properties px-1"
+                                    *ngFor="let propery of offer.highlightedProperties">
+                                    <div class="row p-0 m-0">
+                                        <div class="col-1 checkbox p-0 m-0">
+                                            <img [src]="propery.checked ? 
+                                                '../../../../../assets/images/icons/check.svg' : 
+                                                '../../../../../assets/images/icons/x-red.svg'" />
+                                        </div>
+                                        <div class="col-11 px-1">{{ getLocalizedValue(propery.title) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mobile-only">
+                                <div class="col-12 col-md-3 checkboxes">
+                                    <ng-container *ngFor="let chk of offer.checkboxes">
+                                        <span class="checkbox">
+                                            <p-checkbox [(ngModel)]="chk.checked" [binary]="true"
+                                                (onChange)="onCheckboxCheck($event, offer.code, chk.propertyName, offer.entityId)">
+                                            </p-checkbox>
+                                        </span>
+                                        <span class="checkbox-label">
+                                            {{ getLocalizedValue(chk.value) }}
+                                        </span>
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="row buttons">
+                                <div class="col-6 col-md-3 offset-md-3 view-all-benefits">
+                                    <span class="link" (click)="viewAllBenefits(offer)">
+                                        {{ translations.offers.list.viewAllBenefits | translate }}
+                                    </span>
+                                </div>
+                                <div class="col-6 col-md-3 offset-md-3 purchase text-center">
+                                    <span class="button" (click)="purchase(offer.code, offer.entityId)">{{
+                                        translations.offers.list.purchase | translate }}</span>
+                                    <span class="mobile-only">
+                                        <span class="premium">
+                                            {{ offer.currency }} {{ offer.premium | number : '1.0-2' }}
+                                        </span>
+                                        <span class="mobile-btn" (click)="purchase(offer.code, offer.entityId)">
+                                            <img src="../../../../../assets/images/icons/arrow-btn.svg" />
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row offer-details" *ngIf="offer.showDetails">
+                        <div class="col-12">
+                            <app-offer-details [(offer)]="offerViews.offers[i]"></app-offer-details>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="row buttons-container d-none">
+                    <div class="col-3 close">
+                        <span class="button"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

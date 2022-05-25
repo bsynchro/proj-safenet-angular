@@ -1,0 +1,51 @@
+@import "./variables.scss";
+
+@mixin answerBtn($bgColor: null, $borderColor: null) {
+    @if ($bgColor != null) {
+        background-color: $bgColor;
+    }
+    @else {
+        background-color: $white;
+    }
+    @if ($borderColor != null) {
+        border: 1px solid $borderColor;
+    }
+    @else {
+        border: 1px solid $grey;
+    }
+    border-radius: 5px;
+    margin: auto;
+    cursor: pointer;
+    @include shadow();
+}
+
+@mixin shadow {
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+@mixin btn($primary: true) {
+    @if ($primary) {
+        background-color: $primary-alt-color;
+        color: $white;
+    }
+    @else {
+        background-color: $white;
+        color: $primary-alt-color;
+    }
+    padding: 0.5rem 2rem;
+    border: none;
+    border-radius: 5px;
+    z-index: 10;
+    cursor: pointer;
+    &:focus {
+        outline: 2px solid $accent-color;
+    }
+}
+
+@mixin linkBtn {
+    @include btn(false);
+    background-color: transparent;
+    &:focus {
+        outline: none;
+    }
+}

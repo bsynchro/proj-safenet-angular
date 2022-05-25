@@ -1,0 +1,145 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.checkout-component {
+    .error-messages {
+        .error-message {
+            color: $accent-color;
+        }
+    }
+    .header {
+        .header-text {
+            color: $primary-color;
+            font-size: 20px;
+        }
+        .back-btn {
+            padding-right: 1rem;
+            cursor: pointer;
+            html.rtl & {
+                padding-right: unset;
+                padding-left: 1rem;
+            }
+        }
+    }
+    .user-selection {
+        background-color: $white;
+        border-radius: 5px;
+        @include shadow();
+        .selection-info {
+            padding: 1rem 2.5rem;
+        }
+        .logo {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+    .upselling {
+        .title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .cover {
+            .header {
+                .cover-label {
+                    font-weight: 600;
+                    font-size: 1.1em;
+                    padding-left: 1rem;
+                    html.rtl & {
+                        padding-left: unset;
+                        padding-right: 1rem;
+                    }
+                }
+            }
+        }
+        .terms-and-conditions {
+            display: flex;
+            .declaration {
+                padding-left: 1rem;
+                html.rtl & {
+                    padding-left: unset;
+                    padding-right: 1rem;
+                }
+            }
+        }
+    }
+    .price-summary {
+        background-color: $primary-transparent-color;
+        border-radius: 5px;
+        .title {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .coupon-section {
+            .label {
+                font-size: 0.75em;
+            }
+            .input-section {
+                .coupon-code-input {
+                    @include shadow();
+                    background-color: $white;
+                    border-radius: 5px;
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.75em;
+                    border: 0;
+                }
+                .apply-coupon-code-btn {
+                    @include btn();
+                    @include shadow();
+                    padding: 0.5rem 0.75rem;
+                    font-size: 0.75em;
+                    margin-left: 0.5rem;
+                    html.rtl & {
+                        margin-left: unset;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+        .grand-total {
+            font-weight: 600;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: row-reverse;
+            .checkout-btn {
+                @include btn();
+                padding: 0.25rem 2rem;
+            }
+        }
+    }
+    .checkbox {
+        p-checkbox {
+            .ui-chkbox-box {
+                border: 1px solid $primary-alt-color;
+                .pi-check:before {
+                    color: $primary-alt-color;
+                }
+                .ui-checkbox-icon {
+                    margin-left: -1px;
+                    html.rtl & .ui-checkbox-icon {
+                        margin-left: unset;
+                        margin-right: -1px;
+                    }
+                }
+            }
+        }
+    }
+    .btn {
+        &:disabled {
+            opacity: .4;
+            cursor: not-allowed !important;
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .checkout-component {
+        .user-selection {
+            .selection-info {
+                padding: 1rem;
+            }
+        }
+    }
+}

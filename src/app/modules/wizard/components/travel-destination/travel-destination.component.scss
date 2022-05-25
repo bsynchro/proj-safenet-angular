@@ -1,0 +1,55 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.travel-destination {
+    .title {
+        color: $primary-color;
+        font-size: 20px;
+    }
+    .choices {
+        margin: auto;
+        width: 70%;
+        .answer {
+            padding: 1.5rem 2rem 1.5rem 2rem;
+            z-index: 10;
+            &:nth-child(odd) {
+                .box {
+                    margin-left: auto;
+                }
+            }
+            &:nth-child(even) {
+                .box {
+                    margin-right: auto;
+                }
+            }
+            .box {
+                @include answerBtn();
+                margin: unset;
+                padding: 2rem;
+                width: 70%;
+                height: 5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .selected {
+                background-color: $light-accent-color;
+            }
+        }
+    }
+}
+
+// mobile
+@media all and (max-width:576px) {
+    .travel-destination {
+        .choices {
+            width: 100%;
+            .answer {
+                padding: 1.5rem 1rem 1.5rem 1rem;
+                .box {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

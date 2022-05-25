@@ -1,0 +1,16 @@
+<div class="app-home-component">
+    <div class="layout-wrapper">
+        <div [dir]="direction" class="layout-main">
+            <app-header></app-header>
+            <div class="layout-content pt-3 pt-md-5">
+                <div class="content">
+                    <p-confirmDialog appendTo="body"></p-confirmDialog>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+            <div class="footer">
+                <img src="../../../assets/images/footer.svg" />
+            </div>
+        </div>
+    </div>
+</div>
